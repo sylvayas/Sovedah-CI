@@ -143,7 +143,7 @@ export function MainNav() {
                                         </a>
                                     </NavigationMenuLink>
                                 </li>
-                                {menuList[3].menus[0].submenus.slice(1,).map((item) => (
+                                {menuList[3].menus[0].submenus.slice(0,).map((item) => (
                                     <ListItem key={item.label} href={item.href} title={item.label} className={cn(`${item.active && "font-bold text-novis_orange"}`)} />
                                 ))}
                             </ul>

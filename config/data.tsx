@@ -332,7 +332,7 @@ export const offres = [
 
 export const galeries = [
   {
-    id: "evenement",
+    id: "evenement_collaboratif",
     title: "Événement Collaboratif",
     subdescription: "Participez à notre événement inspirant.",
     description: [
@@ -342,62 +342,63 @@ export const galeries = [
     "Du CLOUD à l'ECO et au FLEX, choisissez la solution sur-mesure qui vous convient le mieux.",
     images: [
       {
-        src: "/images/coworking/Bureaux privés/Bureau prospérité/img (1).jpg",
+        src: "/images/galerie/evenements/even1.jpg",
         width: 1037,
         height: 691,
       },
       {
-        src: "/images/coworking/Bureaux privés/Bureau prospérité/img (2).jpg",
+        src: "/images/galerie/evenements/even2.jpg",
         width: 1037,
         height: 691,
       },
       {
-        src: "/images/coworking/Bureaux privés/Bureau prospérité/img (3).jpg",
+        src: "/images/galerie/evenements/even3.jpg",
         width: 1037,
         height: 691,
       },
       {
-        src: "/images/coworking/Bureaux privés/Bureau détermination/img (1).jpg",
+        src: "/images/galerie/evenements/even4.jpg",
         width: 1037,
         height: 691,
       },
       {
-        src: "/images/coworking/Bureaux privés/Bureau détermination/img (2).jpg",
+        src: "/images/galerie/evenements/even5.jpg",
         width: 1037,
         height: 691,
       },
       {
-        src: "/images/coworking/Bureaux privés/Bureau détermination/img (3).jpg",
+        src: "/images/galerie/evenements/even6.jpg",
         width: 1037,
         height: 691,
       },
       {
-        src: "/images/coworking/Bureaux privés/Bureau confiance/img (1).jpg",
+        src: "/images/galerie/evenements/even7.jpg",
+        width: 1037,
+        height: 691,
+
+      },
+      {
+        src: "/images/galerie/evenements/even8.jpg",
         width: 1037,
         height: 691,
       },
       {
-        src: "/images/coworking/Bureaux privés/Bureau confiance/img (2).jpg",
+        src: "/images/galerie/evenements/even9.jpg",
         width: 1037,
         height: 691,
       },
       {
-        src: "/images/coworking/Bureaux privés/Bureau confiance/img (3).jpg",
+        src: "/images/galerie/evenements/even10.jpg",
         width: 1037,
         height: 691,
       },
       {
-        src: "/images/coworking/Bureaux privés/Bureau excellence/img (1).jpg",
+        src: "/images/galerie/evenements/even11.jpg",
         width: 1037,
         height: 691,
       },
       {
-        src: "/images/coworking/Bureaux privés/Bureau excellence/img (2).jpg",
-        width: 1037,
-        height: 691,
-      },
-      {
-        src: "/images/coworking/Bureaux privés/Bureau excellence/img (3).jpg",
+        src: "/images/galerie/evenements/even12.jpg",
         width: 1037,
         height: 691,
       },

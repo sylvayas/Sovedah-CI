@@ -15,7 +15,7 @@ export async function sendEmail({
 }) {
   try {
     const { data, error } = await resend.emails.send({
-      from: "contact@noviscoworking.com",
+      from: "aitechci1@gmail.com",
       to: to,
       subject: subject,
       react: react,
