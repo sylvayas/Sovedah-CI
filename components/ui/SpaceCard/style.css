@@ -1,0 +1,8 @@
+.swiper {
+  cursor: grab;
+  cursor: -webkit-grab;
+}
+
+.swiper-slide {
+  position: relative;
+}
