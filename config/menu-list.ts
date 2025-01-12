@@ -79,7 +79,7 @@ export function getMenuList(pathname: string): Group[] {
       label: "Galerie",
       icon: Icons.galerie,
       submenus: [
-          { href: "/our_galeries/evenement_collaboratif", label: "Événement Collaboratif", active: pathname === "/our_galeries/evenement_collaboratif" },
+          { href: "/our_galeries/evenement_collaboratifs", label: "Événement Collaboratifs", active: pathname === "/our_galeries/evenement_collaboratifs" },
           { href: "/our_galeries/article_de_presse", label: "Article de Presse", active: pathname === "/our_galeries/article_de_presse" },
           { href: "", label: "Événements à venir", active: pathname === "" },
 

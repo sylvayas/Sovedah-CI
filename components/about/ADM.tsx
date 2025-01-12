@@ -18,7 +18,7 @@ export default function ADM() {
                 flex justify-center flex-col">
                                     <img
                                         alt="App screenshot"
-                                        src="/images/coworkers/coworker (5).jpg"
+                                        src="/images/coworkers/coworker (6).jpg"
                                         className="w-full h-full object-cover rounded-2xl lg:rounded-3xl"
                                     />
                                 </div>

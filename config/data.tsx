@@ -332,8 +332,8 @@ export const offres = [
 
 export const galeries = [
   {
-    id: "evenement_collaboratif",
-    title: "Événement Collaboratif",
+    id: "evenement_collaboratifs",
+    title: "Événement Collaboratifs",
     subdescription: "Participez à notre événement inspirant.",
     description: [
       "Rejoignez-nous pour une expérience inoubliable au cœur de notre espace de coworking, NOVIS COWORKING. Cet événement exclusif mettra en lumière les opportunités de collaboration et de networking au sein de notre communauté dynamique.",
