@@ -40,8 +40,9 @@ export default function DescriptionAllSpaces() {
                 <div className="mt-4 md:mt-0">
                     <h2 className="mb-4  text-2xl md:text-4xl tracking-tight font-saudagar">Open space</h2>
                     <p className="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">
-                        Retrouvez Novis à Villeneuve d&apos;Ascq, à proximité immédiate du Parc de la Haute Borne. <br />
-                        Novis Lille Villeneuve d&apos;Ascq prend place dans un complexe prime écoresponsable, labellisé WELL niveau Silver, à deux pas du Stade Pierre Mauroy, du centre commercial Héron Parc et des nombreuses boutiques du centre commercial V2.
+                    Travailler en open space chez Novis Co-Working, 
+                    c’est maximiser vos ressources tout en enrichissant votre réseau. 
+                    Sur le plan financier, notre espace partagé vous permet de réduire considérablement vos coûts par rapport à un bureau privé, tout en accédant à des équipements premium. Côté relationnel, l’open space favorise les rencontres spontanées, les échanges d’idées et les collaborations fructueuses avec des professionnels variés. Vous évoluerez dans un environnement stimulant où chaque interaction peut être une opportunité. Alliez économies et synergies dans un cadre chaleureux et inspirant, conçu pour propulser votre réussite.
                     </p>
                     <Link
                         className={cn(

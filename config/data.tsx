@@ -1041,30 +1041,19 @@ export const espaces = [
     description: (
       <>
         <p className="text-sm md:text-md mb-2 md:mb-3">
-          Retrouvez Novis à Villeneuve d&apos;Ascq, à proximité immédiate du
-          Parc de la Haute Borne.
+        Travailler en open space chez Novis Co-Working, c’est maximiser vos ressources tout en enrichissant votre réseau.
         </p>
 
         <p className="text-sm md:text-md mb-2 md:mb-3">
-          Novis Lille Villeneuve d&apos;Ascq prend place dans un complexe prime
-          écoresponsable, labellisé WELL niveau Silver, à deux pas du Stade
-          Pierre Mauroy, du centre commercial Héron Parc et des nombreuses
-          boutiques du centre commercial V2.
+          Sur le plan financier, notre espace partagé vous permet de réduire considérablement vos coûts par rapport à un bureau privé, tout en accédant à des équipements premium.
         </p>
 
         <p className="text-sm md:text-md mb-2 md:mb-3">
-          Novis Lille Villeneuve d&apos;Ascq s&apos;étend sur plus de 2 400 m²
-          répartis sur 3 étages. Idéalement situé, il est desservi par la ligne
-          de métro 1 (station 4 Cantons), qui permet de rallier le centre-ville
-          de Lille et la gare SNCF de Lille-Flandres en 15 minutes.
-          L&apos;aéroport de Lille Lesquin est, quant à lui, accessible en 10
-          minutes en voiture.
+        Côté relationnel, l’open space favorise les rencontres spontanées, les échanges d’idées et les collaborations fructueuses avec des professionnels variés.
         </p>
 
         <p className="text-sm md:text-md mb-2 md:mb-3">
-          Le centre dispose de 213 postes équipés, de 3 salles de réunion,
-          d&apos;1 espace événementiel privatisable et de 300 m² d&apos;espaces
-          de coworking.
+        Vous évoluerez dans un environnement stimulant où chaque interaction peut être une opportunité. Alliez économies et synergies dans un cadre chaleureux et inspirant, conçu pour propulser votre réussite.
         </p>
       </>
     ),
