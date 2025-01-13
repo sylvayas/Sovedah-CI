@@ -37,6 +37,7 @@ export default function Footer() {
             </a>
           </div>
         </div>
+
         <div className="pb-14 px-4 flex-1 grid md:grid-cols-3 gap-8 xl:place-content-center">
           <div className="text-white">
             <h3 className="text-lg font-semibold uppercase">{menuList[1].menus[0].label}</h3>
@@ -64,10 +65,22 @@ export default function Footer() {
               <Link href={menuList[3].menus[0].href} className="hover:font-semibold transition-all duration-200">
                 {menuList[3].menus[0].label}
               </Link>
+              
               <Link href={menuList[5].menus[0].href} className="hover:font-semibold transition-all duration-200">
                 {menuList[5].menus[0].label}
               </Link>
             </div>
+          </div>
+
+          {/* Section Adresse et RCC */}
+          <div className="text-white">
+            <h3 className="text-lg font-semibold">INFORMATIONS</h3>
+            <p className="mt-2">
+              Adresse : Cocody Abidjan , Côte d'Ivoire
+            </p>
+            <p className="mt-1">
+              RCC : 123 456 789
+            </p>
           </div>
         </div>
       </div>
