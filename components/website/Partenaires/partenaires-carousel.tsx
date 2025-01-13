@@ -3,9 +3,6 @@ import Image from "next/image";
 import {
   Card,
   CardHeader,
-  CardTitle,
-  CardDescription,
-  CardFooter,
   CardContent,
 } from "@/components/ui/card";
 import {
@@ -15,13 +12,9 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { offres } from "@/config/data";
-import Link from "next/link";
-import { buttonVariants } from "@/components/ui/button";
+import { partenaires } from "@/config/data";
 
-import { cn } from "@/lib/utils";
-
-export default function PartenairesCarousel() {
+export default function SolutionsCarousel() {
   return (
     <Carousel
       opts={{
@@ -30,21 +23,22 @@ export default function PartenairesCarousel() {
       className="w-full max-w-7xl mx-auto"
     >
       <CarouselContent>
-        {offres.map((data, index) => (
+        {partenaires.map((data, index) => (
           <CarouselItem
             key={index}
             className="sm:basis-1/2 relative lg:basis-1/4 sm:mx-2 lg:mx-1"
           >
-            <div className="p-1">
+            <div className="p-2"> {/* Augmenter le padding pour plus d'espace */}
               <Card className="group/solution_item">
-                <CardContent className="flex relative w-full aspect-square items-center justify-center h-[350px] xl:h-[400px]">
+                <CardContent className="flex relative w-full aspect-square items-center justify-center h-[250px] xl:h-[300px]"> {/* Réduire la hauteur */}
                   <CardHeader>
                     <div className="absolute bg-black/20 top-0 left-0 w-full h-full z-[1]"></div>
                     <Image
-                      className="object-cover"
-                      src={data.image}
-                      alt={data.image}
+                      className="object-contain" // Changer de object-cover à object-contain pour mieux voir l'image
+                      src={data.image || '/default-image.jpg'} // Image par défaut
+                      alt={data.image || 'Image par défaut'} // Texte alternatif par défaut
                       fill
+                      style={{ objectFit: 'contain' }} // Assurez-vous que l'image reste à l'intérieur du cadre
                     />
                   </CardHeader>
                   <div
@@ -52,27 +46,7 @@ export default function PartenairesCarousel() {
                                     gap-2 xl:gap-4 py-4 text-center z-10 group-hover/solution_item:translate-y-1 bg-transparent 
                                     group-hover/solution_item:bg-novis_green transition-all duration-500"
                   >
-                    <CardTitle className="text-white font-saudagar">{data.title}</CardTitle>
-                    <CardDescription className="text-white pb-4 px-2">
-                      {data.subdescription}
-                    </CardDescription>
-                    <CardFooter>
-                      <Link
-                        className={cn(
-                          buttonVariants({ size: "sm" }),
-                          "max-w-52 gap-2 overflow-hidden whitespace-pre",
-                          "group relative w-full justify-center gap-2 rounded-md transition-all duration-300 ease-out hover:ring-2 hover:ring-primary hover:ring-offset-2"
-                        )}
-                        href={`/our_offers/${data.id}`}
-                      >
-                        <span className="absolute right-0 -mt-12 h-32 w-8 translate-x-12 rotate-12 bg-white opacity-10 transition-all duration-1000 ease-out group-hover:-translate-x-40" />
-                        <div className="flex items-center">
-                          <span className="ml-1 text-sm sm:text-md">
-                            En savoir plus
-                          </span>{" "}
-                        </div>
-                      </Link>
-                    </CardFooter>
+                    {/* Vous pouvez ajouter un contenu ici */}
                   </div>
                 </CardContent>
               </Card>

@@ -76,7 +76,7 @@ export default function Footer() {
           <div className="text-white">
             <h3 className="text-lg font-semibold">INFORMATIONS</h3>
             <p className="mt-2">
-              Adresse : Cocody Abidjan , Côte d'Ivoire
+              Adresse : Cocody Abidjan , Côte d&apos;Ivoire
             </p>
             <p className="mt-1">
               RCC : 123 456 789

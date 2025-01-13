@@ -8,7 +8,7 @@ export default function Partenaires() {
                 Nos Partenaires
             </h2>
             <h3 className="mx-auto mb-8 text-balance text-center text-lg font-medium tracking-tight text-foreground/80">
-            Ensemble, nous sommes plus forts. Découvrez les entreprises qui partagent notre engagement pour l'innovation et l'excellence.
+            Ensemble, nous sommes plus forts. Découvrez les entreprises qui partagent notre engagement pour l&apos;innovation et l&apos;excellence.
             </h3>
 
             <PartenairesCarousel />
