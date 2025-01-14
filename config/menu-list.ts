@@ -2,7 +2,7 @@ import { LucideIcon } from "lucide-react";
 import { Icons } from "@/components/icons";
 
 type Submenu = {
-  href: string;
+  href?: string;  // Rendre href optionnel
   label: string;
   active: boolean;
 };
@@ -41,8 +41,6 @@ export function getMenuList(pathname: string): Group[] {
       icon: Icons.home,
       submenus: []
     },
-
-
     {
       groupLabel: "",
       href: "/our_spaces",
@@ -56,7 +54,6 @@ export function getMenuList(pathname: string): Group[] {
         { href: "/our_spaces/common_space", label: "Espaces Commun", active: pathname === "/our_spaces/common_space" },
       ]
     },
-
     {
       groupLabel: "",
       href: "/our_offers",
@@ -71,20 +68,17 @@ export function getMenuList(pathname: string): Group[] {
         { href: "/our_offers/location_espace_tournage", label: "Location espace tournage", active: pathname === "/our_offers/location_espace_tournage" },
       ]
     },
-
-    
     {
       groupLabel: "",
       href: "/our_galeries",
       label: "Galerie",
       icon: Icons.galerie,
       submenus: [
-          { href: "/our_galeries/evenements_collaboratifs", label: "Événements Collaboratifs", active: pathname === "/our_galeries/evenements_collaboratifs" },
-          { href: "/our_galeries/article_de_presse", label: "Article de Presse", active: pathname === "/our_galeries/article_de_presse" },
-          { href: "", label: "Événements à venir", active: pathname === "" },
-
+        { href: "/our_galeries/evenements_collaboratifs", label: "Événements Collaboratifs", active: pathname === "/our_galeries/evenements_collaboratifs" },
+        { href: "/our_galeries/article_de_presse", label: "Article de Presse", active: pathname === "/our_galeries/article_de_presse" },
+        { label: "Événements à venir", active: pathname === "" }, // Pas de href
       ]
-  },
+    },
     {
       groupLabel: "",
       href: "/about",

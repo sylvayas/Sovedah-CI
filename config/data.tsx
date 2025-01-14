@@ -232,7 +232,7 @@ export const offres = [
       },
       {
         title: "NOTORIETE",
-        detail: "Un règlement en fonction de votre consommation.",
+        detail: "NOVIS CO-WORKING n'est pas seulement un lieux de travail, mais un écosystème riches en opportunités pour développer votre réseau et votre notoriété grâce au bénéfice des synergies et des collaborations sur place.",
         image:
           "/images/coworking/Bureaux privés/Bureau détermination/notoriété.png",
       },

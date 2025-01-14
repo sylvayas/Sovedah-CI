@@ -43,7 +43,7 @@ export default function Footer() {
             <h3 className="text-lg font-semibold uppercase">{menuList[1].menus[0].label}</h3>
             <div className="mt-2 grid grid-cols-2 md:grid-cols-1">
               {menuList[1].menus[0].submenus.slice(1).map((item) => (
-                <Link key={item.label} href={item.href} className="hover:font-semibold transition-all duration-200">
+                <Link key={item.label} href={item.href || '#'} className="hover:font-semibold transition-all duration-200">
                   {item.label}
                 </Link>
               ))}
@@ -53,7 +53,7 @@ export default function Footer() {
             <h3 className="text-lg font-semibold uppercase">{menuList[2].menus[0].label}</h3>
             <div className="mt-2 grid grid-cols-2 md:grid-cols-1">
               {menuList[2].menus[0].submenus.map((item) => (
-                <Link key={item.label} href={item.href} className="hover:font-semibold transition-all duration-200">
+                <Link key={item.label} href={item.href || '#'} className="hover:font-semibold transition-all duration-200">
                   {item.label}
                 </Link>
               ))}
@@ -62,25 +62,30 @@ export default function Footer() {
           <div className="text-white">
             <h3 className="text-lg font-semibold">NOVIS CO-WORKING</h3>
             <div className="mt-2 grid grid-cols-2 md:grid-cols-1">
-              <Link href={menuList[3].menus[0].href} className="hover:font-semibold transition-all duration-200">
-                {menuList[3].menus[0].label}
-              </Link>
-              
-              <Link href={menuList[5].menus[0].href} className="hover:font-semibold transition-all duration-200">
-                {menuList[5].menus[0].label}
-              </Link>
+              {menuList[3].menus[0].href && (
+                <Link href={menuList[3].menus[0].href} className="hover:font-semibold transition-all duration-200">
+                  {menuList[3].menus[0].label}
+                </Link>
+              )}
+              {menuList[5].menus[0].href && (
+                <Link href={menuList[5].menus[0].href} className="hover:font-semibold transition-all duration-200">
+                  {menuList[5].menus[0].label}
+                </Link>
+              )}
             </div>
           </div>
 
           {/* Section Adresse et RCC */}
           <div className="text-white">
             <h3 className="text-lg font-semibold">INFORMATIONS</h3>
-            <p className="mt-2">
-              Adresse : Cocody Abidjan , Côte d&apos;Ivoire
-            </p>
-            <p className="mt-1">
-              RCC : 123 456 789
-            </p>
+            <div className="mt-2">
+              <p className="whitespace-nowrap">
+                Adresse : MACI SUARL, Abidjan Cocody, Saint Viateur, près du rond-point de la Y4
+              </p>
+              <p className="whitespace-nowrap">
+                RCCM : CI-ABJ-03-2022-B13-04387 / N° CC : 2242023T
+              </p>
+            </div>
           </div>
         </div>
       </div>
