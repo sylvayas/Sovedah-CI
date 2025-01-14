@@ -1,7 +1,8 @@
-import React from 'react'
-import HeroCarousel from '../ui/hero-carousel/hero-carousel'
-import { cn } from '@/lib/utils'
-import { Button } from "@/components/ui/button"
+import React from 'react';
+import HeroCarousel from '../ui/hero-carousel/hero-carousel';
+import { cn } from '@/lib/utils';
+import Link from 'next/link'; // Assurez-vous d'importer Link de Next.js
+import { Button } from "@/components/ui/button";
 import { Icons } from "@/components/icons";
 import {
     Card,
@@ -9,16 +10,14 @@ import {
     CardFooter,
     CardHeader,
     CardTitle,
-} from "@/components/ui/card"
-
+} from "@/components/ui/card";
 
 export default function Hero(
     { space }: { space: any }
 ) {
-
     return (
         <section className="relative max-w-[1400px] mx-auto">
-            <div className={cn("h-[60vh]  md:h-[500px] relative container px-0")}>
+            <div className={cn("h-[60vh] md:h-[500px] relative container px-0")}>
                 <HeroCarousel images={space.images.map((image: any) => image.src)} />
             </div>
             <Card className="w-full md:w-[300px] h-fit md:absolute z-10 top-auto left-auto right-16 bottom-3">
@@ -38,9 +37,11 @@ export default function Hero(
                     </div>
                 </CardContent>
                 <CardFooter>
-                    <Button className='w-full'>Réserver mon espace</Button>
+                    <Link href="/reservation" className="w-full">
+                        <Button className='w-full'>Réserver mon espace</Button>
+                    </Link>
                 </CardFooter>
             </Card>
         </section>
-    )
+    );
 }
