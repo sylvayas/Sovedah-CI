@@ -557,67 +557,6 @@ export const galeries = [
       "Un événement qui a rassemblé les passionnés et créé des souvenirs inoubliables !",
     ],
     images: [
-      {
-        src: "/images/galerie/evenements/even1.jpg",
-        width: 1037,
-        height: 691,
-      },
-      {
-        src: "/images/galerie/evenements/even2.jpg",
-        width: 1037,
-        height: 691,
-      },
-      {
-        src: "/images/galerie/evenements/even3.jpg",
-        width: 1037,
-        height: 691,
-      },
-      {
-        src: "/images/galerie/evenements/even4.jpg",
-        width: 1037,
-        height: 691,
-      },
-      {
-        src: "/images/galerie/evenements/even5.jpg",
-        width: 1037,
-        height: 691,
-      },
-      {
-        src: "/images/galerie/evenements/even6.jpg",
-        width: 1037,
-        height: 691,
-      },
-      {
-        src: "/images/galerie/evenements/even7.jpg",
-        width: 1037,
-        height: 691,
-
-      },
-      {
-        src: "/images/galerie/evenements/even8.jpg",
-        width: 1037,
-        height: 691,
-      },
-      {
-        src: "/images/galerie/evenements/even9.jpg",
-        width: 1037,
-        height: 691,
-      },
-      {
-        src: "/images/galerie/evenements/even10.jpg",
-        width: 1037,
-        height: 691,
-      },
-      {
-        src: "/images/galerie/evenements/even11.jpg",
-        width: 1037,
-        height: 691,
-      },
-      {
-        src: "/images/galerie/evenements/even12.jpg",
-        width: 1037,
-        height: 691,
-      },
     ],
     image: "/images/coworking/Espace Bulle Open space/img (1).jpg",
     bookingLink: '/espace-bulle-open-space',
