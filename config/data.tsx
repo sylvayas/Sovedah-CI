@@ -410,7 +410,7 @@ export const galeries = [
     images:"/images/galerie/evenement collaboratif/even1.jpg",
     image: "/images/coworking/Espace Bulle Open space/img (1).jpg",
     bookingLink: 'https://www.facebook.com/share/p/1Ed2NxDip8/',
-    titles : "Découvrez nos Événements Collaboratifs",
+    titles : "Découvrez nos événements collaboratifs",
   },
   {
     id: "article_de_presse",
@@ -424,7 +424,7 @@ export const galeries = [
     images: "/images/galerie/article de presse/Article de presse.jpg",
     image: "/images/coworking/Espace Bulle Open space/img (1).jpg",
     bookingLink:'https://ahoulafricaine.com/societe-un-brunch-consacre-a-la-sante-mentale-de-lentrepreneur/?fbclid=IwY2xjawHw4a5leHRuA2FlbQIxMQABHYqXehs5GXGQbcrfpZhFhOPGVt7kdhCRl_oDN1Wc-_p5m8RiYIzQF8mC5Q_aem_6Ny7b9Hr3WLg5lLdip4Skw',
-    titles : "Lire notre Article de Presse",
+    titles : "Lire notre article de presse",
   },
   {
     id: "evenement_a_venir",
@@ -436,7 +436,7 @@ export const galeries = [
     images: "/images/coworking/Espace Bulle Open space/img (1).jpg",
     image: "/images/coworking/Espace Bulle Open space/img (1).jpg",
     bookingLink: '/',
-    titles : "Découvrez nos Événements à Venir",
+    titles : "Découvrez nos événements à venir",
   },
 ];
 
