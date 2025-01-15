@@ -1,117 +1,57 @@
-"use client";
-
-import React, { useState } from "react";
-import Image from "next/image";
-import { Card, CardHeader, CardContent } from "@/components/ui/card";
+import React from "react";
 import AnimatedGridPattern from "@/components/magicui/animated-grid-pattern";
+import Link from "next/link";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 export default function DescriptionAllSpaces({ galerie }: { galerie: any }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
-
-  const handleImageClick = (index: number) => {
-    setSelectedImageIndex(index);
-    setIsOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsOpen(false);
-    setSelectedImageIndex(null);
-  };
-
-  const handleKeyDown = (event: React.KeyboardEvent) => {
-    if (event.key === "Escape") {
-      closeModal();
-    } else if (event.key === "ArrowRight") {
-      setSelectedImageIndex((prev) => (prev !== null && prev < galerie.images.length - 1 ? prev + 1 : prev));
-    } else if (event.key === "ArrowLeft") {
-      setSelectedImageIndex((prev) => (prev !== null && prev > 0 ? prev - 1 : prev));
-    }
-  };
-
   return (
-    <section className="container mx-auto p-8">
-      <div className="relative gap-8 items-center md:items-stretch py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 sm:py-16 lg:px-6">
-        
-        {/* Informations sur la galerie */}
+    <section className="container min-h-[300px] mb-14 relative">
+      <div className="relative gap-8 items-center md:items-stretch py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6">
+        <img
+          className="w-full z-10 object-cover"
+          src={galerie.images}
+          alt="dashboard image"
+        />
         <div className="mt-4 md:mt-0">
           <h2 className="mb-4 text-2xl md:text-4xl tracking-tight font-saudagar">
             {galerie.title}
           </h2>
           {galerie.description &&
-            galerie.description.map((des: string, key: number) => (
-              <p key={key} className="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">
+            galerie.description.map((des: any, key: number) => (
+              <p
+                key={key}
+                className="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400"
+              >
                 {des}
               </p>
             ))}
-        </div>
 
-        {/* Tableau d'images */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {galerie.images && galerie.images.map((image: { src: string; width: number; height: number; }, index: number) => (
-            <Card key={index} className="group/solution_item cursor-pointer" onClick={() => handleImageClick(index)}>
-              <CardContent className="flex relative w-full h-64">
-                <CardHeader className="w-full h-full overflow-hidden">
-                  <Image
-                    className="object-cover w-full h-full"
-                    src={image.src}
-                    alt={`Image de ${galerie.title} ${index + 1}`}
-                    fill
-                    sizes="(max-width: 640px) 100vw, (min-width: 641px) 50vw"
-                  />
-                </CardHeader>
-              </CardContent>
-            </Card>
-          ))}
+          <Link
+            className={cn(
+              buttonVariants({ size: "sm" }),
+              "inline-flex", // Utiliser inline-flex pour que le bouton s'ajuste à son contenu
+              "gap-2 overflow-hidden whitespace-pre",
+              "group relative justify-center rounded-md transition-all duration-300 ease-out hover:ring-2 hover:ring-primary hover:ring-offset-2"
+            )}
+            href={galerie.bookingLink}
+          >
+            <span className="absolute right-0 -mt-12 h-32 w-8 translate-x-12 rotate-12 bg-white opacity-10 transition-all duration-1000 ease-out group-hover:-translate-x-40" />
+            <div className="flex items-center">
+              <span className="ml-1 text-sm sm:text-md">{galerie.titles}</span> {/* Utilisation de {galerie.title} ici */}
+            </div>
+          </Link>
         </div>
       </div>
-
-      {/* Modal d'image agrandie */}
-      {isOpen && selectedImageIndex !== null && (
-        <div 
-          className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50" 
-          onClick={closeModal} 
-          onKeyDown={handleKeyDown} 
-          tabIndex={0}
-        >
-          <div className="relative" onClick={(e) => e.stopPropagation()}>
-            <button className="absolute top-0 right-0 p-4 text-white" onClick={closeModal}>
-              &times;
-            </button>
-            <Image
-              className="object-contain"
-              src={galerie.images[selectedImageIndex].src}
-              alt="Image agrandie"
-              width={800} // Ajuste la largeur selon tes besoins
-              height={600} // Ajuste la hauteur selon tes besoins
-            />
-            {/* Navigation */}
-            {selectedImageIndex > 0 && (
-              <div 
-                className="absolute left-0 top-1/2 transform -translate-y-1/2 p-4 text-white cursor-pointer" 
-                onClick={() => setSelectedImageIndex((prev) => (prev !== null && prev > 0 ? prev - 1 : prev))}
-              >
-                &#9664; {/* Flèche gauche */}
-              </div>
-            )}
-            {selectedImageIndex < galerie.images.length - 1 && (
-              <div 
-                className="absolute right-0 top-1/2 transform -translate-y-1/2 p-4 text-white cursor-pointer" 
-                onClick={() => setSelectedImageIndex((prev) => (prev !== null && prev < galerie.images.length - 1 ? prev + 1 : prev))}
-              >
-                &#9654; {/* Flèche droite */}
-              </div>
-            )}
-          </div>
-        </div>
-      )}
 
       <AnimatedGridPattern
         numSquares={50}
         maxOpacity={0.1}
         duration={2}
         repeatDelay={1}
-        className="[mask-image:radial-gradient(500px_circle_at_center,white,transparent)] inset-x-0 w-full h-[100%]"
+        className={
+          "[mask-image:radial-gradient(500px_circle_at_center,white,transparent)] inset-x-0 w-full h-[100%]"
+        }
       />
     </section>
   );

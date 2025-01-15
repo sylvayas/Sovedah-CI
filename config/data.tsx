@@ -407,73 +407,10 @@ export const galeries = [
     description: [
       "Rejoignez-nous pour une expérience inoubliable au cœur de notre espace de coworking, NOVIS COWORKING. Cet événement exclusif mettra en lumière les opportunités de collaboration et de networking au sein de notre communauté dynamique.",
     ],
-    solutionsTitle:
-    "Du CLOUD à l'ECO et au FLEX, choisissez la solution sur-mesure qui vous convient le mieux.",
-    images: [
-      {
-        src: "/images/galerie/evenements/even1.jpg",
-        width: 1037,
-        height: 691,
-      },
-      {
-        src: "/images/galerie/evenements/even2.jpg",
-        width: 1037,
-        height: 691,
-      },
-      {
-        src: "/images/galerie/evenements/even3.jpg",
-        width: 1037,
-        height: 691,
-      },
-      {
-        src: "/images/galerie/evenements/even4.jpg",
-        width: 1037,
-        height: 691,
-      },
-      {
-        src: "/images/galerie/evenements/even5.jpg",
-        width: 1037,
-        height: 691,
-      },
-      {
-        src: "/images/galerie/evenements/even6.jpg",
-        width: 1037,
-        height: 691,
-      },
-      {
-        src: "/images/galerie/evenements/even7.jpg",
-        width: 1037,
-        height: 691,
-
-      },
-      {
-        src: "/images/galerie/evenements/even8.jpg",
-        width: 1037,
-        height: 691,
-      },
-      {
-        src: "/images/galerie/evenements/even9.jpg",
-        width: 1037,
-        height: 691,
-      },
-      {
-        src: "/images/galerie/evenements/even10.jpg",
-        width: 1037,
-        height: 691,
-      },
-      {
-        src: "/images/galerie/evenements/even11.jpg",
-        width: 1037,
-        height: 691,
-      },
-      {
-        src: "/images/galerie/evenements/even12.jpg",
-        width: 1037,
-        height: 691,
-      },
-    ],
+    images:"/images/galerie/evenement collaboratif/even1.jpg",
     image: "/images/coworking/Espace Bulle Open space/img (1).jpg",
-    bookingLink: '/evenement',
+    bookingLink: 'https://www.facebook.com/share/p/1Ed2NxDip8/',
+    titles : "Découvrez nos Événements Collaboratifs",
   },
   {
     id: "article_de_presse",
@@ -484,70 +421,10 @@ export const galeries = [
       "Ces articles soulignent les initiatives que nous prenons pour favoriser un environnement de travail collaboratif et innovant.",
       "Restez informé des dernières tendances et opportunités dans le monde du coworking.",
     ],
-    images: [
-      {
-        src: "/images/coworking/Bureaux privés/Bureau prospérité/img (1).jpg",
-        width: 1037,
-        height: 691,
-      },
-      {
-        src: "/images/coworking/Bureaux privés/Bureau prospérité/img (2).jpg",
-        width: 1037,
-        height: 691,
-      },
-      {
-        src: "/images/coworking/Bureaux privés/Bureau prospérité/img (3).jpg",
-        width: 1037,
-        height: 691,
-      },
-      {
-        src: "/images/coworking/Bureaux privés/Bureau détermination/img (1).jpg",
-        width: 1037,
-        height: 691,
-      },
-      {
-        src: "/images/coworking/Bureaux privés/Bureau détermination/img (2).jpg",
-        width: 1037,
-        height: 691,
-      },
-      {
-        src: "/images/coworking/Bureaux privés/Bureau détermination/img (3).jpg",
-        width: 1037,
-        height: 691,
-      },
-      {
-        src: "/images/coworking/Bureaux privés/Bureau confiance/img (1).jpg",
-        width: 1037,
-        height: 691,
-      },
-      {
-        src: "/images/coworking/Bureaux privés/Bureau confiance/img (2).jpg",
-        width: 1037,
-        height: 691,
-      },
-      {
-        src: "/images/coworking/Bureaux privés/Bureau confiance/img (3).jpg",
-        width: 1037,
-        height: 691,
-      },
-      {
-        src: "/images/coworking/Bureaux privés/Bureau excellence/img (1).jpg",
-        width: 1037,
-        height: 691,
-      },
-      {
-        src: "/images/coworking/Bureaux privés/Bureau excellence/img (2).jpg",
-        width: 1037,
-        height: 691,
-      },
-      {
-        src: "/images/coworking/Bureaux privés/Bureau excellence/img (3).jpg",
-        width: 1037,
-        height: 691,
-      },
-    ],
+    images: "/images/galerie/article de presse/Article de presse.jpg",
     image: "/images/coworking/Espace Bulle Open space/img (1).jpg",
-    bookingLink: '/article-de-presse',
+    bookingLink:'https://ahoulafricaine.com/societe-un-brunch-consacre-a-la-sante-mentale-de-lentrepreneur/?fbclid=IwY2xjawHw4a5leHRuA2FlbQIxMQABHYqXehs5GXGQbcrfpZhFhOPGVt7kdhCRl_oDN1Wc-_p5m8RiYIzQF8mC5Q_aem_6Ny7b9Hr3WLg5lLdip4Skw',
+    titles : "Lire notre Article de Presse",
   },
   {
     id: "evenement_a_venir",
@@ -556,10 +433,10 @@ export const galeries = [
     description: [
       "Un événement qui a rassemblé les passionnés et créé des souvenirs inoubliables !",
     ],
-    images: [
-    ],
+    images: "/images/coworking/Espace Bulle Open space/img (1).jpg",
     image: "/images/coworking/Espace Bulle Open space/img (1).jpg",
-    bookingLink: '/espace-bulle-open-space',
+    bookingLink: '/',
+    titles : "Découvrez nos Événements à Venir",
   },
 ];
 
