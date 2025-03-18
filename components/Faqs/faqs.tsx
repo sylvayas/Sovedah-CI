@@ -32,7 +32,7 @@ export default function Faqs() {
             <span className="ml-1">Prendre rendez-vous</span>
           </div>
         </Link>
-        <Icons.logo className="size-24 mb-4" />
+        <div className=""><Icons.logo className="size-24 mb-4" /></div>
         <Link
           className={cn(
             buttonVariants(),

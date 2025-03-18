@@ -5,9 +5,7 @@ import { cn } from "@/lib/utils";
 export default function SubSection({ offre }: { offre: any }) {
   return (
     <section className="relative mb-14">
-      <h2 className="my-4 text-center sm:text-lg md:text-xl lg:text-2xl tracking-tight font-semibold">
-        {offre.solutionsTitle}
-      </h2>
+    
       {offre.solutions && (
         <div className="container flex flex-wrap justify-around py-8 md:py-4 bg-black text-white">
           {offre.solutions.map((solution: any, key: number) => {

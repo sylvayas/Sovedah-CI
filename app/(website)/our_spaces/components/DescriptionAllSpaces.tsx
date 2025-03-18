@@ -15,7 +15,7 @@ export default function DescriptionAllSpaces() {
             <div className="relative gap-8 items-center py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6">
                 <img className="w-full" src="/images/coworking/Bureaux privés/Bureau confiance/img (1).jpg" alt="dashboard image" />
                 <div className="mt-4 md:mt-0">
-                    <h2 className="mb-4  text-2xl md:text-4xl tracking-tight font-saudagar">Bureaux privés</h2>
+                    <h2 className="mb-4  text-2xl md:text-4xl tracking-tight font-saudagar">Réservation </h2>
                     <p className="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">
                         Installez-vous et faites comme chez vous. La connexion internet est disponible et profitez de tout ce dont nous vous mettrons à disposition dans votre bureau. <br />
                         En fonction de la forme de votre installation vous bénéficierez de différents services.

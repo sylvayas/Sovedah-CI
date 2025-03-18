@@ -14,8 +14,8 @@ export default function Footer() {
   return (
     <section className="container px-0 xl:px-8 bg-novis_green min-h-[50vh] h-fit xl:h-[500px] relative">
       <div className="flex flex-col xl:flex-row xl:h-full relative w-full xl:items-stretch gap-8">
-        <div className="py-14 w-full xl:w-[350px] bg-black/90 flex flex-col gap-4 px-4 sm:px-8 md:px-10 md:gap-6 items-center xl:items-start justify-center">
-          <Icons.logo_black className="size-20" />
+        <div className="py-14 w-full xl:w-[350px] bg-[#1A557A] flex flex-col gap-4 px-4 sm:px-8 md:px-10 md:gap-6 items-center xl:items-start justify-center">
+          <Icons.logo_black className="size-25" />
           <p className="text-white text-sm w-4/5 sm:w-3/4 md:w-1/2 text-center xl:text-left xl:w-full">
             Des aménagements attractifs, conçus pour la collaboration et le développement des réseaux professionnels.
           </p>

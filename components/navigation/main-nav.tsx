@@ -30,20 +30,20 @@ export function MainNav() {
     return (
         <div className="mr-4 hidden md:flex">
             <Link href="/" className="relative mr-6 flex items-center space-x-2">
-                <Icons.logo_rogner className="w-28" />
+                <Icons.logo_rogner className="w-24" />
             </Link>
             <NavigationMenu className="hidden items-center space-x-6 text-sm font-medium xl:flex">
                 <NavigationMenuList>
                     <NavigationMenuItem>
                         <Link href={menuList[0].menus[0].href} legacyBehavior passHref>
-                            <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), `${menuList[0].menus[0].active && "font-bold text-novis_orange"}`)} >
+                            <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), `${menuList[0].menus[0].active && "font-bold text-[ #1A557A]"}`)} >
                                 {menuList[0].menus[0].label}
                             </NavigationMenuLink>
                         </Link>
                     </NavigationMenuItem>
 
                     <NavigationMenuItem>
-                        <NavigationMenuTrigger className={cn(`${menuList[1].menus[0].active && "font-bold text-novis_orange"}`)}>{menuList[1].menus[0].label}</NavigationMenuTrigger>
+                        <NavigationMenuTrigger className={cn(`${menuList[1].menus[0].active && "font-bold text-[#1A557A]"}`)}>{menuList[1].menus[0].label}</NavigationMenuTrigger>
                         <NavigationMenuContent>
                             <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
                                 <li className="row-span-6">
@@ -55,13 +55,13 @@ export function MainNav() {
                                             <Icons.logo className="h-20 w-20 mb-4" />
 
                                             <p className="text-sm leading-tight text-white">
-                                                Bienvenue au sein des espaces de Novis coworking à Cocody.
+                                                Bienvenue au sein des espaces de Sovedah CI à l'aéroport cité douane.
                                             </p>
                                         </a>
                                     </NavigationMenuLink>
                                 </li>
                                 {menuList[1].menus[0].submenus.slice(1,).map((item) => (
-                                    <ListItem key={item.label} href={item.href} title={item.label} className={cn(`${item.active && "font-bold text-novis_orange"}`)} />
+                                    <ListItem key={item.label} href={item.href} title={item.label} className={cn(`${item.active && "font-bold text-[ #1A557A]"}`)} />
                                 ))}
                             </ul>
                             <GridPattern
@@ -126,7 +126,7 @@ export function MainNav() {
 
 
                     <NavigationMenuItem>
-                        <NavigationMenuTrigger className={cn(`${menuList[3].menus[0].active && "font-bold text-novis_orange"}`)}>{menuList[3].menus[0].label}</NavigationMenuTrigger>
+                        <NavigationMenuTrigger className={cn(`${menuList[3].menus[0].active && "font-bold text-[#1A557A]"}`)}>{menuList[3].menus[0].label}</NavigationMenuTrigger>
                         <NavigationMenuContent>
                             <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
                                 <li className="row-span-6">

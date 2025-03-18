@@ -67,16 +67,15 @@ export const datas: List_SpaceCard[] = [
 
 export const offres = [
   {
-    id: "domiciliation_virtuelle_entreprise",
-    title: "Domiciliation Virtuelle",
-    subdescription: "Choisissez notre adresse pour en faire la vôtre.",
+    id: "Réservation de billet d'avion",
+    title: "Réservation de billet d'avion",
+    subdescription: "Réservez votre billet en toute simplicité et profitez d’un voyage confortable",
     description: [
       "Dans le cadre de l'immatriculation de votre entreprise au CEPICI pour obtenir une autorisation légale d'exercer votre activité en Côte-d'Ivoire il vous sera nécessaire de disposer d'un siège-social et de vous rattacher par la suite à un centre d'impôts ivoirien.",
       "Novis coworking met à votre disposition une adresse géographique. Grâce à la souscription d'un abonnement annuel vous obtenez un contrat qui vous permettra de compléter votre dossier auprès du notaire, de l'avocat ou l'expert en charge de faire la constitution de votre société à Abidjan.",
     ],
     options: ["Siège social pour vous faire immatriculer", "Adresse physique pour votre entreprise"],
-    solutionsTitle:
-      "Du CLOUD à l'ECO et au FLEX, choisissez la solution sur-mesure qui vous convient le mieux.",
+
     solutions: [
       {
         title: "CLOUD",
@@ -91,7 +90,7 @@ export const offres = [
         icon: "flex",
       },
     ],
-    image: "/images/coworking/Espace Bulle Open space/img (1).jpg",
+    image: "/images/Nos_services_images/airline_reservation.jpg",
     elements: [
       {
         icon: "🏢", // Représentation symbolique d'un bâtiment
@@ -127,10 +126,10 @@ export const offres = [
     bookingLink:'/reservation-domiciliation'
   },
   {
-    id: "domiciliation_physique_entreprise",
-    title: "Domiciliation physique",
+    id: "Commerce général",
+    title: "Commerce général",
     subdescription:
-      "Profitez du confort et de l'ambiance dynamisante de notre espace de coworking.",
+      "Vivez une expérience shopping alliant confort, dynamisme et convivialité.",
     description: [
       "Dans un environnement où le coût de l'immobilier ne fait que s'accroître, il est important en tant qu'investisseur en côte d'ivoire, entrepreneur ou entreprises internationales de trouver des stratégies pour installer l'entreprise à moindre coût.",
       "Novis coworking vous aide à atteindre cet objectif en minimisant vos coûts. Offrez-vous le luxe de bénéficier d'un bureau élégant à Abidjan au sein d'un espace partagé avec une communauté (locaux, expatriés, repats) et bénéficiez d'un large réseau.",
@@ -150,7 +149,7 @@ export const offres = [
         horraire: "10h-14h",
       },
     ],
-    image: "/images/other/exterieur.jpg",
+    image: "/images/Nos_services_images/commerce_general.jpg",
 
     elements: [
       {
@@ -201,9 +200,9 @@ export const offres = [
     ],
   },
   {
-    id: "location_occasionnelle_de_bureaux_meubles",
-    title: "Location de bureau",
-    subdescription: "Faites comme chez vous !",
+    id: "Location de voiture",
+    title: "Location de voiture",
+    subdescription: "Optez pour une location de voiture simple, rapide et confortable, pour des déplacements en toute liberté.",
     description: [
       "Conscient du fait que toutes les entreprises n'ont pas les mêmes besoins et le même budget nous donnons la possibilité à chacun de pouvoir évoluer à son rythme. A L'heure, à la journée, à la semaine ou au mois venez comme vous êtes.",
       "A chaque bureau son ambiance et son authenticité, choisissez qui vous va à l'instant en fonction de votre humeur pour votre bien être et une meilleure productivité. ",
@@ -243,13 +242,13 @@ export const offres = [
           "/images/coworking/Bureaux privés/Bureau excellence/budget.png",
       },
     ],
-    image: "/images/other/bureau_equipe.jpg",
+    image: "/images/Nos_services_images/location_voiture.jpg",
   },
   {
-    id: "location_salle_de_reunion",
-    title: "Salle de réunion",
+    id: "Conciergerie",
+    title: "Conciergerie",
     subdescription:
-      "Louez une salle de réunion équipée pour vos rencontres professionnelles.",
+      "Un service de conciergerie sur mesure pour simplifier votre quotidien avec élégance.",
     description: [
       "Aménagées de manière ergonomique et confortable, notre salle de réunion avec sa capacité de 10 personnes minimum est entièrement équipée pour accueillir vos rencontres professionnelles abidjanaises.",
       "Grâce à son accessibilité c'est l'emplacement rêvé pour organiser vos réunions, vos formations, vos masterclass. Vos convives, collaborateurs, clients ne pourraient être que ravis de cet endroit que nous nommons affectueusement le labo.",
@@ -277,63 +276,10 @@ export const offres = [
     optionsSup:
       "Pour vous aider à vous concentrer exclusivement sur votre activité, nous vous proposons de nous confier l'organisation de vos petits-déjeuners, pauses café, déjeuners, etc.",
     options: ["Event planner", "Service premium"],
-    image: "/images/other/salle_reunion.jpg",
+    image: "/images/Nos_services_images/conciergerie.jpg",
 
   },
-  {
-    id: "location_espace_evenementiel",
-    title: "Location espace évènementiel",
-    subdescription: "Une occasion particulière ? Réservez une salle.",
-    description: [
-      "Notre Pack évènement vous permet d'organiser tous vos évènements professionnels à Abidjan.",
-      "La Côte d'Ivoire incontournable sur l'échiquier internationale du business vous donne en 2024 la possibilité de vous faire connaître ou de vous développer à travers l'organisation de conférences de presse, lancement de produits, vente privée, cérémonie de dédicace de livre, networking, vernissage, assemblées générales etc… ",
-      "Avec sa capacité de 25 à 50 personnes choisissez au sein du coworking abidjanais l'espace qui se prêtera au mieux au format de votre vision.",
-      "Bénéficiez d'un espace spacieux, sécurisé par un service de gardiennage agrée. Places de parking disponibles, Cuisine disponible",
-    ],
-    tarifs: [
-      {
-        name: "Tarif semaine",
-        horraire: "8h-17h et 17h-22h",
-        items: [
-          { title: "1 Demie journée", price: "45 000 F" },
-          { title: "1 Journée", price: "75 000 F" },
-          { title: "Soirée", price: "30 000 F" },
-        ],
-      },
-      {
-        name: "Tarif samedi et dimanche",
-        horraire: "10h-17h",
-        items: [
-          { title: "1 Demie journée", price: "75 000 F" },
-          { title: "1 Journée", price: "90 000 F" },
-        ],
-      },
-    ],
-    options: ["10 personnes", "siège ergonomique", "écran de projection", "rétro-projecteur", "support de notes"],
-    image: "/images/coworking/Espace Bulle Open space/img (1).jpg",
-  },
-  {
-    id: "location_espace_tournage",
-    title: "Location espace tournage",
-    subdescription: "Louez un espace décoré pour vos tournages et podcasts.",
-    description: [
-      "Personal branding, Mise en scène clips vidéo et films, podcast, etc… sont des besoins de notre ère dans le cadre de la communication des activités d'une entreprise ou association.",
-      "Un espace unique décoré par des professionnels avec recherche, beaucoup de soin et de finesse, chaque mètre carré, mobilier, objets de décoration est mis à votre disposition pour le temps d'un tournage sur la capitale ivoirienne.",
-      "Avec NOVIS coworking, ensemble vers le succès.",
-    ],
-    tarifs: [
-      {
-        name: "Tarif samedi et dimanche",
-        horraire: "10h-17h",
-        items: [
-          { title: "1 Demie journée bureau", price: "25 000 F / 30 000 F" },
-          { title: "1 Demie journée salon", price: "40 000 F" },
-        ],
-      },
-    ],
-    horaires: [{ jours: ["Samedi", "Dimanche"], horaires: ["10h-17h"] }],
-    image: "/images/coworking/Espace Bulle Open space/img (1).jpg",
-  },
+ 
 ];
 export const partenaires = [
   {

@@ -6,7 +6,7 @@ export default function TitleSection({ title, description }: { title: string, de
                 {title}
             </h3>
             {description && <p className="mt-4 text-xs md:text-sm">{description}</p>}
-            <div className="w-[125px] md:w-[150px] h-[2px] bg-novis_orange mx-auto lg:mx-0"></div>
+            <div className="w-[125px] md:w-[150px] h-[2px] bg-novis_green mx-auto lg:mx-0"></div>
         </section>
     );
 }

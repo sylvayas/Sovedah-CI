@@ -10,7 +10,7 @@ export default function Statistiques() {
     <section className="container min-h-[300px] py-14 relative">
       <div className=" flex flex-col gap-8 md:gap-12">
         <h3 className="text-center text-2xl font-saudagar font-semibold md:text-3xl text-black/70">
-          NOVIS CO-WORKING en quelques chiffres
+        SOVEDAH CI en quelques chiffres
         </h3>
         <div className="grid grid-cols-2 xl:grid-cols-4 gap-12">
           <div className="flex flex-col gap-2 md:gap-4 items-center">

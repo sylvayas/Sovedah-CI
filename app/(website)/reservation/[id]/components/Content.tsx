@@ -100,7 +100,7 @@ export default function Content({ group, space }: { group: any; space: any }) {
           },
           body: JSON.stringify({
             subject: "Demande de réservation Novis Coworking",
-            to: [data.email, "info@noviscoworking.com"],
+            to: [data.email, "medesse.allao@sovedahci.com"],
             emailData: {
               coworkingName: space.title,
               category: group.title,

@@ -15,7 +15,7 @@ const datas: ({
   description?: string;
 })[] = [
     {
-      image:"/images/coworking/Espace commun/img (2).jpg",
+      image:"/images/carrousel_images/general_trade (2).jpg",
       type: "image"
     },
     {
@@ -25,7 +25,7 @@ const datas: ({
       type: "text"
     },
     {
-      image: "/images/other/hall bulle 2.jpg",
+      image: "/images/carrousel_images/booking_ticket (2).jpg",
       type: "image"
     },
     {
@@ -35,7 +35,7 @@ const datas: ({
       type: "text"
     },
     {
-      image: "/images/coworking/Bureaux privés/Bureau prospérité/img (1).jpg",
+      image: "/images/carrousel_images/cars_key.jpg",
       type: "image"
     },
     {
@@ -45,7 +45,7 @@ const datas: ({
       type: "text"
     },
     {
-      image: "/images/other/salle_reunion.jpg",
+      image: "/images/carrousel_images/un_concierge.jpg",
       type: "image"
     },
     {
@@ -55,7 +55,7 @@ const datas: ({
       type: "text"
     },
     {
-      image: "/images/coworking/Bureaux privés/Bureau détermination/img (2).jpg",
+      image: "/images/carrousel_images/influencer_happy.jpg",
       type: "image"
     },
   ]
@@ -70,7 +70,7 @@ export default function Services() {
           <Image className="object-cover" src={item.image!} alt={item.image!} fill />
         </div> :
           <div className="flex flex-col px-4 bg-novis_green text-white gap-2 relative w-full items-center justify-center py-4 min-h-[250px] xl:h-[400px]">
-            {item.icon && <item.icon className="text-novis_yellow size-12 md:size-20 mb-4" />}
+            {item.icon && <item.icon className="text-[#1A557A] size-12 md:size-20 mb-4" />}
             <h3 className="font-bold font-saudagar text-xl md:text-2xl">{item.title}</h3>
             <p className="text-center text-xs md:text-sm xl:w-3/4">{item.description}</p>
             <GridPattern

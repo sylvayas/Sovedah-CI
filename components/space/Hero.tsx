@@ -1,47 +1,35 @@
 import React from 'react';
-import HeroCarousel from '../ui/hero-carousel/hero-carousel';
-import { cn } from '@/lib/utils';
-import Link from 'next/link'; // Assurez-vous d'importer Link de Next.js
-import { Button } from "@/components/ui/button";
-import { Icons } from "@/components/icons";
-import {
-    Card,
-    CardContent,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card";
+import imgback from "@/public/images/avion/airbus.jpg";
+
+const image=[
+"/image/avion/airplane.jpg",
+]
+    
+
 
 export default function Hero(
-    { space }: { space: any }
+
 ) {
     return (
-        <section className="relative max-w-[1400px] mx-auto">
-            <div className={cn("h-[60vh] md:h-[500px] relative container px-0")}>
-                <HeroCarousel images={space.images.map((image: any) => image.src)} />
+        <section className="relative ">
+        <div className="container px-0 relative max-w-[1400px]">
+            <div className="relative z-[2] flex flex-col md:flex-row md:gap-x-8 justify-between bg-black/30 py-8 px-4 sm:py-16 lg:px-8">
+                <div className="max-w-screen-sm text-white text-center md:text-left">
+                    <h2 className="mb-4 text-xl sm:text-2xl font-saudagar md:text-3xl lg:text-4xl tracking-tight font-semibold">
+                    Prêt pour votre prochain voyage ? Réservez votre billet d&apos;avion dès maintenant Ivoire! </h2>
+                    <p className="mb-8 font-light text-xs sm:text-sm">Bienvenue au sein des espaces de Novis coworking à Cocody : coworking, location de bureaux privés et espaces événementiels dans des bâtiments neufs, propre et moderne.</p>
+                </div>
             </div>
-            <Card className="w-full md:w-[300px] h-fit md:absolute z-10 top-auto left-auto right-16 bottom-3">
-                <CardHeader>
-                    <CardTitle>
-                        <div className="relative mr-6 flex items-center space-x-2">
-                            <Icons.logo_rogner className="w-24 lg:w-28" />
-                        </div>
-                    </CardTitle>
-                </CardHeader>
-                <CardContent className='grid grid-cols-1 gap-4 divide-y'>
-                    <div>
-                        <h2 className='text-xl font-saudagar'>{space.title}</h2>
-                        <p className='tracking-wide mt-2 text-sm'>{space.adresse}</p>
-                        <p className='tracking-wide mt-2 text-sm font-semibold'>{space.contact}</p>
-                        <p className='tracking-wide mt-2 text-sm font-semibold'>{space.email}</p>
-                    </div>
-                </CardContent>
-                <CardFooter>
-                    <Link href="/reservation" className="w-full">
-                        <Button className='w-full'>Réserver mon espace</Button>
-                    </Link>
-                </CardFooter>
-            </Card>
-        </section>
+            {/* image background */}
+            <img
+                src="/image/avion/airplane.jpg"
+                alt="vue"
+                width={200}
+                height={600}
+                className="absolute inset "
+            />
+        </div>
+    </section >
+    
     );
 }

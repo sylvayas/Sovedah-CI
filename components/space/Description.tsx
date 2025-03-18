@@ -1,157 +1,433 @@
-import React from 'react'
-import Galerie from '../Galerie';
-import AnimatedGridPattern from "@/components/magicui/animated-grid-pattern";
+"use client";
 
-import { cn } from "@/lib/utils"
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card"
-import SpaceCarousel from '../ui/SpaceCard/space-carousel';
+import TitleSection from "@/components/title-section";
+import React, { useState, useEffect } from "react";
+import { ArrowUpRight } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Calendar } from "@/components/ui/calendar";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { Button } from "@/components/ui/button";
+import { usePay } from "@/hooks/usePay";
+import { espaces } from "@/config/data";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { countries } from "countries-list";
+import dayjs from "dayjs";
 
+interface IFormInput {
+  name: string;
+  datenaissance:string;
+  sexe:string;
+  email: string;
+  numeropassport:string;
+  nationnalité:string;
+  phone: string;
+  quantity: string;
+  category: string;
+  destination:string;
+  dates: Date[];
+}
 
-const breakpoints = [3840, 1920, 1080, 640, 384, 256, 128];
+export default function Description({ group = { id: null, title: "Inconnu" }, space = { id: null, title: "Inconnu" } }: { group?: any; space?: any }) {
+  const router = useRouter();
+  const [dates, setDates] = useState<Date[]>([]);
+  const [quantity, setQuantity] = useState<string>("");
+  const [category, setCategory] = useState<string>("");
+  const [totalAmount, setTotalAmount] = useState<number>(0);
+  const [data, setData] = useState<any>();
+  const [isMonthlyTarif, setIsMonthlyTarif] = useState(false);
 
-export default function Description(
-    { space }: { space: any }
-) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm<IFormInput>({
+    mode: "onChange",
+  });
 
-    return (
-        <section className="relative max-w-[1400px] mx-auto bg-gray-900 container px-2 md:px-8 py-20 lg:py-32">
+  const [selectedCountry, setSelectedCountry] = useState("");
 
-            <div className="relative gap-8 items-stretch py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6">
-                <div className="mt-4 md:mt-0">
-                    <h2 className="mb-6 text-white text-2xl md:text-4xl tracking-tight font-saudagar">{space.title}</h2>
-                    <div className="mb-6 font-light text-gray-300 text-custom-justify ">
-                        {space.description}
-                        {space.options
-                            && <div className="py-6">
-                                <h3 className="text-xl md:text-2xl tracking-tight font-saudagar mb-4">{space.options.title}</h3>
-                                <div className="text-gray-200 grid items-start lg:grid-cols-2 gap-4">
-                                    {space.options.items.map((option: any, key: number) => {
-                                        return <table key={key} className="w-full text-sm text-left rtl:text-right text-gray-200">
-                                            <thead className="text-xs text-gray-50 uppercase bg-novis_orange">
-                                                <tr>
-                                                    <th scope="col" className="px-6 py-3">
-                                                        {option.title}
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {option.items.map((item: any, k: number) => {
-                                                    return <tr key={k} className="border-b list-disc  odd:bg-gray-900 even:bg-gray-800">
-                                                        <td className="py-1">
-                                                            <li>{item}</li>
-                                                        </td>
-                                                    </tr>
-                                                })}
+  // Transforme l'objet countries en tableau pour le select
+  const countryList = Object.entries(countries).map(([code, info]) => ({
+    code,
+    name: info.name,
+  }));
 
-                                            </tbody>
-                                        </table>
-                                    })}
-                                </div>
-                            </div>
-                        }
-                        {space.tarifs
-                            && <div className="py-6">
-                                <h3 className="text-xl md:text-2xl tracking-tight font-saudagar mb-4">Nos Tarifs</h3>
-                                <ul className="space-y-4 text-gray-200  list-decimal list-inside">
-                                    {space.tarifs.map((tarif: any, key: number) => {
-                                        return <li key={key} className="text-sm md:text-md">
-                                            {tarif.name}
-                                            <ol className="ps-5 mt-2 space-y-1 list-disc list-inside">
-                                                {tarif.items && tarif.items.map((item: any, k: number) => {
-                                                    return <div key={k}>
-                                                        <li>{item.title} <span className='ml-2'>{"=>"}</span> <span className='ml-2'>{item.price}</span></li>
-                                                        <p className="text-gray-300 text-xs md:text-sm">{item.description} </p>
-                                                    </div>
-                                                })}
-                                            </ol>
-                                        </li>
-                                    })}
-                                </ul>
-                            </div>
-                        }
-                    </div>
+  const selectedSpace = space || {};
+  const hasTarifs = Array.isArray(selectedSpace.tarifs) && selectedSpace.tarifs.length > 0;
+
+  const calculateAmount = (quantity: string, category: string, dates: Date[]): number => {
+    if (!quantity || !category || !dates.length) return 0;
+
+    const qty = parseInt(quantity) || 0;
+    if (qty <= 0) return 0;
+
+    let pricePerUnit = 0;
+    if (hasTarifs) {
+      for (const tarifGroup of selectedSpace.tarifs) {
+        const tarifItem = tarifGroup.items.find((item: any) =>
+          item.title.toLowerCase().includes(category.toLowerCase())
+        );
+        if (tarifItem) {
+          pricePerUnit = parseInt(tarifItem.price.replace(/\D/g, ""));
+          break;
+        }
+      }
+    }
+
+    if (!pricePerUnit) return 0;
+
+    if (category.toLowerCase().includes("mois")) {
+      return pricePerUnit * qty;
+    } else if (category.toLowerCase().includes("heure")) {
+      return pricePerUnit * qty * dates.length;
+    } else if (category.toLowerCase().includes("demie journée")) {
+      return pricePerUnit * Math.ceil(dates.length / 2) * qty;
+    } else if (category.toLowerCase().includes("journée")) {
+      return pricePerUnit * dates.length * qty;
+    }
+    return pricePerUnit * qty;
+  };
+
+  const { open, paymentStatus } = usePay();
+
+  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+    setData(data);
+    if (hasTarifs) {
+      const amount = calculateAmount(data.quantity, data.category, dates);
+      open({
+        amount,
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+      });
+    } else {
+      try {
+        const response = await fetch("/api/send-email", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            subject: "Demande de réservation Sovedah-CI",
+            to: [data.email, "medesse.allao@sovedahci.com"],
+            emailData: {
+              coworkingName: space.title,
+              category: group.title,
+              location: space.adresse,
+              clientName: data.name,
+              clientEmail: data.email,
+              clientPhone: data.phone,
+              reservationPrice: 5000,
+              date: formatDates(dates),
+              priceType: `${data.quantity} ${data.category}`,
+              coworkingImage: space.images[0].src,
+            },
+          }),
+        });
+        if (!response.ok) {
+          throw new Error("Failed to send email");
+        }
+        router.push(
+          `/recap?type=reservation&name=${encodeURIComponent(data.name)}&email=${encodeURIComponent(data.email)}&phone=${encodeURIComponent(data.phone)}&groupId=${group.id}&spaceId=${space.id}&dates=${formatDates(dates)}&quantity=${encodeURIComponent(data.quantity)}&category=${encodeURIComponent(data.category)}`
+        );
+      } catch (error) {
+        toast("Erreur", {
+          description: "Une erreur est survenue lors de l'envoi de la demande",
+        });
+      }
+    }
+  };
+
+  const formatDates = (dates: Date[]): string => {
+    return isMonthlyTarif
+      ? dates.map((d) => dayjs(d).format("YYYY-MM")).join(",")
+      : dates.map((d) => dayjs(d).format("YYYY-MM-DD")).join(",");
+  };
+
+  useEffect(() => {
+    if (quantity && category && dates.length > 0) {
+      const amount = calculateAmount(quantity, category, dates);
+      setTotalAmount(amount);
+      setIsMonthlyTarif(category.toLowerCase().includes("mois"));
+    } else {
+      setTotalAmount(0);
+    }
+  }, [quantity, category, dates]);
+
+  useEffect(() => {
+    if (paymentStatus === "success") {
+      fetch("/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          subject: "Facture Sovedah-CI",
+          to: [data.email, "medesse.allao@sovedahci.com"],
+          emailData: {
+            coworkingName: space.title,
+            category: group.title,
+            location: space.adresse,
+            clientName: data.name,
+            clientEmail: data.email,
+            clientPhone: data.phone,
+            reservationPrice: totalAmount,
+            date: formatDates(dates),
+            priceType: `${data.quantity} ${data.category}`,
+            coworkingImage: space.images[0].src,
+          },
+        }),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Failed to send email");
+          }
+          router.push(
+            `/recap?type=payment&name=${encodeURIComponent(data.name)}&email=${encodeURIComponent(data.email)}&phone=${encodeURIComponent(data.phone)}&groupId=${group.id}&spaceId=${space.id}&dates=${formatDates(dates)}&amount=${totalAmount}&quantity=${encodeURIComponent(data.quantity)}&category=${encodeURIComponent(data.category)}`
+          );
+        })
+        .catch(() => {
+          toast("Erreur", {
+            description: "Une erreur est survenue lors de l'envoi de la facture",
+          });
+        });
+    } else if (paymentStatus === "error") {
+      toast("Paiement échoué", {
+        description: "Une erreur est survenue lors du paiement",
+      });
+    }
+  }, [paymentStatus]);
+
+  return (
+    <section className="container min-h-[300px] py-14 relative">
+      <TitleSection title={"Détail de réservation"} />
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="grid gap-4 md:gap-8 lg:grid-cols-2 mt-4"
+       >
+        <div className="relative flex-col items-start gap-8 flex">
+          <div className="grid w-full items-start gap-6">
+            
+            <div className="grid gap-6 rounded-lg border p-4">
+              <CardTitle>Informations personnelles</CardTitle>
+              <div className="grid gap-3">
+                <Label htmlFor="name">Nom & Prénoms</Label>
+                <Input
+                  id="name"
+                  type="text"
+                  {...register("name", { required: true })}
+                  aria-invalid={errors.name ? "true" : "false"}
+                />
+                {errors.name?.type === "required" && (
+                  <p role="alert">Nom & Prénom sont requis</p>
+                )}
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                <div className="grid gap-3">
+                    <Label htmlFor="email">Email</Label>
+                    <Input
+                    id="email"
+                    type="email"
+                    {...register("email", { required: true })}
+                    aria-invalid={errors.email ? "true" : "false"}
+                    />
+                    {errors.email?.type === "required" && (
+                    <p role="alert">Email est requis</p>
+                    )}
                 </div>
-                <img className="w-full hidden md:block object-cover" src={space.images.map((image: any) => image.src)[0]} alt="dashboard image" />
+                <div className="grid gap-3">
+                    <Label htmlFor="phone">Téléphone</Label>
+                    <Input
+                    id="phone"
+                    type="tel"
+                    {...register("phone", { required: true })}
+                    aria-invalid={errors.phone ? "true" : "false"}
+                    />
+                    {errors.phone?.type === "required" && (
+                    <p role="alert">Téléphone est requis</p>
+                    )}
+                </div>
+             </div>
+
+             <div className="grid gap-3">
+                <Label htmlFor="datenaissance">Date Naissance</Label>
+                <Input
+                  id="datenaissance"
+                  type="text"
+                  {...register("datenaissance", { required: true })}
+                  aria-invalid={errors.datenaissance ? "true" : "false"}
+                />
+                {errors.datenaissance?.type === "required" && (
+                  <p role="alert">Date de Naissance est requise</p>
+                )}
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div className="grid gap-3">
+                    <Label htmlFor="sexe">Sexe</Label>
+                    <Input
+                    id="sexe"
+                    type="sexe"
+                    {...register("sexe", { required: true })}
+                    aria-invalid={errors.sexe ? "true" : "false"}
+                    />
+                    {errors.sexe?.type === "required" && (
+                    <p role="alert">sexe est requis</p>
+                    )}
+                </div>
+                <div className="grid gap-3">
+                    <Label htmlFor="Nationnalité">Nationnalité</Label>
+                    <Input
+                    id="Nationnalité"
+                    type="Nationnalité"
+                    {...register("nationnalité", { required: true })}
+                    aria-invalid={errors.nationnalité? "true" : "false"}
+                    />
+                    {errors.nationnalité?.type === "required" && (
+                    <p role="alert">Nationnalité est requis</p>
+                    )}
+                </div>
+             </div>
+             <div className="grid gap-3">
+                <Label htmlFor="numeropassport">Numero de passport</Label>
+                <Input
+                  id="numeropassport"
+                  type="text"
+                  {...register("numeropassport", { required: true })}
+                  aria-invalid={errors.numeropassport? "true" : "false"}
+                />
+                {errors.numeropassport?.type === "required" && (
+                  <p role="alert">Date de Naissance est requise</p>
+                )}
+              </div>
             </div>
-            {space.items && space.items.length > 0 ? (
-                <>
-                    <h2 className="mb-6 text-center text-white text-xl md:text-2xl tracking-tight font-saudagar">Nos différents espaces</h2>
-                    <div className="relative grid py-8 lg:grid-cols-2 justify-center gap-8 mb-8 lg:mb-16">
-                        {space.items.map((subSpace: any, key: number) => {
-                            return <Card key={key} className={cn("w-full mx-4 relative max-w-[320px] sm:max-w-lg md:max-w-2xl",)}>
-                                <SpaceCarousel images={subSpace.images.map((image: any) => image.src)} />
-                                <CardHeader className='bg-gray-900'>
-                                    <CardTitle className="text-sm md:text-lg text-novis_orange">{subSpace.title}</CardTitle>
-                                    <CardDescription className='text-white text-sm '>{subSpace.description}</CardDescription>
-                                </CardHeader>
-                                <CardContent className='bg-gray-900'>
-                                    <div className="font-light text-gray-300 grid md:grid-cols-2">
-                                        {subSpace.options
-                                            && <div>
-                                                <h3 className="md:text-lg tracking-tight font-semibold mb-4">Options</h3>
-                                                <ul className="space-y-1 text-gray-200 list-disc list-inside">
-                                                    {subSpace.options.map((option: any, key: number) => {
-                                                        return <li key={key} className="text-sm md:text-md">
-                                                            {option}
-                                                        </li>
-                                                    })}
-                                                </ul>
-                                            </div>
-                                        }
-                                        {subSpace.tarifs
-                                            && <div className='mt-4'>
-                                                <h3 className="md:text-lg tracking-tight font-semibold mb-4">Nos Tarifs</h3>
-                                                <ul className="space-y-4 text-gray-200  list-decimal list-inside">
-                                                    {subSpace.tarifs.map((tarif: any, key: number) => {
-                                                        return <li key={key} className="text-sm md:text-md">
-                                                            {tarif.name}
-                                                            <ol className="ps-5 mt-2 space-y-1 list-disc list-inside">
-                                                                {tarif.items && tarif.items.map((item: any, k: number) => {
-                                                                    return <div key={k}>
-                                                                        <li>{item.title} <span className='ml-2'>{"=>"}</span> <span className='ml-2'>{item.price}</span></li>
-                                                                        <p className="text-gray-300 text-xs md:text-sm">{item.description} </p>
-                                                                    </div>
-                                                                })}
-                                                            </ol>
-                                                        </li>
-                                                    })}
-                                                </ul>
-                                            </div>
-                                        }
-                                    </div>
-                                </CardContent>
-                            </Card>
-                        })}
-                    </div>
-                </>
 
-            ) : <></>}
+ 
+         </div>  
 
-            <AnimatedGridPattern
-                numSquares={100}
-                maxOpacity={0.1}
-                duration={2}
-                repeatDelay={1}
-                className={
-                    "[mask-image:radial-gradient(500px_circle_at_center,white,transparent)] inset-x-0 w-full  h-[150%]"
-                } />
+            </div>
 
-            <Galerie slides={space.images.map((item: any) => ({
-                src: item.src,
-                width: item.width,
-                height: item.height,
-                srcSet: breakpoints.map((breakpoint) => ({
-                    src: item.src,
-                    width: breakpoint,
-                    height: Math.round((item.height / item.width) * breakpoint),
-                })),
-            }))} />
-        </section>
-    )
+           
+        
+        <Card>
+          <CardHeader>
+            <CardTitle>Détail du paiement</CardTitle>
+          </CardHeader>
+          <CardContent className="grid gap-8">
+            {/* {hasTarifs && (
+              <>
+                <div className="grid gap-3">
+                  <Label htmlFor="quantity">Quantité</Label>
+                  <Input
+                    id="quantity"
+                    type="number"
+                    min="1"
+                    placeholder="Entrez la quantité"
+                    onChange={(e) => setQuantity(e.target.value)}
+                  />
+                </div>
+                <div className="grid gap-3">
+                  <Label htmlFor="category">Catégorie</Label>
+                  <Input
+                    id="category"
+                    type="text"
+                    placeholder="Ex: Mois, Heure"
+                    onChange={(e) => setCategory(e.target.value)}
+                  />
+                </div>
+              </>
+            )} */}
+
+
+            <div className="grid grid-cols-2 gap-3">
+                <div className="grid gap-3">
+                    <Label htmlFor="email">Option de voyage</Label>
+                    <Input
+                    id="email"
+                    type="email"
+                    {...register("email", { required: true })}
+                    aria-invalid={errors.email ? "true" : "false"}
+                    />
+                    {errors.email?.type === "required" && (
+                    <p role="alert">Email est requis</p>
+                    )}
+                </div>
+                <div className="grid gap-3">
+                    <Label htmlFor="phone">Nombre de passagers</Label>
+                    <Input
+                    id="phone"
+                    type="tel"
+                    {...register("phone", { required: true })}
+                    aria-invalid={errors.phone ? "true" : "false"}
+                    />
+                    {errors.phone?.type === "required" && (
+                    <p role="alert">Téléphone est requis</p>
+                    )}
+                </div>
+            </div> 
+
+             <div className="grid gap-3">
+                <Label htmlFor="destination">Destination</Label>
+                <select
+                    id="destination"
+                    {...register("destination", { required: true })} // Intégration avec react-hook-form
+                    value={selectedCountry}
+                    onChange={(e) => setSelectedCountry(e.target.value)}
+                    className="border rounded p-2" // Style basique, adapte selon ton design
+                    aria-invalid={errors.destination ? "true" : "false"}
+                >
+                    <option value="">Sélectionnez un pays</option>
+                    {countryList.map((country) => (
+                    <option key={country.code} value={country.code}>
+                        {country.name}
+                    </option>
+                    ))}
+                </select>
+                {errors.destination?.type === "required" && (
+                    <p role="alert">La destination est requise</p>
+                )}
+            </div>
+
+            <div className="grid gap-3">
+              <Label htmlFor="date">
+                {isMonthlyTarif ? "Choisissez les mois" : "Choisissez les dates"}
+              </Label>
+              <Calendar
+                id="date"
+                mode="single"
+                selected={dates}
+                onSelect={(days) => setDates(days || [new Date()])}
+                numberOfMonths={2}
+                className="rounded-md border"
+                disabled={(date) =>
+                  isMonthlyTarif ? date.getDate() !== 1 : false
+                }
+              />
+            </div>
+            {hasTarifs && (
+              <div className="text-right font-bold">
+                Total: {totalAmount} FCFA
+              </div>
+            )}
+            <Button
+              type="submit"
+              disabled={!isValid || dates.length === 0}
+              className="ml-auto gap-1"
+            >
+              <span>
+                {hasTarifs
+                  ? "Confirmer le paiement"
+                  : "Demander une réservation"}
+                <ArrowUpRight className="h-4 w-4" />
+              </span>
+            </Button>
+          </CardContent>
+        </Card>
+      </form>
+    </section>
+    
+  );
 }

@@ -2,13 +2,30 @@ import React from 'react'
 import Hero from "@/components/space/Hero";
 import Description from "@/components/space/Description";
 import { espaces } from '@/config/data';
+import { group } from 'console';
 
-export default function SpacePage({params: { space_id } }: { params: { space_id: string } }) {
-    const space = espaces.find((espace) => espace.id == space_id);
+export default async function ItemSpace({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const group = espaces.find((espace) => {
+    if (espace.items) {
+      return espace.items.find((espac) => espac.id == params.id);
+    }
+    return espace.id == params.id;
+  });
+
+  const item = group
+    ? group.items
+      ? group.items.find((espac) => espac.id == params.id)
+      : group
+    : null;
+
     return (
         <div>
-            <Hero space={space} />
-            <Description space={space} />
+            <Hero/>
+            <Description group={group} space={item}/>
         </div>
-    )
+    );
 }
