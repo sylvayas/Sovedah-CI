@@ -55,7 +55,7 @@ export function MainNav() {
                                             <Icons.logo className="h-20 w-20 mb-4" />
 
                                             <p className="text-sm leading-tight text-white">
-                                                Bienvenue au sein des espaces de Sovedah CI à l'aéroport cité douane.
+                                                Bienvenue au sein des espaces de Sovedah CI à l&apos;aéroport cité douane.
                                             </p>
                                         </a>
                                     </NavigationMenuLink>

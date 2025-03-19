@@ -13,7 +13,6 @@ export default function DescriptionAllSpaces() {
             <TitleSection title={"Nos différents espaces situés à Cocody"} />
 
             <div className="relative gap-8 items-center py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6">
-                <img className="w-full" src="/images/coworking/Bureaux privés/Bureau confiance/img (1).jpg" alt="dashboard image" />
                 <div className="mt-4 md:mt-0">
                     <h2 className="mb-4  text-2xl md:text-4xl tracking-tight font-saudagar">Réservation </h2>
                     <p className="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">
@@ -34,6 +33,7 @@ export default function DescriptionAllSpaces() {
                         </div>
                     </Link>
                 </div>
+                <img className="w-full" src="/images/coworking/Bureaux privés/Bureau confiance/img (1).jpg" alt="dashboard image" />
             </div>
 
             <div className="relative flex flex-col-reverse md:gap-8 items-center py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6">
