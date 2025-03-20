@@ -146,7 +146,7 @@ const calculateAmount = useCallback((tarifString: string, dates: Date[]): number
     } else {
       setTotalAmount(0);
     }
-  }, [selectedTarif, dates,calculateAmount]);
+  }, [selectedTarif, dates,calculateAmount,formatDates]);
   useEffect(() => {
     if (paymentStatus === "success") {
       fetch("/api/send-email", {
@@ -189,8 +189,7 @@ const calculateAmount = useCallback((tarifString: string, dates: Date[]): number
         description: "Une erreur est survenue lors du paiement",
       });
     }
-  }, [paymentStatus,data.email,data.name,data.phone,dates,group.id,group.title,router,selectedTarif,space.adresse,space.id,space.images,space.title,
-totalAmount,]);
+  }, [paymentStatus]);
 
   return (
     <section className="container min-h-[300px] py-14 relative">

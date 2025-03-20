@@ -6,7 +6,7 @@ import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 
 import { cn } from "@/lib/utils"
-import Image from "next/image";
+
 
 export default function Missiion_Charte() {
     return (
@@ -21,14 +21,7 @@ export default function Missiion_Charte() {
                         <p className='font-light text-sm text-gray-100 mb-4'><span className='font-semibold'>Faciliter la croissance des entreprises et des entrepreneurs : </span>Fournir un écosystème qui favorise le développement des entreprises, en offrant des ressources, un réseau et un soutien pour favoriser la croissance économique. </p>
                         <p className='font-light text-sm text-gray-100 mb-4'><span className='font-semibold'>Promouvoir l&apos;innovation et l&apos;entrepreneuriat : </span>Encourager l&apos;innovation, la créativité et l&apos;entrepreneuriat en offrant un environnement propice à la transformation des idées en projets concrets.</p>
                     </div>
-                    <div className="grid grid-cols-2 gap-4 mt-8">
-                       <Image src="/images/coworking/Bureaux privés/Bureau prospérité/img_p (3).jpg" alt="description" width={500} height={300} />
-                        
-                       <Image src="/images/coworking/Espace Bulle Open space/img (1).jpg" alt="description" width={500} height={300} />
-                        
-                       <Image src="/ images/coworking/Bureaux privés/Bureau détermination/img (1).jpg" alt="description" width={500} height={300} />
-                       
-                    </div>
+                 
                 </div>
             </div>
             <div className="relative gap-8 items-center py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6">

@@ -89,7 +89,7 @@ export default function Description({ group = { id: null, title: "Inconnu" }, sp
       return pricePerUnit * dates.length * qty;
     }
     return pricePerUnit * qty;
-  }, [hasTarifs, selectedSpace]);
+  }, [hasTarifs,selectedSpace.tarifs]);
 
   const { open, paymentStatus } = usePay();
 
