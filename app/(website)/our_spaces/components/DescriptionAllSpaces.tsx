@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import Image from 'next/image'; // Ajout de l'importation
 
 
+
 export default function DescriptionAllSpaces() {
     return (
         <section className="container min-h-[100px] py-14 relative mt-0">          
@@ -37,11 +38,13 @@ export default function DescriptionAllSpaces() {
                                 "group relative w-full justify-center gap-2 rounded-md transition-all duration-300 ease-out hover:ring-2 hover:ring-primary hover:ring-offset-2",
                             )}
                             
-                            href={"/contact_us"}
+                            href={"/space_states"}
                             >
                             <span className="absolute right-0 -mt-12 h-32 w-8 translate-x-12 rotate-12 bg-white opacity-10 transition-all duration-1000 ease-out group-hover:-translate-x-40" />
+                            
                             <div className="flex items-center">
                                 <span className="ml-1">Commander</span>
+                              
                             </div>
                     </Link>
                     </div>
