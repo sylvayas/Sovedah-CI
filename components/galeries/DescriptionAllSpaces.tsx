@@ -3,16 +3,13 @@ import AnimatedGridPattern from "@/components/magicui/animated-grid-pattern";
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 export default function DescriptionAllSpaces({ galerie }: { galerie: any }) {
   return (
     <section className="container min-h-[300px] mb-14 relative">
       <div className="relative gap-8 items-center md:items-stretch py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6">
-        <img
-          className="w-full z-10 object-cover"
-          src={galerie.images}
-          alt="dashboard image"
-        />
+          <Image src="/images/coworking/Espace Bulle Open space/img (1).jpg" alt="description" width={500} height={300} />
         <div className="mt-4 md:mt-0">
           <h2 className="mb-4 text-2xl md:text-4xl tracking-tight font-saudagar">
             {galerie.title}

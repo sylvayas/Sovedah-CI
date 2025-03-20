@@ -2,14 +2,14 @@ import React from 'react'
 import AnimatedGridPattern from "@/components/magicui/animated-grid-pattern";
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
-
+import Image from "next/image";
 import { cn } from "@/lib/utils"
 
 export default function DescriptionAllSpaces() {
     return (
         <section className="container min-h-[300px] py-14 relative">
             <div className="relative gap-8 items-center py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6">
-                <img className="w-full" src="/images/coworking/Bureaux privés/Bureau confiance/Bureau Confiance 1.jpg" alt="dashboard image" />
+                <Image src="/images/coworking/Bureaux privés/Bureau confiance/Bureau Confiance 1.jpg" alt="description" width={500} height={300} />
                 <div className="mt-4 md:mt-0">
                     <h2 className="mb-4  text-2xl md:text-4xl tracking-tight font-saudagar">Bureaux privés</h2>
                     <p className="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius omnis iure eligendi placeat, quae dolorum pariatur doloribus odit repudiandae delectus praesentium, labore officiis consequuntur laboriosam a? Architecto ullam debitis commodi.</p>

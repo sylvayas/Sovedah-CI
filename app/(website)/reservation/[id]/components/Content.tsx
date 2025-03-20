@@ -21,6 +21,7 @@ import { espaces } from "@/config/data";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import dayjs from "dayjs";
+import { useCallback } from 'react';
 
 interface IFormInput {
   name: string;
@@ -53,31 +54,34 @@ export default function Content({ group, space }: { group: any; space: any }) {
   const hasTarifs = selectedSpace.tarifs && selectedSpace.tarifs.length > 0;
 
   // Fonction pour calculer le montant total
-  const calculateAmount = (tarifString: string, dates: Date[]): number => {
-    if (!tarifString) return 0;
-    
-    const [tarifGroupName, tarifItemTitle] = tarifString.split("|");
-    const tarifGroup = selectedSpace.tarifs.find(
-      (t: any) => t.name === tarifGroupName
-    );
-    const tarifItem = tarifGroup?.items.find(
-      (item: any) => item.title === tarifItemTitle
-    );
-    
-    if (!tarifItem) return 0;
 
-    const price = parseInt(tarifItem.price.replace(/\D/g, ""));
-    if (tarifItem.title.toLowerCase().includes("mois")) {
-      return price * dates.length;
-    } else if (tarifItem.title.toLowerCase().includes("heure")) {
-      return price * dates.length;
-    } else if (tarifItem.title.toLowerCase().includes("demie journée")) {
-      return price * Math.ceil(dates.length / 2);
-    } else if (tarifItem.title.toLowerCase().includes("journée")) {
-      return price * dates.length;
-    }
-    return 0;
-  };
+
+// Dans votre composant
+const calculateAmount = useCallback((tarifString: string, dates: Date[]): number => {
+  if (!tarifString) return 0;
+
+  const [tarifGroupName, tarifItemTitle] = tarifString.split("|");
+  const tarifGroup = selectedSpace.tarifs.find(
+    (t: any) => t.name === tarifGroupName
+  );
+  const tarifItem = tarifGroup?.items.find(
+    (item: any) => item.title === tarifItemTitle
+  );
+
+  if (!tarifItem) return 0;
+
+  const price = parseInt(tarifItem.price.replace(/\D/g, ""));
+  if (tarifItem.title.toLowerCase().includes("mois")) {
+    return price * dates.length;
+  } else if (tarifItem.title.toLowerCase().includes("heure")) {
+    return price * dates.length;
+  } else if (tarifItem.title.toLowerCase().includes("demie journée")) {
+    return price * Math.ceil(dates.length / 2);
+  } else if (tarifItem.title.toLowerCase().includes("journée")) {
+    return price * dates.length;
+  }
+  return 0;
+}, [selectedSpace]); // Dépendance : selectedSpace
 
   const { open, paymentStatus } = usePay();
 
@@ -129,12 +133,12 @@ export default function Content({ group, space }: { group: any; space: any }) {
     }
   };
 
-  const formatDates = (dates: Date[]): string => {
+  const formatDates = useCallback((dates: Date[]): string => {
     return isMonthlyTarif
       ? dates.map((d) => dayjs(d).format("YYYY-MM")).join(",")
       : dates.map((d) => dayjs(d).format("YYYY-MM-DD")).join(",");
-  };
-
+  }, [isMonthlyTarif]);
+  
   useEffect(() => {
     if (selectedTarif && dates.length > 0) {
       const amount = calculateAmount(selectedTarif, dates);
@@ -142,8 +146,7 @@ export default function Content({ group, space }: { group: any; space: any }) {
     } else {
       setTotalAmount(0);
     }
-  }, [selectedTarif, dates]);
-
+  }, [selectedTarif, dates,calculateAmount]);
   useEffect(() => {
     if (paymentStatus === "success") {
       fetch("/api/send-email", {
@@ -186,7 +189,8 @@ export default function Content({ group, space }: { group: any; space: any }) {
         description: "Une erreur est survenue lors du paiement",
       });
     }
-  }, [paymentStatus]);
+  }, [paymentStatus,data.email,data.name,data.phone,dates,group.id,group.title,router,selectedTarif,space.adresse,space.id,space.images,space.title,
+totalAmount,]);
 
   return (
     <section className="container min-h-[300px] py-14 relative">

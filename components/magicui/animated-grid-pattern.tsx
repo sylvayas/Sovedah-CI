@@ -2,7 +2,7 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 import { motion } from "framer-motion";
-
+import { useCallback } from 'react';
 import { cn } from "@/lib/utils";
 
 interface GridPatternProps {
@@ -44,12 +44,12 @@ export function GridPattern({
   }
 
   // Adjust the generateSquares function to return objects with an id, x, and y
-  function generateSquares(count: number) {
+  const generateSquares = useCallback((count: number) => {
     return Array.from({ length: count }, (_, i) => ({
       id: i,
       pos: getPos(),
     }));
-  }
+  }, [getPos]);
 
   // Function to update a single square's position
   const updateSquarePosition = (id: number) => {
@@ -70,7 +70,7 @@ export function GridPattern({
     if (dimensions.width && dimensions.height) {
       setSquares(generateSquares(numSquares));
     }
-  }, [dimensions, numSquares]);
+  }, [dimensions, numSquares,,generateSquares]);
 
   // Resize observer to update container dimensions
   useEffect(() => {
@@ -82,14 +82,14 @@ export function GridPattern({
         });
       }
     });
-
-    if (containerRef.current) {
-      resizeObserver.observe(containerRef.current);
+const containsvalue= containerRef.current;
+    if (containsvalue) {
+      resizeObserver.observe(containsvalue);
     }
 
     return () => {
-      if (containerRef.current) {
-        resizeObserver.unobserve(containerRef.current);
+      if (containsvalue) {
+        resizeObserver.unobserve(containsvalue);
       }
     };
   }, [containerRef]);

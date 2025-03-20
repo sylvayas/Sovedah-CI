@@ -36,7 +36,7 @@ export const SwipeCarousel = ({ imgs }: { imgs: StaticImageData[] }) => {
         }, AUTO_DELAY);
 
         return () => clearInterval(intervalRef);
-    }, []);
+    }, [dragX,imgs.length ]);
 
     const onDragEnd = () => {
         const x = dragX.get();

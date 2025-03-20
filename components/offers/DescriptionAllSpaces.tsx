@@ -3,12 +3,13 @@ import AnimatedGridPattern from "@/components/magicui/animated-grid-pattern";
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 export default function DescriptionAllSpaces({ offre }: { offre: any }) {
   return (
     <section className="container min-h-[300px] mb-14 relative">
       <div className="relative gap-8 items-center md:items-stretch py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6">
-        <img
+        <Image
           className="w-full z-10 object-cover"
           src={offre.image}
           alt="dashboard image"
@@ -96,7 +97,7 @@ export default function DescriptionAllSpaces({ offre }: { offre: any }) {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-6 lg:mb-16">
             {offre.avantages.map((avantage: any, key: number) => (
               <div key={key} className="items-center flex flex-col bg-gray-50 rounded-lg shadow">
-                <img
+                <Image
                   className="w-full rounded-lg sm:rounded-none sm:rounded-l-lg"
                   src={avantage.image}
                   alt={avantage.image}

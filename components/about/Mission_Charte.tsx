@@ -6,6 +6,7 @@ import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 
 import { cn } from "@/lib/utils"
+import Image from "next/image";
 
 export default function Missiion_Charte() {
     return (
@@ -21,9 +22,12 @@ export default function Missiion_Charte() {
                         <p className='font-light text-sm text-gray-100 mb-4'><span className='font-semibold'>Promouvoir l&apos;innovation et l&apos;entrepreneuriat : </span>Encourager l&apos;innovation, la créativité et l&apos;entrepreneuriat en offrant un environnement propice à la transformation des idées en projets concrets.</p>
                     </div>
                     <div className="grid grid-cols-2 gap-4 mt-8">
-                        <img className="w-full rounded-lg row-span-2" src="/images/coworking/Bureaux privés/Bureau prospérité/img_p (3).jpg" alt="office content 1" />
-                        <img className="mt-4 w-full lg:mt-10 rounded-lg" src="/images/coworking/Espace Bulle Open space/img (1).jpg" alt="office content 2" />
-                        <img className="mt-4 w-full lg:mt-10 rounded-lg" src="/images/coworking/Bureaux privés/Bureau détermination/img (1).jpg" alt="office content 2" />
+                       <Image src="/images/coworking/Bureaux privés/Bureau prospérité/img_p (3).jpg" alt="description" width={500} height={300} />
+                        
+                       <Image src="/images/coworking/Espace Bulle Open space/img (1).jpg" alt="description" width={500} height={300} />
+                        
+                       <Image src="/ images/coworking/Bureaux privés/Bureau détermination/img (1).jpg" alt="description" width={500} height={300} />
+                       
                     </div>
                 </div>
             </div>

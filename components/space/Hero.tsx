@@ -1,9 +1,7 @@
 import React from 'react';
-import imgback from "@/public/images/avion/airbus.jpg";
 
-const image=[
-"/image/avion/airplane.jpg",
-]
+import Image from "next/image";
+
     
 
 
@@ -21,7 +19,7 @@ export default function Hero(
                 </div>
             </div>
             {/* image background */}
-            <img
+            <Image
                 src="/image/avion/airplane.jpg"
                 alt="vue"
                 width={200}

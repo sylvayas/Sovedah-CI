@@ -9,7 +9,6 @@ import {
   File,
   FileText,
   HelpCircle,
-  Image,
   Laptop,
   Loader2,
   Moon,
@@ -46,12 +45,13 @@ import {
   PartyPopperIcon,
 } from "lucide-react";
 import Galerie from "./Galerie";
+import Image from "next/image";
 
 export type IconProps = React.HTMLAttributes<SVGElement>;
 
 export const Icons: any = {
   logo: ({ className, ...props }: { className: string }) => (
-    <img
+    <Image
       src="/images/logo_sovedah_white.jpg"
       alt="NOVIS CO-WORKING"
       className={className}
@@ -59,7 +59,7 @@ export const Icons: any = {
     />
   ),
   logo_rogner: ({ className, ...props }: { className: string }) => (
-    <img
+    <Image
       src="/images/logo_sovedah_original.png"
       alt="NOVIS CO-WORKING"
       className={className}
@@ -67,7 +67,7 @@ export const Icons: any = {
     />
   ),
   logo_black: ({ className, ...props }: { className: string }) => (
-    <img
+    <Image
       src="/images/logo_sovedah_original.png"
       alt="NOVIS CO-WORKING"
       className={className}
@@ -76,7 +76,7 @@ export const Icons: any = {
     />
   ),
   logo_black_rogner: ({ className, ...props }: { className: string }) => (
-    <img
+    <Image
       src="/images/logo-1_1.png"
       alt="NOVIS CO-WORKING"
       className={className}

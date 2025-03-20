@@ -2,7 +2,7 @@ import TitleSection from '@/components/title-section'
 import React from 'react'
 import GridPattern from "@/components/magicui/grid-pattern";
 import { cn } from "@/lib/utils";
-
+import Image from "next/image";
 export default function ADM() {
     return (
         <section className="container min-h-[300px] py-14 relative">
@@ -16,11 +16,8 @@ export default function ADM() {
                             <div className="relative flex justify-center items-center h-full z-[1] pt-8 px-8">
                                 <div className="w-full sm:max-w-[80%] md:max-w-[60%] border-2 shadow-2xl rounded-2xl lg:rounded-3xl border-white relative top-auto bottom-auto mx-auto
                 flex justify-center flex-col">
-                                    <img
-                                        alt="App screenshot"
-                                        src="/images/coworkers/coworker (7).jpg"
-                                        className="w-full h-full object-cover rounded-2xl lg:rounded-3xl"
-                                    />
+                    <Image src="/images/coworkers/coworker (7).jpg" alt="description" width={500} height={300} />
+
                                 </div>
                             </div>
                         </div>

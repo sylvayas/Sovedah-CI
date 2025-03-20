@@ -18,7 +18,7 @@ import {
   CardDescription,
   CardFooter,
 } from "@/components/ui/card";
-import { Calendar } from "@/components/ui/calendar";
+import { Calendar } from "@/components/ui/calendar"; // shadcn Calendar
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -45,6 +45,10 @@ export default function ListSpaceCard({ formulas }: { formulas: Formula[] }) {
 
 const FormulaReservationCard = ({ formula }: { formula: Formula }) => {
   const [dates, setDates] = useState<Date[]>([]);
+  const [dateRange, setDateRange] = useState<{ from: Date | undefined; to: Date | undefined }>({
+    from: undefined,
+    to: undefined,
+  });
   const [isLoading, setIsLoading] = useState(false);
   const {
     register,
@@ -53,6 +57,30 @@ const FormulaReservationCard = ({ formula }: { formula: Formula }) => {
   } = useForm<IFormInput>({
     mode: "onChange",
   });
+
+  // Gérer la sélection de la plage de dates
+  const handleSelectRange = (range: { from: Date | undefined; to: Date | undefined } | undefined) => {
+    if (!range) {
+      setDateRange({ from: undefined, to: undefined });
+      setDates([]);
+      return;
+    }
+
+    setDateRange(range);
+
+    if (range.from && range.to) {
+      const dateArray = [];
+      let currentDate = new Date(range.from);
+      const endDate = new Date(range.to);
+      while (currentDate <= endDate) {
+        dateArray.push(new Date(currentDate));
+        currentDate.setDate(currentDate.getDate() + 1);
+      }
+      setDates(dateArray);
+    } else {
+      setDates([]);
+    }
+  };
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     setIsLoading(true);
@@ -73,7 +101,8 @@ const FormulaReservationCard = ({ formula }: { formula: Formula }) => {
             clientPhone: data.phone,
             reservationPrice: formula.price,
             period: formula.period,
-            date: dayjs(dates[0]).format("YYYY-MM-DD"),
+            date: dates.length > 0 ? dayjs(dates[0]).format("YYYY-MM-DD") : "", // Date de début
+            dateEnd: dates.length > 0 ? dayjs(dates[dates.length - 1]).format("YYYY-MM-DD") : "", // Date de fin
           },
         }),
       });
@@ -188,17 +217,18 @@ const FormulaReservationCard = ({ formula }: { formula: Formula }) => {
                 )}
               </div>
               <div className="grid gap-3">
-                <Label>Date de début</Label>
+                <Label>Sélectionner une plage de dates</Label>
                 <Calendar
-                  mode="single"
-                  selected={dates[0]}
-                  onSelect={(day) => setDates(day ? [day] : [])}
+                  mode="range"
+                  selected={dateRange}
+                  onSelect={(range) => console.log("Sélection :", range)}
                   disabled={(date) => date < new Date()}
                   initialFocus
                 />
-                {formula.period && (
-                  <p className="text-sm text-muted-foreground">
-                    La période de réservation est de {formula.period} à partir de la date sélectionnée.
+                {dates.length > 0 && (
+                  <p className="text-sm text-gray-600">
+                    Plage sélectionnée : {dayjs(dates[0]).format("YYYY-MM-DD")} -{" "}
+                    {dayjs(dates[dates.length - 1]).format("YYYY-MM-DD")}
                   </p>
                 )}
               </div>

@@ -4,7 +4,7 @@ import { BorderBeam } from "@/components/magicui/border-beam";
 import AnimatedGridPattern from "@/components/magicui/animated-grid-pattern";
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
-
+import Image from "next/image";
 import { cn } from "@/lib/utils"
 
 export default function DescriptionAllSpaces() {
@@ -33,8 +33,9 @@ export default function DescriptionAllSpaces() {
                         </div>
                     </Link>
                 </div>
-                <img className="w-full" src="/images/coworking/Bureaux privés/Bureau confiance/img (1).jpg" alt="dashboard image" />
+                <Image src="/images/coworking/Bureaux privés/Bureau confiance/img (1).jpg" alt="description" width={500} height={300} />
             </div>
+            
 
             <div className="relative flex flex-col-reverse md:gap-8 items-center py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6">
                 <div className="mt-4 md:mt-0">
@@ -58,11 +59,13 @@ export default function DescriptionAllSpaces() {
                         </div>
                     </Link>
                 </div>
-                <img className="w-full" src="/images/coworking/Espace Bulle Open space/img (1).jpg" alt="dashboard image" />
+                <Image src="/images/coworking/Espace Bulle Open space/img (1).jpg" alt="description" width={500} height={300} />
+             
             </div>
 
             <div className="gap-8 items-center py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6">
-                <img className="w-full" src="/images/coworking/Salle de réunion/img (1).jpg" alt="dashboard image" />
+            <Image src="/images/coworking/Salle de réunion/img (1).jpg" alt="description" width={500} height={300} />
+               
                 <div className="mt-4 md:mt-0">
                     <h2 className="mb-4  text-2xl md:text-4xl tracking-tight font-saudagar">Salle de réunion</h2>
                     <p className="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">
@@ -106,7 +109,8 @@ export default function DescriptionAllSpaces() {
                         </div>
                     </Link>
                 </div>
-                <img className="w-full" src="/images/coworking/Espace commun/img (1).jpg" alt="dashboard image" />
+                <Image src="/images/coworking/Espace commun/img (1).jpg" alt="description" width={500} height={300} />
+                
             </div>
 
             {/* <div className="bg-black">

@@ -1,7 +1,7 @@
 "use client";
 
 import TitleSection from "@/components/title-section";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -58,12 +58,12 @@ export default function Description({ group = { id: null, title: "Inconnu" }, sp
   const selectedSpace = space || {};
   const hasTarifs = Array.isArray(selectedSpace.tarifs) && selectedSpace.tarifs.length > 0;
 
-  const calculateAmount = (quantity: string, category: string, dates: Date[]): number => {
+  const calculateAmount = useCallback((quantity: string, category: string, dates: Date[]): number => {
     if (!quantity || !category || !dates.length) return 0;
-
+  
     const qty = parseInt(quantity) || 0;
     if (qty <= 0) return 0;
-
+  
     let pricePerUnit = 0;
     if (hasTarifs) {
       for (const tarifGroup of selectedSpace.tarifs) {
@@ -76,9 +76,9 @@ export default function Description({ group = { id: null, title: "Inconnu" }, sp
         }
       }
     }
-
+  
     if (!pricePerUnit) return 0;
-
+  
     if (category.toLowerCase().includes("mois")) {
       return pricePerUnit * qty;
     } else if (category.toLowerCase().includes("heure")) {
@@ -89,7 +89,7 @@ export default function Description({ group = { id: null, title: "Inconnu" }, sp
       return pricePerUnit * dates.length * qty;
     }
     return pricePerUnit * qty;
-  };
+  }, [hasTarifs, selectedSpace]);
 
   const { open, paymentStatus } = usePay();
 
@@ -155,7 +155,7 @@ export default function Description({ group = { id: null, title: "Inconnu" }, sp
     } else {
       setTotalAmount(0);
     }
-  }, [quantity, category, dates]);
+  }, [quantity, category, dates,calculateAmount,data.category, data.quantity, group.id, space.adresse, space.id, space.images]);
 
   useEffect(() => {
     if (paymentStatus === "success") {
@@ -199,7 +199,15 @@ export default function Description({ group = { id: null, title: "Inconnu" }, sp
         description: "Une erreur est survenue lors du paiement",
       });
     }
-  }, [paymentStatus]);
+  }, [paymentStatus,data.email,
+    data.name,
+    data.phone,
+    dates,
+    formatDates,
+    group.title,
+    space.title,
+    totalAmount,
+    router,]);
 
   return (
     <section className="container min-h-[300px] py-14 relative">
@@ -391,22 +399,23 @@ export default function Description({ group = { id: null, title: "Inconnu" }, sp
                 )}
             </div>
 
-            <div className="grid gap-3">
-              <Label htmlFor="date">
-                {isMonthlyTarif ? "Choisissez les mois" : "Choisissez les dates"}
-              </Label>
-              <Calendar
-                id="date"
-                mode="single"
-                selected={dates}
-                onSelect={(days) => setDates(days || [new Date()])}
-                numberOfMonths={2}
-                className="rounded-md border"
-                disabled={(date) =>
-                  isMonthlyTarif ? date.getDate() !== 1 : false
-                }
-              />
-            </div>
+           {/* <div className="grid gap-3">
+                          <Label>Sélectionner une plage de dates</Label>
+                          <Calendar
+                            mode="range"
+                            selected={dates}
+                            onSelect={(range) => console.log("Sélection :", range)}
+                            disabled={(date) => date < new Date()}
+                            initialFocus
+                          />
+                          {dates.length > 0 && (
+                            <p className="text-sm text-gray-600">
+                              Plage sélectionnée : {dayjs(dates[0]).format("YYYY-MM-DD")} -{" "}
+                              {dayjs(dates[dates.length - 1]).format("YYYY-MM-DD")}
+                            </p>
+                          )}
+                        </div> */}
+
             {hasTarifs && (
               <div className="text-right font-bold">
                 Total: {totalAmount} FCFA
