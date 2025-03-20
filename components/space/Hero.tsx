@@ -1,10 +1,6 @@
 import React from 'react';
 
 import Image from "next/image";
-
-    
-
-
 export default function Hero(
 
 ) {
@@ -20,11 +16,13 @@ export default function Hero(
             </div>
             {/* image background */}
             <Image
-                src="/image/avion/airplane.jpg"
+                src="/images/avion/airbus.jpg"
                 alt="vue"
-                width={200}
-                height={600}
-                className="absolute inset "
+                 layout="fill"  // Pour remplir la section
+                 objectFit="cover"
+                 quality={100} 
+                 priority 
+                className="absolute inset-0 "
             />
         </div>
     </section >

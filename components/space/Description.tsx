@@ -155,7 +155,7 @@ export default function Description({ group = { id: null, title: "Inconnu" }, sp
     } else {
       setTotalAmount(0);
     }
-  }, [quantity, category, dates,calculateAmount,data.category, data.quantity, group.id, space.adresse, space.id, space.images]);
+  }, [quantity, category, dates,calculateAmount]);
 
   useEffect(() => {
     if (paymentStatus === "success") {
@@ -199,15 +199,7 @@ export default function Description({ group = { id: null, title: "Inconnu" }, sp
         description: "Une erreur est survenue lors du paiement",
       });
     }
-  }, [paymentStatus,data.email,
-    data.name,
-    data.phone,
-    dates,
-    formatDates,
-    group.title,
-    space.title,
-    totalAmount,
-    router,]);
+  }, [paymentStatus]);
 
   return (
     <section className="container min-h-[300px] py-14 relative">

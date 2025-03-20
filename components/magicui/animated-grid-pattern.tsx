@@ -25,6 +25,7 @@ export function GridPattern({
   y = -1,
   strokeDasharray = 0,
   numSquares = 50,
+  
   className,
   maxOpacity = 0.5,
   duration = 4,
@@ -34,7 +35,7 @@ export function GridPattern({
   const id = useId();
   const containerRef = useRef(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
-  const [squares, setSquares] = useState(() => generateSquares(numSquares));
+
 
   function getPos() {
     return [
@@ -50,6 +51,8 @@ export function GridPattern({
       pos: getPos(),
     }));
   }, [getPos]);
+
+  const [squares, setSquares] = useState(() => generateSquares(numSquares));
 
   // Function to update a single square's position
   const updateSquarePosition = (id: number) => {

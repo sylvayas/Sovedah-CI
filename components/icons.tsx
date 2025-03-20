@@ -54,6 +54,8 @@ export const Icons: any = {
     <Image
       src="/images/logo_sovedah_white.jpg"
       alt="NOVIS CO-WORKING"
+      width={500}
+      height={500}
       className={className}
       {...props}
     />
@@ -62,6 +64,8 @@ export const Icons: any = {
     <Image
       src="/images/logo_sovedah_original.png"
       alt="NOVIS CO-WORKING"
+      width={500}
+      height={500}
       className={className}
       {...props}
     />
@@ -70,6 +74,8 @@ export const Icons: any = {
     <Image
       src="/images/logo_sovedah_original.png"
       alt="NOVIS CO-WORKING"
+      width={500}
+      height={500}
       className={className}
       {...props}
       
@@ -79,6 +85,8 @@ export const Icons: any = {
     <Image
       src="/images/logo-1_1.png"
       alt="NOVIS CO-WORKING"
+      width={500}
+      height={500}
       className={className}
       {...props}
     />
