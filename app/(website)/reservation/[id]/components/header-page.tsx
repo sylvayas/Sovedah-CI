@@ -33,20 +33,7 @@ export default function HeaderPage({
           />
         </div>
       </section>
-      <section className="relative">
-        <div className="container grid grid-cols-2 gap-4 md:grid-cols-4 py-2 md:py-4 bg-gray-200">
-          <p className="font-medium text-xs md:text-sm">
-            Domiciliation d&apos;entreprises{" "}
-          </p>
-          <p className="font-medium text-xs md:text-sm">Location de bureaux </p>
-          <p className="font-medium text-xs md:text-sm">
-            Location de salle de réunion
-          </p>
-          <p className="font-medium text-xs md:text-sm">
-            Location de salle de conférence
-          </p>
-        </div>
-      </section>
+    
     </>
   );
 }

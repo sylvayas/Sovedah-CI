@@ -28,20 +28,6 @@ export default function DescriptionAllSpaces() {
                     </Link>
                 </div>
             </div>
-            {/* <div className="bg-black">
-                <div className="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-16 lg:px-6">
-                    <div className="mt-4 md:mt-0 text-white">
-                        <h2 className="text-novis_yellow mb-4  text-2xl md:text-4xl tracking-tight font-saudagar">We didn't reinvent the wheel</h2>
-                        <p className="mb-4">We are strategists, designers and developers. Innovators and problem solvers. Small enough to be simple and quick, but big enough to deliver the scope you want at the pace you need. Small enough to be simple and quick, but big enough to deliver the scope you want at the pace you need.</p>
-                        <p>We are strategists, designers and developers. Innovators and problem solvers. Small enough to be simple and quick.</p>
-                    </div>
-                    <div className="grid grid-cols-2 gap-4 mt-8">
-                        <img className="w-full rounded-lg row-span-2" src="/images/coworking/Bureaux privés/Bureau prospérité/Bureau Prospérité 2.jpg" alt="office content 1" />
-                        <img className="mt-4 w-full lg:mt-10 rounded-lg" src="/images/coworking/Bureaux privés/Bureau détermination/IMG_5236[1].jpg" alt="office content 2" />
-                        <img className="mt-4 w-full lg:mt-10 rounded-lg" src="/images/coworking/Bureaux privés/Bureau détermination/IMG_5236[1].jpg" alt="office content 2" />
-                    </div>
-                </div>
-            </div> */}
             <AnimatedGridPattern
                 numSquares={50}
                 maxOpacity={0.1}
