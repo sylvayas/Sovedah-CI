@@ -33,6 +33,20 @@ interface IFormInput {
 export default function Description({ group = { id: null, title: "Inconnu" }, space = { id: null, title: "Inconnu" } }: { group?: any; space?: any }) {
   const router = useRouter();
   const [dates, setDates] = useState<Date[]>([]);
+
+  const handleSelect = (
+    range: { from: Date | null | undefined; to: Date | null | undefined } | undefined,
+    _selectedDay: Date,
+    _modifiers: any, // On ignore ces paramètres si non utilisés
+    _e: React.MouseEvent | React.KeyboardEvent
+  ) => {
+    const newDates: Date[] = [];
+    if (range?.from) newDates.push(range.from);
+    if (range?.to) newDates.push(range.to);
+    setDates(newDates);
+  };
+
+
   const [quantity, setQuantity] = useState<string>("");
   const [category, setCategory] = useState<string>("");
   const [totalAmount, setTotalAmount] = useState<number>(0);
@@ -389,25 +403,21 @@ export default function Description({ group = { id: null, title: "Inconnu" }, sp
                 {errors.destination?.type === "required" && (
                     <p role="alert">La destination est requise</p>
                 )}
+                  </div>
+                  <div className="grid gap-3">
+                  <Label>Sélectionner une plage de dates</Label>
+                  <Calendar
+                    id="date"
+                    mode="multiple"
+                    selected={dates}
+                    onSelect={(days) => setDates(days || [new Date()])}
+                    numberOfMonths={2}
+                    className="rounded-md border"
+                    disabled={(date) =>
+                      isMonthlyTarif ? date.getDate() !== 1 : false
+                    }
+                  />
             </div>
-
-           {/* <div className="grid gap-3">
-                          <Label>Sélectionner une plage de dates</Label>
-                          <Calendar
-                            mode="range"
-                            selected={dates}
-                            onSelect={(range) => console.log("Sélection :", range)}
-                            disabled={(date) => date < new Date()}
-                            initialFocus
-                          />
-                          {dates.length > 0 && (
-                            <p className="text-sm text-gray-600">
-                              Plage sélectionnée : {dayjs(dates[0]).format("YYYY-MM-DD")} -{" "}
-                              {dayjs(dates[dates.length - 1]).format("YYYY-MM-DD")}
-                            </p>
-                          )}
-                        </div> */}
-
             {hasTarifs && (
               <div className="text-right font-bold">
                 Total: {totalAmount} FCFA
