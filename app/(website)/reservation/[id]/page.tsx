@@ -2,28 +2,15 @@ import HeaderPage from "./components/header-page";
 import Content from "./components/Content";
 import { datas, espaces } from "@/config/data";
 
-export default async function ItemSpace({
-  params,
-}: {
-  params: { id: string };
-}) {
-  const group = espaces.find((espace) => {
-    if (espace.items) {
-      return espace.items.find((espac) => espac.id == params.id);
-    }
-    return espace.id == params.id;
-  });
+import ListSpaceCard from "./components/list-space-card";
 
-  const item = group
-    ? group.items
-      ? group.items.find((espac) => espac.id == params.id)
-      : group
-    : null;
-
+export default async function ItemSpace(){
   return (
     <div>
-      <HeaderPage group={group} space={item} />
-      <Content group={group} space={item} />
+      <HeaderPage />
+    
+      <ListSpaceCard/>
+     
     </div>
   );
 }

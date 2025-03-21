@@ -121,10 +121,6 @@ export function MainNav() {
 
 
 
-
-
-
-
                     <NavigationMenuItem>
                         <NavigationMenuTrigger className={cn(`${menuList[3].menus[0].active && "font-bold text-[#1A557A]"}`)}>{menuList[3].menus[0].label}</NavigationMenuTrigger>
                         <NavigationMenuContent>
@@ -170,22 +166,11 @@ export function MainNav() {
                         </NavigationMenuContent>
                     </NavigationMenuItem>
 
-
-                   
-                   
-                    <NavigationMenuItem>
-                        <Link href={menuList[4].menus[0].href} legacyBehavior passHref>
-                            <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), `${menuList[4].menus[0].active && "font-bold text-novis_orange"}`)} >
-                                {menuList[4].menus[0].label}
-                            </NavigationMenuLink>
-                        </Link>
-                    </NavigationMenuItem>
-
                     
                     <NavigationMenuItem>
-                        <Link href={menuList[5].menus[0].href} legacyBehavior passHref>
-                            <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), `${menuList[5].menus[0].active && "font-bold text-novis_orange"}`)} >
-                                {menuList[5].menus[0].label}
+                        <Link href={menuList[4].menus[0].href} legacyBehavior passHref>
+                            <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), `${menuList[4].menus[0].active && "font-bold text-novis_green"}`)} >
+                                {menuList[4].menus[0].label}
                             </NavigationMenuLink>
                         </Link>
                     </NavigationMenuItem>

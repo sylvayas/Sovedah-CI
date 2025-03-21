@@ -33,20 +33,6 @@ interface IFormInput {
 export default function Description({ group = { id: null, title: "Inconnu" }, space = { id: null, title: "Inconnu" } }: { group?: any; space?: any }) {
   const router = useRouter();
   const [dates, setDates] = useState<Date[]>([]);
-
-  const handleSelect = (
-    range: { from: Date | null | undefined; to: Date | null | undefined } | undefined,
-    _selectedDay: Date,
-    _modifiers: any, // On ignore ces paramètres si non utilisés
-    _e: React.MouseEvent | React.KeyboardEvent
-  ) => {
-    const newDates: Date[] = [];
-    if (range?.from) newDates.push(range.from);
-    if (range?.to) newDates.push(range.to);
-    setDates(newDates);
-  };
-
-
   const [quantity, setQuantity] = useState<string>("");
   const [category, setCategory] = useState<string>("");
   const [totalAmount, setTotalAmount] = useState<number>(0);

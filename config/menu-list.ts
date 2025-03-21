@@ -52,8 +52,8 @@ export function getMenuList(pathname: string): Group[] {
         { href: "/our_spaces", label: "Tous nos espaces", active: pathname === "/our_spaces" },
         { href: "/our_spaces/private_offices", label: "Réservation de billet d'avion", active: pathname === "/our_spaces/private_offices" },
         { href: "/our_spaces", label: "Commerce générale", active: pathname === "/our_spaces" },
-        { href: "/our_spaces/meeting_room", label: "Location de voiture", active: pathname === "/our_spaces/meeting_room" },
-        { href: "/our_spaces/common_space", label: "Conciergérie", active: pathname === "/our_spaces/common_space" },
+        { href: "/private_offices", label: "Location de voiture", active: pathname === "/private_offices" },
+        { href: "/contact_us", label: "Conciergérie", active: pathname === "/contact_us" },
       ]
     },
 
@@ -63,24 +63,12 @@ export function getMenuList(pathname: string): Group[] {
       label: "boutique",
       icon: Icons.library,
       submenus: [
-        { href: "/our_offers/domiciliation_virtuelle_entreprise", label: "Domiciliation virtuelle d'entreprise", active: pathname === "/our_offers/domiciliation_virtuelle_entreprise" },
-        { href: "/our_offers/domiciliation_physique_entreprise", label: "Domiciliation physique d'entreprise", active: pathname === "/our_offers/domiciliation_physique_entreprise" },
+        { href: "/our_offers/description", label: "produits hygiénique", active: pathname === "/our_offers/description" },
+        { href: "/our_offers/sub-section", label: "equipement informatique", active: pathname === "/our_offers/sub-section" },
       ]
     },
 
-    
-    {
-      groupLabel: "",
-      href: "/A propos",
-      label: "A propos",
-      icon: Icons.galerie,
-      submenus: [
-          { href: "/our_galeries/evenements_collaboratifs", label: "Événements Collaboratifs", active: pathname === "/our_galeries/evenements_collaboratifs" },
-          { href: "/our_galeries/article_de_presse", label: "Article de Presse", active: pathname === "/our_galeries/Article de Presse" },
-          { href: "/our_galeries/evenement_a_venir", label: "Événements à venir", active: pathname === "/our_galeries/evenement_a_venir" },
 
-      ]
-  },
     {
       groupLabel: "",
       href: "/about",

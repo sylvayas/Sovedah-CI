@@ -8,7 +8,7 @@ export default async function OurSpace() {
         <div>
             <HeaderPage />
             <DescriptionAllSpaces />
-            
+            <SpaceStates/>
         
         </div>
         

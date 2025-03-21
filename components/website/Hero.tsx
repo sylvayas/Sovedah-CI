@@ -5,7 +5,7 @@ import Link from "next/link"; // Assurez-vous d'importer Link
 import { CalendarIcon } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 
-const images = [
+export const images = [
   "/images/carrousel_images/reservation_billet.jpg",
   "/images/carrousel_images/commerce_general (2).jpg",
   "/images/carrousel_images/location_voiture (2).jpg",
@@ -37,11 +37,11 @@ export default function Hero() {
           <div className="flex items-center justify-center text-white flex-wrap gap-2">
             {item("RESERVATION DE BILLET D'AVION", "/our_spaces/private_offices")}
             <span className="h-4 w-[2px] bg-white"></span>
-            {item("COMMERCE GENERALE", "/our_spaces/open_space")}
+            {item("COMMERCE GENERALE", "/our_spaces")}
             <span className="h-4 w-[2px] bg-white"></span>
-            {item("LOCATION DE VOITURE", "/our_spaces/meeting_room")}
+            {item("LOCATION DE VOITURE", "/private_offices")}
             <span className="h-4 w-[2px] bg-white"></span>
-            {item("CONCIERGERIE", "/our_spaces/common_space")}
+            {item("CONCIERGERIE", "/contact_us")}
           </div>
 
           

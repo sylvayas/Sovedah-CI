@@ -30,7 +30,7 @@ export default function FormSection() {
         },
         body: JSON.stringify({
           ...data,
-          to: "info@noviscoworking.com",
+          to: "medesse.allao@sovedahci.com",
         }),
       });
 
@@ -81,7 +81,7 @@ export default function FormSection() {
                     className="text-sm ml-4"
                   >
                     <small className="block">Mail</small>
-                    <strong>info@noviscoworking.com</strong>
+                    <strong>medesse.allao@sovedahci.com</strong>
                   </a>
                 </li>
               </ul>
@@ -166,7 +166,7 @@ export default function FormSection() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className={`bg-novis_orange text-white tracking-wide rounded-md text-sm px-4 py-3 w-full !mt-6 ${
+              className={`bg-[#1A557A] text-white tracking-wide rounded-md text-sm px-4 py-3 w-full !mt-6 ${
                 isSubmitting
                   ? "opacity-50 cursor-not-allowed"
                   : "hover:bg-novis_orange-dark"

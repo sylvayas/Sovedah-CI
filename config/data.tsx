@@ -128,27 +128,7 @@ export const offres = [
   {
     id: "Commerce général",
     title: "Commerce général",
-    subdescription:
-      "Vivez une expérience shopping alliant confort, dynamisme et convivialité.",
-    description: [
-      "Dans un environnement où le coût de l'immobilier ne fait que s'accroître, il est important en tant qu'investisseur en côte d'ivoire, entrepreneur ou entreprises internationales de trouver des stratégies pour installer l'entreprise à moindre coût.",
-      "Novis coworking vous aide à atteindre cet objectif en minimisant vos coûts. Offrez-vous le luxe de bénéficier d'un bureau élégant à Abidjan au sein d'un espace partagé avec une communauté (locaux, expatriés, repats) et bénéficiez d'un large réseau.",
-      "2 possibilités s'offrent à vous, le bureau privé ou l'espace open-space",
-    ],
-    horraires: [
-      {
-        name: "Du lundi au vendredi",
-        horraire: "8h-17h et 17h-22h",
-      },
-      {
-        name: "Samedi",
-        horraire: "10h-17h",
-      },
-      {
-        name: "Dimanche",
-        horraire: "10h-14h",
-      },
-    ],
+    bookingLink:'/space-states',
     image: "/images/Nos_services_images/commerce_general.jpg",
 
     elements: [
@@ -273,6 +253,7 @@ export const offres = [
         ],
       },
     ],
+    
     optionsSup:
       "Pour vous aider à vous concentrer exclusivement sur votre activité, nous vous proposons de nous confier l'organisation de vos petits-déjeuners, pauses café, déjeuners, etc.",
     options: ["Event planner", "Service premium"],

@@ -67,9 +67,9 @@ export default function Footer() {
                   {menuList[3].menus[0].label}
                 </Link>
               )}
-              {menuList[5].menus[0].href && (
-                <Link href={menuList[5].menus[0].href} className="hover:font-semibold transition-all duration-200">
-                  {menuList[5].menus[0].label}
+              {menuList[4].menus[0].href && (
+                <Link href={menuList[4].menus[0].href} className="hover:font-semibold transition-all duration-200">
+                  {menuList[4].menus[0].label}
                 </Link>
               )}
             </div>
