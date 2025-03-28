@@ -80,7 +80,7 @@ export default function Footer() {
             <h3 className="text-lg font-semibold">INFORMATIONS</h3>
             <div className="mt-2">
               <p className="whitespace-nowrap">
-                Adresse :171 KSSI ZOE-BRUNO BS 22 IIOT 16, ABIDJAN, CÔTE D'IVOIRE
+                Adresse :171 KSSI ZOE-BRUNO BS 22 IIOT 16, ABIDJAN, CÔTE D&apos;IVOIRE
               </p>
               <p className="whitespace-nowrap">
                 RCCM :CI-ABJ-03-2024-B13-02727 / N° CC : 2400985R

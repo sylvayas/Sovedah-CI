@@ -17,7 +17,7 @@ export default function SubSection() {
       <div className="py-8 px-4 md:px-16 mx-auto max-w-screen-xl container lg:py-16">
         <div className="max-w-screen-lg text-gray-700 sm:text-lg">
           <h2 className="mb-4 text-4xl tracking-tight font-bold font-saudagar">
-         SOVEDAH CI vous propose de découvrir les différents servives qu'elles offrent
+         SOVEDAH CI vous propose de découvrir les différents servives qu&apos;elles offrent
           </h2>
        
           <p className="text-custom-justify">
