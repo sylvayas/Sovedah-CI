@@ -11,7 +11,7 @@ export default async function OurSpace() {
             <Valeurs />
             <Missiion_Charte />
             <ADM />
-            <About />
+            
         </div>
     );
 }

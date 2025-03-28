@@ -64,7 +64,7 @@ export function getMenuList(pathname: string): Group[] {
       icon: Icons.library,
       submenus: [
         { href: "/our_offers/description", label: "produits hygiénique", active: pathname === "/our_offers/description" },
-        { href: "/our_offers/sub-section", label: "equipement informatique", active: pathname === "/our_offers/sub-section" },
+        { href: "/our_offers/sub-section", label: "Accessoires de voyage", active: pathname === "/our_offers/sub-section" },
       ]
     },
 

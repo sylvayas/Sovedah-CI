@@ -1,47 +1,36 @@
+"use client";
 import { Icons } from "@/components/icons";
-import GridPattern from "@/components/magicui/grid-pattern";
 import { cn } from "@/lib/utils";
+import Services from "../website/About/services";
+
+import dynamic from "next/dynamic";
+
+const GridPattern = dynamic(() => import("@/components/magicui/grid-pattern"), {
+  ssr: false,
+});
 
 export default function SubSection() {
   return (
-    <section className="relative">
+   
+    <>
+      <section className="relative">
       <div className="py-8 px-4 md:px-16 mx-auto max-w-screen-xl container lg:py-16">
         <div className="max-w-screen-lg text-gray-700 sm:text-lg">
           <h2 className="mb-4 text-4xl tracking-tight font-bold font-saudagar">
-            Novis coworking vous propose de découvrir ses espaces de travail
-            flexibles et économiques à Abidjan.
+         SOVEDAH CI vous propose de découvrir les différents servives qu'elles offrent
           </h2>
+       
           <p className="text-custom-justify">
             <p className="mb-4 font-light text-sm">
-              Près du rond-point de la Y4 dans le quartier de st Viateur à
-              Cocody,{" "}
-              <b className="font-medium">
-                Novis coworking met à votre disposition des bureaux en location
-                pour la domiciliation physique de votre entreprise.
-              </b>{" "}
-              Vous y trouverez dans cet espace fonctionnel une salle de réunion
-              de 10 voir 14 personnes. <br /> <br />
-              La Côte-d&apos;Ivoire étant un pays très attractif pour faire du
-              business , vous pourrez également venir y passer vos moments de
-              travail et y organiser tous vos rendez-vous.
+            SOVEDAH CI (Société de Vente Directe d&apos;Articles Hygiéniques) est une entreprise ivoirienne spécialisée dans la distribution de produits d&apos;hygiène et de bien-être à travers Innov&apos;A Market. 
+            Nous proposons également des services de billetterie avec Innov&apos;A Voyage, facilitant ainsi l&apos;accès aux voyages grâce à des solutions adaptées aux besoins de notre clientèle.
             </p>
             <p className="mb-4 text-sm  font-light ">
-              De la domiciliation virtuelle à la domiciliation physique des
-              entreprises, il s&apos;agit d&apos;un tiers lieu qui favorise la
-              rencontre entre entrepreneurs de différents secteurs
-              d&apos;activités.
-              <br /> Les associations y trouvent également un siège social et
-              des espaces meublés, équipés pour accueillir des activités et
-              programmes.
+            Notre mission est d&apos;apporter des solutions pratiques, accessibles et de qualité à nos clients, en alliant innovation et proximité. 
+            Nous nous engageons à offrir une expérience d&apos;achat fluide et sécurisée, avec des produits sélectionnés pour leur fiabilité et un service client réactif.
             </p>
             <p className="mb-4 font-light text-sm">
-              Sachez que vous pourrez également profiter d&apos;espaces
-              événementiels privatisables en fonction de vos envies et projets.{" "}
-              <br />
-              Une connexion internet, une papeterie, une imprimante, un
-              distributeur de boisson froide, un coin café etc … vous mettrons
-              dans des conditions optimales pour travailler et développer votre
-              entreprise.
+            Chez SOVEDAH CI, nous croyons en un commerce responsable et durable, où chaque client bénéficie d&apos;un accompagnement personnalisé pour répondre à ses attentes.Faites-nous confiance pour vos besoins en produits d&apos;hygiène et en billetterie !
             </p>
           </p>
           {/* <a href="#" className="inline-flex items-center font-medium text-primary-600 hover:text-primary-800 dark:text-primary-500 dark:hover:text-primary-700">
@@ -78,5 +67,11 @@ export default function SubSection() {
         )}
       />
     </section>
+    
+      <section className="container min-h-96 py-14 relative">
+          
+          <Services />
+        </section>
+    </>
   );
 }

@@ -134,20 +134,21 @@ export function AnimatedBeamMultipleOutputDemo({
 export default function Valeurs() {
 
     return (
-        <section className="container min-h-[300px] py-14 relative">
-            <div className="relative md:gap-8 items-center px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 lg:px-6">
-                <div className="mb-4 md:mt-0">
-                    <h2 className="mb-4  text-2xl md:text-4xl tracking-tight font-saudagar">Nos valeurs</h2>
-                    <ul className="list-disc">
-                        <li className="mb-2 text-sm"><span className="font-semibold">Nous : </span> dans le sens (communauté, famille, esprit d&apos;équipe, d&apos;empathie, ensemble)</li>
-                        <li className="mb-2 text-sm"><span className="font-semibold">Optimiste : </span></li>
-                        <li className="mb-2 text-sm"><span className="font-semibold">Vision : </span></li>
-                        <li className="mb-2 text-sm"><span className="font-semibold">Intégrité : </span></li>
-                        <li className="mb-2 text-sm"><span className="font-semibold">Sérénité : </span></li>
-                    </ul>
-                </div>
-                <AnimatedBeamMultipleOutputDemo />
-            </div>
-        </section>
+        // <section className="container min-h-[300px] py-14 relative">
+        //     <div className="relative md:gap-8 items-center px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 lg:px-6">
+        //         <div className="mb-4 md:mt-0">
+        //             <h2 className="mb-4  text-2xl md:text-4xl tracking-tight font-saudagar">Nos valeurs</h2>
+        //             <ul className="list-disc">
+        //                 <li className="mb-2 text-sm"><span className="font-semibold">Nous : </span> dans le sens (communauté, famille, esprit d&apos;équipe, d&apos;empathie, ensemble)</li>
+        //                 <li className="mb-2 text-sm"><span className="font-semibold">Optimiste : </span></li>
+        //                 <li className="mb-2 text-sm"><span className="font-semibold">Vision : </span></li>
+        //                 <li className="mb-2 text-sm"><span className="font-semibold">Intégrité : </span></li>
+        //                 <li className="mb-2 text-sm"><span className="font-semibold">Sérénité : </span></li>
+        //             </ul>
+        //         </div>
+        //         <AnimatedBeamMultipleOutputDemo />
+        //     </div>
+        // </section>
+        <></>
     );
 }

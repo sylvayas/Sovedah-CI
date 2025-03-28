@@ -60,7 +60,7 @@ export default function Footer() {
             </div>
           </div>
           <div className="text-white">
-            <h3 className="text-lg font-semibold">NOVIS CO-WORKING</h3>
+            <h3 className="text-lg font-semibold">SOVEDAH CI</h3>
             <div className="mt-2 grid grid-cols-2 md:grid-cols-1">
               {menuList[3].menus[0].href && (
                 <Link href={menuList[3].menus[0].href} className="hover:font-semibold transition-all duration-200">
@@ -80,10 +80,10 @@ export default function Footer() {
             <h3 className="text-lg font-semibold">INFORMATIONS</h3>
             <div className="mt-2">
               <p className="whitespace-nowrap">
-                Adresse : MACI SUARL, Abidjan Cocody, Saint Viateur, près du rond-point de la Y4
+                Adresse :171 KSSI ZOE-BRUNO BS 22 IIOT 16, ABIDJAN, CÔTE D'IVOIRE
               </p>
               <p className="whitespace-nowrap">
-                RCCM : CI-ABJ-03-2022-B13-04387 / N° CC : 2242023T
+                RCCM :CI-ABJ-03-2024-B13-02727 / N° CC : 2400985R
               </p>
             </div>
           </div>
