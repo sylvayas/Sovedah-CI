@@ -30,7 +30,7 @@ export default function FormSection() {
         },
         body: JSON.stringify({
           ...data,
-          to: "medesse.allao@sovedahci.com",
+          to: "INFOS@sovedahci.com",
         }),
       });
 
@@ -77,11 +77,11 @@ export default function FormSection() {
                     </svg>
                   </div>
                   <a
-                    href="mailto:info@noviscoworking.com"
+                    href="INFOS@sovedahci.com"
                     className="text-sm ml-4"
                   >
                     <small className="block">Mail</small>
-                    <strong>medesse.allao@sovedahci.com</strong>
+                    <strong>INFOS@sovedahci.com</strong>
                   </a>
                 </li>
               </ul>

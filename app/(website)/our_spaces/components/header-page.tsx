@@ -26,7 +26,7 @@ export default function HeaderPage() {
                             </div>
                             <div className="flex min-w-64 gap-2 bg-novis_yellow rounded-sm p-2 text-white">
                                 <Icons.space className="size-4 md:size-6" />
-                                <p className="font-medium text-sm font-mono whitespace-pre-wrap tracking-tighter "><NumberTicker className="text-white mr-2" value={40} />Salles de réunion</p>
+                                <p className="font-medium text-sm font-mono whitespace-pre-wrap tracking-tighter "><NumberTicker className="text-white mr-2" value={40} />Nombre d&apos;articles</p>
                             </div>
                         </div>
                     </div>

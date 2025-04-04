@@ -55,7 +55,7 @@ export function MainNav() {
                                             <Icons.logo className="h-20 w-20 mb-4" />
 
                                             <p className="text-sm leading-tight text-white">
-                                                Bienvenue au sein des espaces de Sovedah CI à l&apos;aéroport cité douane.
+                                                Bienvenue au sein de Sovedah CI .
                                             </p>
                                         </a>
                                     </NavigationMenuLink>
@@ -122,7 +122,7 @@ export function MainNav() {
 
 
                     <NavigationMenuItem>
-                        <NavigationMenuTrigger className={cn(`${menuList[3].menus[0].active && "font-bold text-[#1A557A]"}`)}>{menuList[3].menus[0].label}</NavigationMenuTrigger>
+                        <NavigationMenuTrigger>{menuList[3].menus[0].label}</NavigationMenuTrigger>
                         <NavigationMenuContent>
                             <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
                                 <li className="row-span-6">
