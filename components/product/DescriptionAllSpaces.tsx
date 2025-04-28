@@ -1,5 +1,4 @@
 // components/DescriptionAllSpaces.jsx
-"use client"
 import React from "react";
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
@@ -224,7 +223,64 @@ export const AVANTAGES = [
     image: "/images/produits&details/serviettes-hygiéniques (1).jpg",
   },
   
-  
+  {
+    title: "Lilas clip normal",
+    description: {
+        intro: "Papier hygiénique doux, idéal pour les enfants et les peaux sensibles.",
+        whyChoose: [
+          "Ultra doux pour un confort maximal",
+          "Résistant et économique",
+          "Adapté aux peaux sensibles",
+        ],
+        pricing: [
+          "PU : 1000 FCFA",
+          "Prix revendeur à partir de 50 rouleaux : 900 FCFA",
+        ],
+        callToAction: "Commandez maintenant pour une douceur au quotidien !",
+      },
+    image: "/images/produits&details/images.jpeg",
+  },
+  {
+    title: "Lilas maternité super",
+    description: {
+        intro: "Parce que le confort d'une maman après l'accouchement est une priorité, Conforta Maternité Super vous accompagne dans cette période délicate avec douceur et efficacité.Avec sa forme anatomique et son absorption renforcée, cette serviette hygiénique a été spécialement conçue pour les flux abondants. D'une épaisseur de 7 mm seulement, elle assure une protection optimale tout en restant discrète et confortable.",
+        whyChoose: [
+         
+          "Ultra doux pour un confort maximal",
+          "Résistant et économique",
+          "Adapté aux peaux sensibles",
+        ],
+        pricing: [
+          "PU : 1000 FCFA",
+          "Prix revendeur à partir de 50 rouleaux : 900 FCFA",
+        ],
+        callToAction: "Commandez maintenant pour une douceur au quotidien !",
+      },
+    image: "/images/produits&details/serviettes-hygiéniques.jpg",
+  },
+  {
+    title: "Clean soft",
+    description: {
+        intro: "Offrez à votre bébé tout le confort qu’il mérite avec les couches Clean Soft taille 2 (3-5 kg) ! Douces, absorbantes et testées dermatologiquement, elles assurent une protection optimale jour et nuit.",
+        whyChoose: [
+          "Contenu du pack :",
+          "6 paquets de 50 couches = 300 couches au total",
+          "Taille 2 – Small (3 à 5 kg)",
+          "Idéales pour les nouveau-nés et jeunes nourrissons",
+          "Avantages :", 
+          "Douceur exceptionnelle pour la peau sensible de bébé",
+          "Barrières anti-fuiteS pour plus de sécurité",
+          "Faciles à mettre grâce aux attaches solides",
+          "Rapport qualité-prix imbattable !",
+        ],
+        pricing: [
+          "PU : 3000 FCA",
+          "A partir de 6 parquets : 2800 FCFA",
+        ],
+        callToAction: "Commandez maintenant pour une douceur au quotidien !",
+      },
+    image: "/images/produits&details/clean2.jpeg",
+  },
 //   {
 //     title: "Masque de sommeil",
 //     description: "Masque de sommeil pour un voyage confortable.",
@@ -255,7 +311,7 @@ export default function DescriptionAllSpaces() {
       <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
         <div className="mx-auto max-w-screen-sm text-center mb-8 lg:mb-16">
           <h2 className="mb-4 text-xl md:text-4xl font-saudagar tracking-tight">
-          
+            Nos différents articles
           </h2>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4  gap-8 mb-6 lg:mb-8 h-full">
