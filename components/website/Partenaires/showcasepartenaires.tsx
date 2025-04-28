@@ -8,20 +8,15 @@ export interface ShowcaseCardProps {
 
 const datas: ShowcaseCardProps[] = [
   {
-    image: "/images/Partenaires/logo.jpg",
+    image: "/images/Partenaires/Kkiapay-logo.jpg",
   },
   {
-    image: "/images/Partenaires/logo1.jpg",
+    image: "/images/Partenaires/Logo Original.png",
   },
   {
-    image: "/images/Partenaires/logo2.jpg",
+    image: "/images/Partenaires/Amadeus-Logo-2.jpg",
   },
-  {
-    image: "/images/Partenaires/logo3.jpg",
-  },
-  {
-    image: "/images/Partenaires/logo4.jpg",
-  },
+  
 ];
 
 export function ShowcaseCard({

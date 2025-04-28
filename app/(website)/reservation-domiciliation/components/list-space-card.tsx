@@ -30,7 +30,7 @@ interface IFormInput {
   name: string;
   email: string;
   phone: string;
-  dates: Date[];
+  date: Date | undefined; // Une seule date
 }
 
 export default function ListSpaceCard({ formulas }: { formulas: Formula[] }) {
@@ -44,11 +44,7 @@ export default function ListSpaceCard({ formulas }: { formulas: Formula[] }) {
 }
 
 const FormulaReservationCard = ({ formula }: { formula: Formula }) => {
-  const [dates, setDates] = useState<Date[]>([]);
-  const [dateRange, setDateRange] = useState<{ from: Date | undefined; to: Date | undefined }>({
-    from: undefined,
-    to: undefined,
-  });
+  const [date, setDate] = useState<Date | undefined>(new Date(2025, 3, 17)); // 17 avril 2025
   const [isLoading, setIsLoading] = useState(false);
   const {
     register,
@@ -57,30 +53,6 @@ const FormulaReservationCard = ({ formula }: { formula: Formula }) => {
   } = useForm<IFormInput>({
     mode: "onChange",
   });
-
-  // Gérer la sélection de la plage de dates
-  const handleSelectRange = (range: { from: Date | undefined; to: Date | undefined } | undefined) => {
-    if (!range) {
-      setDateRange({ from: undefined, to: undefined });
-      setDates([]);
-      return;
-    }
-
-    setDateRange(range);
-
-    if (range.from && range.to) {
-      const dateArray = [];
-      let currentDate = new Date(range.from);
-      const endDate = new Date(range.to);
-      while (currentDate <= endDate) {
-        dateArray.push(new Date(currentDate));
-        currentDate.setDate(currentDate.getDate() + 1);
-      }
-      setDates(dateArray);
-    } else {
-      setDates([]);
-    }
-  };
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     setIsLoading(true);
@@ -101,8 +73,7 @@ const FormulaReservationCard = ({ formula }: { formula: Formula }) => {
             clientPhone: data.phone,
             reservationPrice: formula.price,
             period: formula.period,
-            date: dates.length > 0 ? dayjs(dates[0]).format("YYYY-MM-DD") : "", // Date de début
-            dateEnd: dates.length > 0 ? dayjs(dates[dates.length - 1]).format("YYYY-MM-DD") : "", // Date de fin
+            date: date ? dayjs(date).format("YYYY-MM-DD") : "", // Une seule date
           },
         }),
       });
@@ -117,6 +88,12 @@ const FormulaReservationCard = ({ formula }: { formula: Formula }) => {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  // Fonction de débogage pour vérifier la sélection de la date
+  const handleDateChange = (newDate: Date | undefined) => {
+    console.log("Date sélectionnée :", newDate);
+    setDate(newDate);
   };
 
   return (
@@ -217,24 +194,24 @@ const FormulaReservationCard = ({ formula }: { formula: Formula }) => {
                 )}
               </div>
               <div className="grid gap-3">
-                <Label>Sélectionner une plage de dates</Label>
+                <Label>Sélectionner une date</Label>
                 <Calendar
-                  mode="range"
-                  selected={dateRange}
-                  onSelect={(range) => console.log("Sélection :", range)}
-                  disabled={(date) => date < new Date()}
-                  initialFocus
+                  date={date}
+                  setDate={handleDateChange} // Utilise une fonction pour déboguer
+                  showOutsideDays={true}
+                  fromDate={new Date()} // Désactive les dates passées
                 />
-                {dates.length > 0 && (
+                {date ? (
                   <p className="text-sm text-gray-600">
-                    Plage sélectionnée : {dayjs(dates[0]).format("YYYY-MM-DD")} -{" "}
-                    {dayjs(dates[dates.length - 1]).format("YYYY-MM-DD")}
+                    Date sélectionnée : {dayjs(date).format("YYYY-MM-DD")}
                   </p>
+                ) : (
+                  <p className="text-sm text-gray-600">Aucune date sélectionnée</p>
                 )}
               </div>
               <Button
                 type="submit"
-                disabled={!isValid || dates.length === 0 || isLoading}
+                disabled={!isValid || !date || isLoading}
                 className="w-full"
               >
                 {isLoading ? "En cours..." : "Confirmer la demande"}

@@ -14,31 +14,26 @@ export interface ShowcaseCardProps {
 const datas: {
   image: string;
   title: string;
-  description: string;
   href: string;
 }[] = [
     {
-      image: "/images/coworking/Bureaux privés/Bureau confiance/img (2).jpg",
-      title: "Bureau privé",
-      description: "Réservez votre bureau adapté à la croissance de votre entreprise.",
+      image: "/images/",
+      title: "Conforta protect",
       href: "/our_spaces/private_offices",
     },
     {
-      image: "/images/coworking/Espace Bulle Open space/img (1).jpg",
-      title: "Open Space",
-      description: "Rencontrez des entrepreneurs et développez votre réseau.",
+      image: "/images/",
+      title: "Conforta lingette",
       href: "/our_spaces/open_space",
     },
     {
-      image: "/images/coworking/Salle de réunion/img (2).jpg",
-      title: "Salle de réunion",
-      description: "Salles entièrement équipées et prêtes à l'emploi.",
+      image: "/images/",
+      title: "Conforta couche",
       href: "/our_spaces/meeting_room",
     },
     {
-      image: "/images/coworking/Espace Bulle Open space/img (2).jpg",
-      title: "Espace commun",
-      description: "Une bonne adresse avec les bons services.",
+      image: "/images/",
+      title: "Clean",
       href: "/our_spaces/common_space",
     },
   ]

@@ -1,16 +1,15 @@
 "use client";
 
 import TitleSection from "@/components/title-section";
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Calendar } from "@/components/ui/calendar";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { usePay } from "@/hooks/usePay";
-import { espaces } from "@/config/data";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { countries } from "countries-list";
@@ -18,15 +17,19 @@ import dayjs from "dayjs";
 
 interface IFormInput {
   name: string;
-  datenaissance:string;
-  sexe:string;
+  lastname: string;
+  datenaissance: string;
+  sexe: string;
   email: string;
-  numeropassport:string;
-  nationnalité:string;
+  CNI: string;
+  nationality: string;
   phone: string;
+  travelOption: string;
+  passengerCount: string;
+  departureCountry: string;
+  arrivalCountry: string;
   quantity: string;
   category: string;
-  destination:string;
   dates: Date[];
 }
 
@@ -38,58 +41,63 @@ export default function Description({ group = { id: null, title: "Inconnu" }, sp
   const [totalAmount, setTotalAmount] = useState<number>(0);
   const [data, setData] = useState<any>();
   const [isMonthlyTarif, setIsMonthlyTarif] = useState(false);
+  const [date, setDate] = useState<Date | undefined>(new Date(2025, 3, 17)); // 17 avril 2025
 
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors, isValid },
   } = useForm<IFormInput>({
     mode: "onChange",
   });
 
-  const [selectedCountry, setSelectedCountry] = useState("");
-
   // Transforme l'objet countries en tableau pour le select
-  const countryList = Object.entries(countries).map(([code, info]) => ({
-    code,
-    name: info.name,
-  }));
+  const countryList = useMemo(() => {
+    return Object.entries(countries).map(([code, info]) => ({
+      code,
+      name: info.name,
+    }));
+  }, []);
 
   const selectedSpace = space || {};
   const hasTarifs = Array.isArray(selectedSpace.tarifs) && selectedSpace.tarifs.length > 0;
 
-  const calculateAmount = useCallback((quantity: string, category: string, dates: Date[]): number => {
-    if (!quantity || !category || !dates.length) return 0;
-  
-    const qty = parseInt(quantity) || 0;
-    if (qty <= 0) return 0;
-  
-    let pricePerUnit = 0;
-    if (hasTarifs) {
-      for (const tarifGroup of selectedSpace.tarifs) {
-        const tarifItem = tarifGroup.items.find((item: any) =>
-          item.title.toLowerCase().includes(category.toLowerCase())
-        );
-        if (tarifItem) {
-          pricePerUnit = parseInt(tarifItem.price.replace(/\D/g, ""));
-          break;
+  const calculateAmount = useCallback(
+    (quantity: string, category: string, dates: Date[]): number => {
+      if (!quantity || !category || !dates.length) return 0;
+
+      const qty = parseInt(quantity) || 0;
+      if (qty <= 0) return 0;
+
+      let pricePerUnit = 0;
+      if (hasTarifs) {
+        for (const tarifGroup of selectedSpace.tarifs) {
+          const tarifItem = tarifGroup.items.find((item: any) =>
+            item.title.toLowerCase().includes(category.toLowerCase())
+          );
+          if (tarifItem) {
+            pricePerUnit = parseInt(tarifItem.price.replace(/\D/g, ""));
+            break;
+          }
         }
       }
-    }
-  
-    if (!pricePerUnit) return 0;
-  
-    if (category.toLowerCase().includes("mois")) {
+
+      if (!pricePerUnit) return 0;
+
+      if (category.toLowerCase().includes("mois")) {
+        return pricePerUnit * qty;
+      } else if (category.toLowerCase().includes("heure")) {
+        return pricePerUnit * qty * dates.length;
+      } else if (category.toLowerCase().includes("demie journée")) {
+        return pricePerUnit * Math.ceil(dates.length / 2) * qty;
+      } else if (category.toLowerCase().includes("journée")) {
+        return pricePerUnit * dates.length * qty;
+      }
       return pricePerUnit * qty;
-    } else if (category.toLowerCase().includes("heure")) {
-      return pricePerUnit * qty * dates.length;
-    } else if (category.toLowerCase().includes("demie journée")) {
-      return pricePerUnit * Math.ceil(dates.length / 2) * qty;
-    } else if (category.toLowerCase().includes("journée")) {
-      return pricePerUnit * dates.length * qty;
-    }
-    return pricePerUnit * qty;
-  }, [hasTarifs,selectedSpace.tarifs]);
+    },
+    [hasTarifs, selectedSpace.tarifs]
+  );
 
   const { open, paymentStatus } = usePay();
 
@@ -155,7 +163,7 @@ export default function Description({ group = { id: null, title: "Inconnu" }, sp
     } else {
       setTotalAmount(0);
     }
-  }, [quantity, category, dates,calculateAmount]);
+  }, [quantity, category, dates, calculateAmount]);
 
   useEffect(() => {
     if (paymentStatus === "success") {
@@ -199,225 +207,194 @@ export default function Description({ group = { id: null, title: "Inconnu" }, sp
         description: "Une erreur est survenue lors du paiement",
       });
     }
-  }, [paymentStatus]);
+  }, [paymentStatus, data, totalAmount, dates, router]);
 
   return (
     <section className="container min-h-[300px] py-14 relative">
       <TitleSection title={"Détail de réservation"} />
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="grid gap-4 md:gap-8 lg:grid-cols-2 mt-4"
-       >
+      <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4 md:gap-8 lg:grid-cols-2 mt-4">
         <div className="relative flex-col items-start gap-8 flex">
           <div className="grid w-full items-start gap-6">
-            
             <div className="grid gap-6 rounded-lg border p-4">
               <CardTitle>Informations personnelles</CardTitle>
-              <div className="grid gap-3">
-                <Label htmlFor="name">Nom & Prénoms</Label>
-                <Input
-                  id="name"
-                  type="text"
-                  {...register("name", { required: true })}
-                  aria-invalid={errors.name ? "true" : "false"}
-                />
-                {errors.name?.type === "required" && (
-                  <p role="alert">Nom & Prénom sont requis</p>
-                )}
+              <div className="grid grid-cols-2 gap-3">
+                <div className="grid gap-3">
+                  <Label htmlFor="name">Nom</Label>
+                  <Input id="name" type="text" {...register("name", { required: "Nom requis" })} />
+                  {errors.name && <p role="alert" className="text-red-600 text-sm">{errors.name.message}</p>}
+                </div>
+                <div className="grid gap-3">
+                  <Label htmlFor="lastname">Prénom</Label>
+                  <Input id="lastname" type="text" {...register("lastname", { required: "Prénom requis" })} />
+                  {errors.lastname && <p role="alert" className="text-red-600 text-sm">{errors.lastname.message}</p>}
+                </div>
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div className="grid gap-3">
-                    <Label htmlFor="email">Email</Label>
-                    <Input
-                    id="email"
-                    type="email"
-                    {...register("email", { required: true })}
-                    aria-invalid={errors.email ? "true" : "false"}
-                    />
-                    {errors.email?.type === "required" && (
-                    <p role="alert">Email est requis</p>
-                    )}
+                  <Label htmlFor="email">Email</Label>
+                  <Input id="email" type="email" {...register("email", { required: "Email requis" })} />
+                  {errors.email && <p role="alert" className="text-red-600 text-sm">{errors.email.message}</p>}
                 </div>
                 <div className="grid gap-3">
-                    <Label htmlFor="phone">Téléphone</Label>
-                    <Input
-                    id="phone"
-                    type="tel"
-                    {...register("phone", { required: true })}
-                    aria-invalid={errors.phone ? "true" : "false"}
-                    />
-                    {errors.phone?.type === "required" && (
-                    <p role="alert">Téléphone est requis</p>
-                    )}
+                  <Label htmlFor="phone">Téléphone</Label>
+                  <Input id="phone" type="tel" {...register("phone", { required: "Téléphone requis" })} />
+                  {errors.phone && <p role="alert" className="text-red-600 text-sm">{errors.phone.message}</p>}
                 </div>
-             </div>
-
-             <div className="grid gap-3">
-                <Label htmlFor="datenaissance">Date Naissance</Label>
-                <Input
-                  id="datenaissance"
-                  type="text"
-                  {...register("datenaissance", { required: true })}
-                  aria-invalid={errors.datenaissance ? "true" : "false"}
-                />
-                {errors.datenaissance?.type === "required" && (
-                  <p role="alert">Date de Naissance est requise</p>
-                )}
               </div>
-
+              <div className="grid grid-cols-1 gap-3">
+                <div className="grid gap-3">
+                  <Label htmlFor="datenaissance">Date de naissance</Label>
+                  <Input
+                    id="datenaissance"
+                    type="date"
+                    {...register("datenaissance", { required: "Date de naissance requise" })}
+                  />
+                  {errors.datenaissance && <p role="alert" className="text-red-600 text-sm">{errors.datenaissance.message}</p>}
+                </div>
+                <div className="grid gap-3">
+                  <Label htmlFor="nationality">Nationalité</Label>
+                  <Controller
+                    name="nationality"
+                    control={control}
+                    rules={{ required: "Nationalité requise" }}
+                    render={({ field }) => (
+                      <select id="nationality" {...field} className="border rounded p-2">
+                        <option value="">Sélectionnez un pays</option>
+                        {countryList.map((country) => (
+                          <option key={country.code} value={country.code}>
+                            {country.name}
+                          </option>
+                        ))}
+                      </select>
+                    )}
+                  />
+                  {errors.nationality && <p role="alert" className="text-red-600 text-sm">{errors.nationality.message}</p>}
+                </div>
+              </div>
               <div className="grid grid-cols-2 gap-3">
                 <div className="grid gap-3">
-                    <Label htmlFor="sexe">Sexe</Label>
-                    <Input
-                    id="sexe"
-                    type="sexe"
-                    {...register("sexe", { required: true })}
-                    aria-invalid={errors.sexe ? "true" : "false"}
-                    />
-                    {errors.sexe?.type === "required" && (
-                    <p role="alert">sexe est requis</p>
-                    )}
+                  <Label htmlFor="sexe">Sexe</Label>
+                  <select id="sexe" {...register("sexe", { required: "Sexe requis" })} className="border rounded p-4">
+                    <option value="">-- Choisissez une option --</option>
+                    <option value="homme">Homme</option>
+                    <option value="femme">Femme</option>
+                  </select>
+                  {errors.sexe && <p role="alert" className="text-red-600 text-sm">{errors.sexe.message}</p>}
                 </div>
                 <div className="grid gap-3">
-                    <Label htmlFor="Nationnalité">Nationnalité</Label>
-                    <Input
-                    id="Nationnalité"
-                    type="Nationnalité"
-                    {...register("nationnalité", { required: true })}
-                    aria-invalid={errors.nationnalité? "true" : "false"}
-                    />
-                    {errors.nationnalité?.type === "required" && (
-                    <p role="alert">Nationnalité est requis</p>
-                    )}
+                  <Label htmlFor="CNI">Type de document</Label>
+                  <select id="CNI" {...register("CNI", { required: "Document requis" })} className="border rounded p-4">
+                    <option value="">-- Choisissez une option --</option>
+                    <option value="CNI">CNI</option>
+                    <option value="Passport">Passport</option>
+                    <option value="Autre">Autre</option>
+                  </select>
+                  {errors.CNI && <p role="alert" className="text-red-600 text-sm">{errors.CNI.message}</p>}
                 </div>
-             </div>
-             <div className="grid gap-3">
-                <Label htmlFor="numeropassport">Numero de passport</Label>
-                <Input
-                  id="numeropassport"
-                  type="text"
-                  {...register("numeropassport", { required: true })}
-                  aria-invalid={errors.numeropassport? "true" : "false"}
-                />
-                {errors.numeropassport?.type === "required" && (
-                  <p role="alert">Date de Naissance est requise</p>
-                )}
               </div>
             </div>
-
- 
-         </div>  
-
-            </div>
-
-           
-        
+          </div>
+        </div>
         <Card>
           <CardHeader>
             <CardTitle>Détail du paiement</CardTitle>
           </CardHeader>
           <CardContent className="grid gap-8">
-            {/* {hasTarifs && (
-              <>
-                <div className="grid gap-3">
-                  <Label htmlFor="quantity">Quantité</Label>
-                  <Input
-                    id="quantity"
-                    type="number"
-                    min="1"
-                    placeholder="Entrez la quantité"
-                    onChange={(e) => setQuantity(e.target.value)}
-                  />
-                </div>
-                <div className="grid gap-3">
-                  <Label htmlFor="category">Catégorie</Label>
-                  <Input
-                    id="category"
-                    type="text"
-                    placeholder="Ex: Mois, Heure"
-                    onChange={(e) => setCategory(e.target.value)}
-                  />
-                </div>
-              </>
-            )} */}
-
-
             <div className="grid grid-cols-2 gap-3">
-                <div className="grid gap-3">
-                    <Label htmlFor="email">Option de voyage</Label>
-                    <Input
-                    id="email"
-                    type="email"
-                    {...register("email", { required: true })}
-                    aria-invalid={errors.email ? "true" : "false"}
-                    />
-                    {errors.email?.type === "required" && (
-                    <p role="alert">Email est requis</p>
-                    )}
-                </div>
-                <div className="grid gap-3">
-                    <Label htmlFor="phone">Nombre de passagers</Label>
-                    <Input
-                    id="phone"
-                    type="tel"
-                    {...register("phone", { required: true })}
-                    aria-invalid={errors.phone ? "true" : "false"}
-                    />
-                    {errors.phone?.type === "required" && (
-                    <p role="alert">Téléphone est requis</p>
-                    )}
-                </div>
-            </div> 
-
-             <div className="grid gap-3">
-                <Label htmlFor="destination">Destination</Label>
+              <div className="grid gap-3">
+                <Label htmlFor="travelOption">Option de voyage</Label>
                 <select
-                    id="destination"
-                    {...register("destination", { required: true })} // Intégration avec react-hook-form
-                    value={selectedCountry}
-                    onChange={(e) => setSelectedCountry(e.target.value)}
-                    className="border rounded p-2" // Style basique, adapte selon ton design
-                    aria-invalid={errors.destination ? "true" : "false"}
+                  id="travelOption"
+                  {...register("travelOption", { required: "Option de voyage requise" })}
+                  className="border rounded p-4"
                 >
-                    <option value="">Sélectionnez un pays</option>
-                    {countryList.map((country) => (
-                    <option key={country.code} value={country.code}>
-                        {country.name}
-                    </option>
-                    ))}
+                  <option value="">-- Choisissez une option --</option>
+                  <option value="Eco">Eco</option>
+                  <option value="Première">Première</option>
+                  <option value="Affaire">Affaire</option>
                 </select>
-                {errors.destination?.type === "required" && (
-                    <p role="alert">La destination est requise</p>
-                )}
-                  </div>
-                  <div className="grid gap-3">
-                  <Label>Sélectionner une plage de dates</Label>
-                  <Calendar
-                    id="date"
-                    mode="multiple"
-                    selected={dates}
-                    onSelect={(days) => setDates(days || [new Date()])}
-                    numberOfMonths={2}
-                    className="rounded-md border"
-                    disabled={(date) =>
-                      isMonthlyTarif ? date.getDate() !== 1 : false
-                    }
-                  />
-            </div>
-            {hasTarifs && (
-              <div className="text-right font-bold">
-                Total: {totalAmount} FCFA
+                {errors.travelOption && <p role="alert" className="text-red-600 text-sm">{errors.travelOption.message}</p>}
               </div>
-            )}
-            <Button
-              type="submit"
-              disabled={!isValid || dates.length === 0}
-              className="ml-auto gap-1"
-            >
+              <div className="grid gap-3">
+                <Label htmlFor="passengerCount">Nombre de passagers</Label>
+                <select
+                  id="passengerCount"
+                  {...register("passengerCount", { required: "Nombre de passagers requis" })}
+                  className="border rounded p-4"
+                >
+                  <option value="">-- Choisissez une option --</option>
+                  {[...Array(20)].map((_, i) => (
+                    <option key={i + 1} value={i + 1}>
+                      {i + 1}
+                    </option>
+                  ))}
+                </select>
+                {errors.passengerCount && (
+                  <p role="alert" className="text-red-600 text-sm">{errors.passengerCount.message}</p>
+                )}
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-6">
+              <div className="flex flex-col gap-2">
+                <Label htmlFor="departureCountry">Pays de départ</Label>
+                <Controller
+                  name="departureCountry"
+                  control={control}
+                  rules={{ required: "Pays de départ requis" }}
+                  render={({ field }) => (
+                    <select id="departureCountry" {...field} className="border rounded p-2">
+                      <option value="">Sélectionnez un pays</option>
+                      {countryList.map((country) => (
+                        <option key={country.code} value={country.code}>
+                          {country.name}
+                        </option>
+                      ))}
+                    </select>
+                  )}
+                />
+                {errors.departureCountry && (
+                  <p role="alert" className="text-red-600 text-sm">{errors.departureCountry.message}</p>
+                )}
+              </div>
+              <div className="flex flex-col gap-2">
+                <Label htmlFor="arrivalCountry">Pays d'arrivée</Label>
+                <Controller
+                  name="arrivalCountry"
+                  control={control}
+                  rules={{ required: "Pays d'arrivée requis" }}
+                  render={({ field }) => (
+                    <select id="arrivalCountry" {...field} className="border rounded p-2">
+                      <option value="">Sélectionnez un pays</option>
+                      {countryList.map((country) => (
+                        <option key={country.code} value={country.code}>
+                          {country.name}
+                        </option>
+                      ))}
+                    </select>
+                  )}
+                />
+                {errors.arrivalCountry && (
+                  <p role="alert" className="text-red-600 text-sm">{errors.arrivalCountry.message}</p>
+                )}
+              </div>
+            </div>
+            <div className="grid gap-3">
+              <Label>Sélectionner une date</Label>
+              <Calendar
+                date={date}
+                setDate={(newDate: Date | undefined) => {
+                  if (newDate) {
+                    setDate(newDate);
+                    setDates([newDate]);
+                  }
+                }}
+                showOutsideDays={true}
+              />
+            </div>
+            {hasTarifs && <div className="text-right font-bold">Total: {totalAmount} FCFA</div>}
+            <Button type="submit" disabled={!isValid || dates.length === 0} className="ml-auto gap-1">
               <span>
-                {hasTarifs
-                  ? "Confirmer le paiement"
-                  : "Demander une réservation"}
+                {hasTarifs ? "Confirmer le paiement" : "Demander une réservation"}
                 <ArrowUpRight className="h-4 w-4" />
               </span>
             </Button>
@@ -425,6 +402,5 @@ export default function Description({ group = { id: null, title: "Inconnu" }, sp
         </Card>
       </form>
     </section>
-    
   );
 }

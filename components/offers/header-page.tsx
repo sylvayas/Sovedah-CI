@@ -8,8 +8,8 @@ export default function HeaderPage() {
 
     return (
         <>
-            <section className="relative p-2">
-                <div className={cn("h-[60vh] md:h-[400px] xl:h-[400px] relative container px-0 max-w-[1400px]")}>
+            <section className="relative p-8">
+                <div className={cn("h-[80vh] md:h-[600px] xl:h-[450px] relative container px-0 max-w-[1400px]")}>
                     <div className="absolute z-[3] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center flex-col gap-8 max-w-5xl w-full">
                         <div className="max-w-screen-sm text-white text-center md:text-left">
                             <h2 className="mb-4 text-xl sm:text-2xl md:text-3xl lg:text-4xl tracking-tight font-semibold">
@@ -22,7 +22,7 @@ export default function HeaderPage() {
                     {/* image background */}
                    <Image
                                          
-                      src="/images/boutique/produit_hygienique.jpg"
+                      src="/images/boutique/boutique general.jpg"
                       alt="vue"
                       layout="fill"  // Pour remplir la section
                       objectFit="cover"

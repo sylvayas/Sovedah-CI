@@ -18,7 +18,7 @@ export default function Statistiques() {
               <Icons.building className="text-white size-8 md:size-10" />
             </div>
             <p className="font-medium text-3xl md:text-4xl font-mono whitespace-pre-wrap tracking-tighter "><NumberTicker value={13} /></p>
-            <p className="font-medium">Espaces de travail</p>
+            <p className="font-medium">Fournisseurs</p>
           </div>
 
           <div className=" flex flex-col gap-2 md:gap-4 items-center">
@@ -26,7 +26,7 @@ export default function Statistiques() {
               <Icons.space className="text-white size-8 md:size-10" />
             </div>
             <p className="font-medium text-3xl md:text-4xl font-mono whitespace-pre-wrap tracking-tighter "><NumberTicker value={230} /> m²</p>
-            <p className="font-medium">De bureaux</p>
+            <p className="font-medium">Magasins</p>
           </div>
 
           <div className=" flex flex-col gap-2 md:gap-4 items-center">
