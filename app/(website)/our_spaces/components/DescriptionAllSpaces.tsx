@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 interface Product {
   id: string;
   title: string;
-  date?: string; // Rendu optionnel pour cohérence
+  date?: string;
   description: string | { intro: string; whyChoose: string[]; pricing: string[]; callToAction: string };
   src: string;
 }
@@ -30,18 +30,22 @@ export default function DescriptionAllSpaces() {
   };
 
   const goToPrevious = () => {
-    const newIndex = (currentIndex - 1 + allProducts.length) % allProducts.length;
-    setSelectedImage(allProducts[newIndex]);
+    const newIndex = (currentIndex - 1 + featuredProducts.length) % featuredProducts.length;
+    setSelectedImage(featuredProducts[newIndex]);
     setCurrentIndex(newIndex);
   };
 
   const goToNext = () => {
-    const newIndex = (currentIndex + 1) % allProducts.length;
-    setSelectedImage(allProducts[newIndex]);
+    const newIndex = (currentIndex + 1) % featuredProducts.length;
+    setSelectedImage(featuredProducts[newIndex]);
     setCurrentIndex(newIndex);
   };
 
-  const allProducts = [...hygieneProducts, ...babyProducts];
+  // Sélectionner un sous-ensemble de produits pour l'onglet "Quelques produits"
+  const featuredProducts = [
+    ...hygieneProducts.slice(0, 2), // 2 premiers produits d'hygiène
+    ...babyProducts.slice(0, 2),    // 2 premiers accessoires
+  ];
 
   // Helper function to render description in lightbox
   const renderDescription = (description: Product["description"]): string => {
@@ -66,40 +70,13 @@ export default function DescriptionAllSpaces() {
         </div>
 
         <Tabs defaultValue="all" className="mt-8">
-          <TabsList className="grid grid-cols-3 w-full">
+          <TabsList className="grid grid-cols-2 w-full">
             <TabsTrigger value="all">Quelques produits</TabsTrigger>
-            <TabsTrigger value="hygiene">Produits Hygiéniques</TabsTrigger>
             <TabsTrigger value="baby">Accessoires</TabsTrigger>
           </TabsList>
           <TabsContent value="all" className="mt-6">
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {allProducts.map((product, index) => (
-                <div
-                  key={product.id}
-                  className="overflow-hidden rounded-lg shadow-md cursor-pointer group"
-                  onClick={() => openLightbox(product, index)}
-                >
-                  <div className="relative aspect-square">
-                    <Image
-                      src={product.src || "/placeholder.svg"}
-                      alt={product.title}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-                      <div className="p-3 text-white">
-                        <h3 className="font-medium text-sm">{product.title}</h3>
-                        {product.date && <p className="text-xs text-white/80">{product.date}</p>}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </TabsContent>
-          <TabsContent value="hygiene" className="mt-6">
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {hygieneProducts.map((product, index) => (
+              {featuredProducts.map((product, index) => (
                 <div
                   key={product.id}
                   className="overflow-hidden rounded-lg shadow-md cursor-pointer group"
@@ -229,57 +206,57 @@ const hygieneProducts = [
     },
     src: "/images/produits&details/lilas-couches-adultes-large-15-pieces.webp",
   },
-  {
-    id: "baby1",
-    title: "Couche Bébé chou",
-    date: "1 avril 2025",
-    description: {
-      intro: "Couches ultra-absorbantes pour bébés, offrant confort et protection.",
-      whyChoose: ["Haute absorption", "Confortable pour les bébés", "Facile à utiliser"],
-      pricing: ["PU : 6000 FCFA"],
-      callToAction: "Commandez maintenant pour un confort optimal !",
-    },
-    src: "/images/produits&details/essuie-tout.jpg",
-  },
-  {
-    id: "baby2",
-    title: "Lingettes pour bébé",
-    date: "1 avril 2025",
-    description: {
-      intro: "Lingettes douces et hypoallergéniques pour la peau sensible des bébés.",
-      whyChoose: ["Hypoallergéniques", "Douces pour la peau", "Pratiques pour le voyage"],
-      pricing: ["PU : 1000 FCFA"],
-      callToAction: "Ajoutez-les à votre panier dès aujourd'hui !",
-    },
-    src: "/images/produits&details/conf_mat.jpeg",
-  },
+  // {
+  //   id: "baby1",
+  //   title: "Couche Bébé chou",
+  //   date: "1 avril 2025",
+  //   description: {
+  //     intro: "Couches ultra-absorbantes pour bébés, offrant confort et protection.",
+  //     whyChoose: ["Haute absorption", "Confortable pour les bébés", "Facile à utiliser"],
+  //     pricing: ["PU : 6000 FCFA"],
+  //     callToAction: "Commandez maintenant pour un confort optimal !",
+  //   },
+  //   src: "/images/produits&details/essuie-tout.jpg",
+  // },
+  // {
+  //   id: "baby2",
+  //   title: "Lingettes pour bébé",
+  //   date: "1 avril 2025",
+  //   description: {
+  //     intro: "Lingettes douces et hypoallergéniques pour la peau sensible des bébés.",
+  //     whyChoose: ["Hypoallergéniques", "Douces pour la peau", "Pratiques pour le voyage"],
+  //     pricing: ["PU : 1000 FCFA"],
+  //     callToAction: "Ajoutez-les à votre panier dès aujourd'hui !",
+  //   },
+  //   src: "/images/produits&details/conf_mat.jpeg",
+  // },
 ];
 
 const babyProducts = [
-  {
-    id: "prod1",
-    title: "Masque de sommeil",
-    date: "1 avril 2025",
-    description: {
-      intro: "Masque de sommeil pour un voyage confortable.",
-      whyChoose: ["Confortable", "Bloque la lumière", "Léger et portable"],
-      pricing: ["PU : 2000 FCFA"],
-      callToAction: "Commandez pour des voyages reposants !",
-    },
-    src: "/images/accessoire_voyage/Masque de sommeil occultant 2.avif",
-  },
-  {
-    id: "prod2",
-    title: "Valise cabine",
-    date: "1 avril 2025",
-    description: {
-      intro: "Valise cabine pour voyages légers.",
-      whyChoose: ["Compacte", "Robuste", "Facile à transporter"],
-      pricing: ["PU : 25000 FCFA"],
-      callToAction: "Parfait pour vos déplacements !",
-    },
-    src: "/images/accessoire_voyage/Valises cabine 2.jpg",
-  },
+  // {
+  //   id: "prod1",
+  //   title: "Masque de sommeil",
+  //   date: "1 avril 2025",
+  //   description: {
+  //     intro: "Masque de sommeil pour un voyage confortable.",
+  //     whyChoose: ["Confortable", "Bloque la lumière", "Léger et portable"],
+  //     pricing: ["PU : 2000 FCFA"],
+  //     callToAction: "Commandez pour des voyages reposants !",
+  //   },
+  //   src: "/images/accessoire_voyage/Masque de sommeil occultant 2.avif",
+  // },
+  // {
+  //   id: "prod2",
+  //   title: "Valise cabine",
+  //   date: "1 avril 2025",
+  //   description: {
+  //     intro: "Valise cabine pour voyages légers.",
+  //     whyChoose: ["Compacte", "Robuste", "Facile à transporter"],
+  //     pricing: ["PU : 25000 FCFA"],
+  //     callToAction: "Parfait pour vos déplacements !",
+  //   },
+  //   src: "/images/accessoire_voyage/Valises cabine 2.jpg",
+  // },
   {
     id: "prod3",
     title: "Sac à dos",
@@ -296,12 +273,7 @@ const babyProducts = [
     id: "prod4",
     title: "Coussin de voyage",
     date: "1 avril 2025",
-    description: {
-      intro: "Coussin de voyage ergonomique.",
-      whyChoose: ["Soutien du cou", "Confortable", "Facile à transporter"],
-      pricing: ["PU : 5000 FCFA"],
-      callToAction: "Voyagez avec confort !",
-    },
+    description: "",
     src: "/images/accessoire_voyage/Coussin de voyage ergonomique 2.jpg",
   },
 ];

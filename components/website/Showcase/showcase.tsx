@@ -17,23 +17,23 @@ const datas: {
   href: string;
 }[] = [
     {
-      image: "/images/",
-      title: "Conforta protect",
+      image: "/images/accessoire_voyage/Un cadenas TSA.jpg",
+      title: "Cadenas TSA ",
       href: "/our_spaces/private_offices",
     },
     {
-      image: "/images/",
-      title: "Conforta lingette",
+      image: "/images/accessoire_voyage/chaussette voyage 2.jpg",
+      title: "Chaussette voyage",
       href: "/our_spaces/open_space",
     },
     {
-      image: "/images/",
-      title: "Conforta couche",
+      image: "/images/produits&details/ultra_doux.png",
+      title: "Conforta Ultra doux",
       href: "/our_spaces/meeting_room",
     },
     {
-      image: "/images/",
-      title: "Clean",
+      image: "/images/produits&details/serviettes-hygiéniques.jpg",
+      title: "Lilas maternité super",
       href: "/our_spaces/common_space",
     },
   ]
@@ -48,13 +48,13 @@ export function ShowcaseCard({
   return (
     <Link
       href={href}
-      className="flex flex-col gap-2 group  w-[300px] xl:w-[500px] relative overflow-hidden cursor-pointer"
+      className="flex flex-col gap-2 group  w-[300px] xl:w-[250px] relative overflow-hidden cursor-pointer"
     >
       <Image
         src={image}
         alt={title}
-        height={300}
-        width={500}
+        height={200}
+        width={200}
         className="size-full object-cover max-h-[260px] xl:max-h-[300px] rounded-xl"
       />
 
@@ -78,13 +78,13 @@ export default function Showcase() {
       <h3 className="mx-auto mb-8 text-balance text-center text-lg font-medium tracking-tight text-foreground/80">
         Des espaces de coworking en Côte-d&apos;Ivoire
       </h3>
-      <div className="relative flex flex-col">
+      <div className="relative flex flex-col text-center">
         <Marquee pauseOnHover className="max-w-screen [--duration:40s]">
           {datas.map((data, index) => (
             <ShowcaseCard key={index} title={data.title}
               image={data.image}
               href={data.href}
-              affiliation={data.description}
+              
             />
           ))}
         </Marquee>

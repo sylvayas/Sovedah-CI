@@ -14,11 +14,14 @@ export default function About() {
           </div>
           <div>Dites au revoir aux espaces de travail traditionnels et vos tracas du quotidien pour votre immobilier d&apos;entreprise  !</div>
         </div>
-        <div className="grid grid-rows-2 gap-8">
-          <p><span className="font-saudagar leading-tight">SOVEDAH CI</span> vous propose une gamme complète de services adaptés à vos besoins, incluant la réservation de billets d&apos;avion, le commerce général, la location de voitures, la conciergerie et désormais la location de bureaux flexibles.
+        <div className="grid grid-rows-2 ">
+          <p><span className="font-semibold text-3xl ">SOVEDAH CI</span> vous propose une gamme complète de services adaptés à vos besoins, incluant la réservation de billets d&apos;avion, 
           Que vous recherchiez un espace de travail partagé ou privé, modulable et entièrement personnalisable, nous vous offrons une solution clé en main en Côte d&apos;Ivoire, idéale pour les porteurs de projets avant ou après leur immatriculation au CEPICI.
           </p>
           <p>
+          le commerce général, la location de voitures, la conciergerie et désormais la location de bureaux flexibles.
+          Que vous recherchiez un espace de travail partagé ou privé, modulable et entièrement personnalisable, nous vous offrons une solution clé en main en Côte d&apos;Ivoire, idéale pour les porteurs de projets avant ou après leur immatriculation au CEPICI.
+
           </p>
         </div>
       </div>

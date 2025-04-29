@@ -122,48 +122,14 @@ export function MainNav() {
 
 
                     <NavigationMenuItem>
-                        <NavigationMenuTrigger>{menuList[3].menus[0].label}</NavigationMenuTrigger>
-                        <NavigationMenuContent>
-                            <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
-                                <li className="row-span-6">
-                                    <NavigationMenuLink asChild>
-                                        <a
-                                            className="flex h-full w-full ring-2 ring-novis_yellow select-none flex-col justify-end rounded-md bg-novis_green p-6 no-underline outline-none focus:shadow-md"
-                                            href={menuList[3].menus[0].href}
-                                        >
-                                            <Icons.logo className="h-20 w-20 mb-4" />
-
-                                            <p className="text-sm leading-tight text-white">
-                                            Découvrez notre galerie.
-                                            </p>
-                                        </a>
-                                    </NavigationMenuLink>
-                                </li>
-                                {menuList[3].menus[0].submenus.slice(0,).map((item) => (
-                                    <ListItem key={item.label} href={item.href} title={item.label} className={cn(`${item.active && "font-bold text-novis_orange"}`)} />
-                                ))}
-                            </ul>
-                            <GridPattern
-                                squares={[
-                                    [4, 4],
-                                    [5, 1],
-                                    [8, 2],
-                                    [5, 3],
-                                    [5, 5],
-                                    [10, 10],
-                                    [12, 15],
-                                    [15, 10],
-                                    [10, 15],
-                                    [15, 10],
-                                    [10, 15],
-                                    [15, 10],
-                                ]}
-                                className={cn(
-                                    "[mask-image:radial-gradient(400px_circle_at_center,white,transparent)]",
-                                    "inset-x-0 inset-y-[-30%] h-[200%] skew-y-12",
-                                )}
-                            />
-                        </NavigationMenuContent>
+                    <NavigationMenuLink asChild>
+                        <Link
+                        href={menuList[3].menus[0].href}
+                        className="flex items-center px-4 py-2 text-sm font-medium text-gray-700 hover:text-novis_orange "
+                        >
+                        {menuList[3].menus[0].label}
+                        </Link>
+                    </NavigationMenuLink>
                     </NavigationMenuItem>
 
                     
