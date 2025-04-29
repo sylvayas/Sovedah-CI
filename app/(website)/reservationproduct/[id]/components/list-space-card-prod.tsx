@@ -174,7 +174,7 @@ const sendEmail = async (
 };
 
 // Main Component
-export default function ListeSpaceProd({
+export default function ListeSpaceCardProd({
   group = { id: null, title: "Inconnu" },
   space = { id: null, title: "Inconnu" },
 }: ListeSpaceProps) {
