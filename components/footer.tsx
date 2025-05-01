@@ -17,22 +17,18 @@ export default function Footer() {
         <div className="py-14 w-full xl:w-[350px] bg-[#1A557A] flex flex-col gap-4 px-4 sm:px-8 md:px-10 md:gap-6 items-center xl:items-start justify-center">
           <Icons.logo_black className="size-25" />
           <p className="text-white text-sm w-4/5 sm:w-3/4 md:w-1/2 text-center xl:text-left xl:w-full">
-            Des aménagements attractifs, conçus pour la collaboration et le développement des réseaux professionnels.
+            Des Solutions de Voyage et Services sur Mesure
           </p>
           <div className="flex items-center gap-4">
-            <a href="https://www.facebook.com//profile.php?id=61553900900562" target="_blank" rel="noopener noreferrer" className="p-1 rounded-full text-novis_green ring-1 ring-novis_yellow bg-white flex justify-center items-center">
+            <a href="https://www.facebook.com/share/12Mev9bjWhg/" target="_blank" rel="noopener noreferrer" className="p-1 rounded-full text-novis_green ring-1 ring-novis_yellow bg-white flex justify-center items-center">
               <Icons.facebook className="size-6" />
-            </a>
-            <a href="https://www.linkedin.com/company/novis-co-working" target="_blank" rel="noopener noreferrer" className="p-1 rounded-full text-novis_green ring-1 ring-novis_yellow bg-white flex justify-center items-center">
-              <Icons.linkedIn className="size-6" />
-            </a>
-            <a href="https://www.instagram.com/noviscoworking" target="_blank" rel="noopener noreferrer" className="p-1 rounded-full text-novis_green ring-1 ring-novis_yellow bg-white flex justify-center items-center">
-              <Icons.instagram className="size-6" />
-            </a>
-            <a href="https://twitter.com/noviscoworking" target="_blank" rel="noopener noreferrer" className="p-1 rounded-full text-novis_green ring-1 ring-novis_yellow bg-white flex justify-center items-center">
-              <Icons.twitter className="size-6" />
-            </a>
-            <a href="https://www.youtube.com/@NovisCoworking" target="_blank" rel="noopener noreferrer" className="p-1 rounded-full text-novis_green ring-1 ring-novis_yellow bg-white flex justify-center items-center">
+            </a>         
+            <a
+              href="mailto:medesse.allao@sovedah-ci.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-1 rounded-full text-novis_green ring-1 ring-novis_yellow bg-white flex justify-center items-center"
+            >
               <Icons.youtube className="size-6" />
             </a>
           </div>

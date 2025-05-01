@@ -288,7 +288,7 @@ export default function ListeSpace({
     } else {
       setTotalAmount(0);
     }
-  }, [quantity, category, date, hasTarifs, space]);
+  }, [quantity, category, date, hasTarifs, space,selectedProduct]);
 
   useEffect(() => {
     setValue("date", date);
@@ -310,10 +310,10 @@ export default function ListeSpace({
       <section className="container min-h-[300px] mb-14 relative mt-14">
         <div className="relative gap-8 items-center md:items-stretch py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6">
           <Image
-            className="w-full z-10 object-cover"
+            className="w-full z-10 object-cover max-w-[420px] max-h-[420px]"
             src={selectedProduct.image}
-            width={200}
-            height={200}
+            width={100}
+            height={100}
             alt={`${selectedProduct.title} image`}
           />
           <div className="mt-4 md:mt-0">
@@ -445,7 +445,7 @@ export default function ListeSpace({
                 {errors.quantity && <p role="alert" className="text-red-600 text-sm">{errors.quantity.message}</p>}
               </div>
                 <div className="grid gap-3 w-full">
-                  <Label htmlFor="category">Type d'achat</Label>
+                  <Label htmlFor="category">Type d&apos;achat</Label>
                   <select
                     id="category"
                     {...register("category", { required: true })}
@@ -453,7 +453,7 @@ export default function ListeSpace({
                     className="rounded-md border p-2"
                     value={category}
                   >
-                    <option value="">Sélectionner le type d'achat</option>
+                    <option value="">Sélectionner le type d&apos;achat</option>
                     <option value="Détail">Détails</option>
                     <option value="En gros">En gros</option>
                     

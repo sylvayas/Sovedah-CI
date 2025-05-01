@@ -14,11 +14,13 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { countries } from "countries-list";
 import dayjs from "dayjs";
+import debounce from "lodash.debounce";
 
 interface IFormInput {
   name: string;
   lastname: string;
   datenaissance: string;
+  numerodocument: string;
   sexe: string;
   email: string;
   CNI: string;
@@ -41,7 +43,8 @@ export default function Description({ group = { id: null, title: "Inconnu" }, sp
   const [totalAmount, setTotalAmount] = useState<number>(0);
   const [data, setData] = useState<any>();
   const [isMonthlyTarif, setIsMonthlyTarif] = useState(false);
-  const [date, setDate] = useState<Date | undefined>(new Date(2025, 3, 17)); // 17 avril 2025
+  const [date, setDate] = useState<Date | undefined>(undefined);
+  const [isLoading, setIsLoading] = useState(true); // État de chargement pour éviter le tic
 
   const {
     register,
@@ -52,6 +55,15 @@ export default function Description({ group = { id: null, title: "Inconnu" }, sp
     mode: "onChange",
   });
 
+  // Initialisation côté client
+  useEffect(() => {
+    setDate(new Date(2025, 3, 17));
+    setDates([new Date(2025, 3, 17)]);
+    setIsLoading(false); // Marquer le chargement comme terminé
+  }, []);
+
+
+
   // Transforme l'objet countries en tableau pour le select
   const countryList = useMemo(() => {
     return Object.entries(countries).map(([code, info]) => ({
@@ -60,8 +72,8 @@ export default function Description({ group = { id: null, title: "Inconnu" }, sp
     }));
   }, []);
 
-  const selectedSpace = space || {};
-  const hasTarifs = Array.isArray(selectedSpace.tarifs) && selectedSpace.tarifs.length > 0;
+  const selectedSpace = useMemo(() => space || { tarifs: [], images: [{ src: "" }], title: "Inconnu", adresse: "" }, [space]);
+  const hasTarifs = useMemo(() => Array.isArray(selectedSpace.tarifs) && selectedSpace.tarifs.length > 0, [selectedSpace.tarifs]);
 
   const calculateAmount = useCallback(
     (quantity: string, category: string, dates: Date[]): number => {
@@ -155,59 +167,31 @@ export default function Description({ group = { id: null, title: "Inconnu" }, sp
       : dates.map((d) => dayjs(d).format("YYYY-MM-DD")).join(",");
   };
 
-  useEffect(() => {
-    if (quantity && category && dates.length > 0) {
-      const amount = calculateAmount(quantity, category, dates);
-      setTotalAmount(amount);
-      setIsMonthlyTarif(category.toLowerCase().includes("mois"));
-    } else {
-      setTotalAmount(0);
-    }
-  }, [quantity, category, dates, calculateAmount]);
+  const debouncedSetQuantity = useMemo(
+    () =>
+      debounce((value: string) => {
+        setQuantity(value);
+      }, 300),
+    []
+  );
+
+  const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    debouncedSetQuantity(value);
+  };
 
   useEffect(() => {
-    if (paymentStatus === "success") {
-      fetch("/api/send-email", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          subject: "Facture Sovedah-CI",
-          to: [data.email, "medesse.allao@sovedahci.com"],
-          emailData: {
-            coworkingName: space.title,
-            category: group.title,
-            location: space.adresse,
-            clientName: data.name,
-            clientEmail: data.email,
-            clientPhone: data.phone,
-            reservationPrice: totalAmount,
-            date: formatDates(dates),
-            priceType: `${data.quantity} ${data.category}`,
-            coworkingImage: space.images[0].src,
-          },
-        }),
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Failed to send email");
-          }
-          router.push(
-            `/recap?type=payment&name=${encodeURIComponent(data.name)}&email=${encodeURIComponent(data.email)}&phone=${encodeURIComponent(data.phone)}&groupId=${group.id}&spaceId=${space.id}&dates=${formatDates(dates)}&amount=${totalAmount}&quantity=${encodeURIComponent(data.quantity)}&category=${encodeURIComponent(data.category)}`
-          );
-        })
-        .catch(() => {
-          toast("Erreur", {
-            description: "Une erreur est survenue lors de l'envoi de la facture",
-          });
-        });
-    } else if (paymentStatus === "error") {
-      toast("Paiement échoué", {
-        description: "Une erreur est survenue lors du paiement",
-      });
+    return () => {
+      debouncedSetQuantity.cancel(); // Clean up debounce on component unmount
+    };
+  }, [debouncedSetQuantity]);
+  
+  const handleDateChange = (newDate: Date | undefined) => {
+    if (newDate && newDate.getTime() !== date?.getTime()) {
+      setDate(newDate);
+      setDates([newDate]);
     }
-  }, [paymentStatus, data, totalAmount, dates, router]);
+  };
 
   return (
     <section className="container min-h-[300px] py-14 relative">
@@ -241,7 +225,7 @@ export default function Description({ group = { id: null, title: "Inconnu" }, sp
                   {errors.phone && <p role="alert" className="text-red-600 text-sm">{errors.phone.message}</p>}
                 </div>
               </div>
-              <div className="grid grid-cols-1 gap-3">
+              <div className="grid grid-cols-2 gap-2">
                 <div className="grid gap-3">
                   <Label htmlFor="datenaissance">Date de naissance</Label>
                   <Input
@@ -258,7 +242,7 @@ export default function Description({ group = { id: null, title: "Inconnu" }, sp
                     control={control}
                     rules={{ required: "Nationalité requise" }}
                     render={({ field }) => (
-                      <select id="nationality" {...field} className="border rounded p-2">
+                      <select id="nationality" {...field} className="border rounded p-2 w-full">
                         <option value="">Sélectionnez un pays</option>
                         {countryList.map((country) => (
                           <option key={country.code} value={country.code}>
@@ -271,25 +255,34 @@ export default function Description({ group = { id: null, title: "Inconnu" }, sp
                   {errors.nationality && <p role="alert" className="text-red-600 text-sm">{errors.nationality.message}</p>}
                 </div>
               </div>
+              <div className="grid gap-3">
+                <Label htmlFor="sexe">Sexe</Label>
+                <select id="sexe" {...register("sexe", { required: "Sexe requis" })} className="border rounded p-4">
+                  <option value="">-- Choisissez une option --</option>
+                  <option value="homme">Homme</option>
+                  <option value="femme">Femme</option>
+                </select>
+                {errors.sexe && <p role="alert" className="text-red-600 text-sm">{errors.sexe.message}</p>}
+              </div>
               <div className="grid grid-cols-2 gap-3">
                 <div className="grid gap-3">
-                  <Label htmlFor="sexe">Sexe</Label>
-                  <select id="sexe" {...register("sexe", { required: "Sexe requis" })} className="border rounded p-4">
-                    <option value="">-- Choisissez une option --</option>
-                    <option value="homme">Homme</option>
-                    <option value="femme">Femme</option>
-                  </select>
-                  {errors.sexe && <p role="alert" className="text-red-600 text-sm">{errors.sexe.message}</p>}
-                </div>
-                <div className="grid gap-3">
-                  <Label htmlFor="CNI">Type de document</Label>
-                  <select id="CNI" {...register("CNI", { required: "Document requis" })} className="border rounded p-4">
+                  <Label htmlFor="CNI">Type de pièce</Label>
+                  <select id="CNI" {...register("CNI", { required: "Document requis" })} className="border rounded p-2">
                     <option value="">-- Choisissez une option --</option>
                     <option value="CNI">CNI</option>
                     <option value="Passport">Passport</option>
                     <option value="Autre">Autre</option>
                   </select>
                   {errors.CNI && <p role="alert" className="text-red-600 text-sm">{errors.CNI.message}</p>}
+                </div>
+                <div className="grid gap-3">
+                  <Label htmlFor="numerodocument">Numéro de la pièce</Label>
+                  <Input
+                    id="numerodocument"
+                    type="text"
+                    {...register("numerodocument", { required: "Numéro de document requis" })}
+                  />
+                  {errors.numerodocument && <p role="alert" className="text-red-600 text-sm">{errors.numerodocument.message}</p>}
                 </div>
               </div>
             </div>
@@ -300,6 +293,15 @@ export default function Description({ group = { id: null, title: "Inconnu" }, sp
             <CardTitle>Détail du paiement</CardTitle>
           </CardHeader>
           <CardContent className="grid gap-8">
+            <div className="grid gap-3">
+              <Label htmlFor="quantity">Quantité</Label>
+              <Input
+                id="quantity"
+                type="text"
+                value={quantity}
+                onChange={handleQuantityChange}
+              />
+            </div>
             <div className="grid grid-cols-2 gap-3">
               <div className="grid gap-3">
                 <Label htmlFor="travelOption">Option de voyage</Label>
@@ -357,7 +359,7 @@ export default function Description({ group = { id: null, title: "Inconnu" }, sp
                 )}
               </div>
               <div className="flex flex-col gap-2">
-                <Label htmlFor="arrivalCountry">Pays d'arrivée</Label>
+                <Label htmlFor="arrivalCountry">Pays d&apos;arrivée</Label>
                 <Controller
                   name="arrivalCountry"
                   control={control}
@@ -382,12 +384,7 @@ export default function Description({ group = { id: null, title: "Inconnu" }, sp
               <Label>Sélectionner une date</Label>
               <Calendar
                 date={date}
-                setDate={(newDate: Date | undefined) => {
-                  if (newDate) {
-                    setDate(newDate);
-                    setDates([newDate]);
-                  }
-                }}
+                setDate={handleDateChange}
                 showOutsideDays={true}
               />
             </div>

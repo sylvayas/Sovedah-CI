@@ -98,7 +98,7 @@ export default function DescriptionAllSpaces() {
              
         <div className="card-actions flex justify-center items-center  rounded-lg flex-wrap gap-2">
               <Link
-                href="/components/list-space"
+                href="/private_offices/list_space-vehicule"
                 className={cn(
                   buttonVariants(),
                   "gap-2 mt-2 overflow-hidden whitespace-pre group relative justify-center rounded-md transition-all duration-300 ease-out hover:ring-2 hover:ring-primary hover:ring-offset-2"
@@ -106,7 +106,7 @@ export default function DescriptionAllSpaces() {
               >
                 <span className="absolute right-0 -mt-12 h-32 w-8 translate-x-12 rotate-12 bg-white opacity-10 transition-all duration-1000 ease-out group-hover:-translate-x-40" />
                 <div className="flex items-center">
-                  <span className="ml-1">Commander</span>
+                  <span className="ml-1">Réservez</span>
                 </div>
               </Link>
             </div>

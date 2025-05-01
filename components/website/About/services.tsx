@@ -14,50 +14,51 @@ const datas: ({
   title?: string;
   description?: string;
 })[] = [
-    {
-      image:"/images/carrousel_images/general_trade (2).jpg",
-      type: "image"
-    },
-    {
-      title: "Avantage 1",
-      description: "Réduisez vos charges, minimisez vos coûts financiers et développez votre réseau professionnel.",
-      icon: Icons.network,
-      type: "text"
-    },
-    {
-      image: "/images/carrousel_images/booking_ticket (2).jpg",
-      type: "image"
-    },
-    {
-      title: "Avantage 2",
-      description: "Bénéficiez d'une adresse prestigieuse dans un immeuble neuf, moderne dans le quartier de Cocody. Bureaux très accessibles par différentes voies dont la Y4. Service de sécurité 24h/24 par une société de gardiennage agrée.",
-      icon: Icons.landPlot,
-      type: "text"
-    },
-    {
-      image: "/images/carrousel_images/cars_key.jpg",
-      type: "image"
-    },
-    {
-      title: "Avantage 3",
-      description: "Parking Visiteurs et Résidents disponible. Possibilité de se restaurer sur place (cuisine et cuisinier).",
-      icon: Icons.parking,
-      type: "text"
-    },
-    {
-      image: "/images/carrousel_images/un_concierge.jpg",
-      type: "image"
-    },
-    {
-      title: "Avantage 4",
-      description: "Ici, installez-vous à votre aise et dites aurevoir à la gestion des tracas d'une location de bureau classique en Côte-d'Ivoire et concentrez-vous sur votre activité.",
-      icon: Icons.laptop,
-      type: "text"
-    },
-    {
-      image: "/images/carrousel_images/influencer_happy.jpg",
-      type: "image"
-    },
+  {
+    image: "/images/carrousel_images/general_trade (2).jpg",
+    type: "image"
+  },
+  {
+    title: "Commerce Général",
+    description: "Accédez à une large gamme de produits et services grâce à notre réseau de partenaires fiables. Réduisez vos coûts et développez votre activité avec des solutions commerciales sur mesure.",
+    icon: Icons.network,
+    type: "text"
+  },
+  {
+    image: "/images/carrousel_images/booking_ticket (2).jpg",
+    type: "image"
+  },
+  {
+    title: "Réservation de Billets",
+    description: "Voyagez sans stress grâce à notre service de réservation rapide et sécurisé pour vos vols nationaux et internationaux. Gagnez du temps et partez en toute tranquillité.",
+    icon: Icons.plane,
+    type: "text"
+  },
+  {
+    image: "/images/carrousel_images/cars_key.jpg",
+    type: "image"
+  },
+  {
+    title: "Location de Voiture",
+    description: "Profitez d'une flotte de véhicules confortables et adaptés à vos besoins, avec des options flexibles pour tous vos déplacements professionnels ou personnels.",
+    icon: Icons.car,
+    type: "text"
+  },
+  {
+    image: "/images/carrousel_images/un_concierge.jpg",
+    type: "image"
+  },
+  {
+    title: "Conciergerie Professionnelle",
+    description: "Déléguez vos tâches logistiques et administratives à notre équipe de concierges. Concentrez-vous sur l’essentiel pendant que nous nous occupons du reste.",
+    icon: Icons.laptop,
+    type: "text"
+  },
+  {
+    image: "/images/carrousel_images/influencer_happy.jpg",
+    type: "image"
+  }
+  
   ]
 
 

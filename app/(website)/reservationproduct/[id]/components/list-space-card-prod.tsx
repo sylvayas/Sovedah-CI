@@ -17,7 +17,7 @@ import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import TitleSection from "@/components/title-section";
-import { AVANTAGES } from "@/components/offers/DescriptionAllSpaces";
+import { AVANTAGES } from "@/components/product/DescriptionAllSpacesprod";
 import Image from "next/image";
 
 // Interfaces
@@ -307,53 +307,34 @@ export default function ListeSpaceCardProd({
   return (
     <>
       {/* Product Section */}
-      <section className="container min-h-[300px] mb-14 relative mt-14">
+      <section className="container min-h-[200px] mb-14 relative mt-14">
         <div className="relative gap-8 items-center md:items-stretch py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6">
           <Image
-            className="w-full z-10 object-cover"
+            className="w-full z-10 object-cover max-w-[430px] max-h-[430px]"
             src={selectedProduct.image}
-            width={200}
-            height={200}
+            width={100}
+            height={100}
             alt={`${selectedProduct.title} image`}
           />
           <div className="mt-4 md:mt-0">
             <h2 className="mb-4 text-2xl md:text-4xl tracking-tight font-saudagar">
               {selectedProduct.title}
             </h2>
-            {selectedProduct.description ? (
+            {selectedProduct.description && (
               <div className="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">
-                <p>{selectedProduct.description.intro}</p>
-                <h3 className="mt-4 font-semibold">Pourquoi choisir ce produit ?</h3>
-                <ul className="list-disc pl-5">
+                <p className="mb-4">{selectedProduct.description.intro}</p>
+                <h3 className="text-base font-semibold mb-2">Pourquoi choisir ce produit ?</h3>
+                <ul className="list-disc pl-5 mb-4">
                   {selectedProduct.description.whyChoose.map((item, index) => (
                     <li key={index}>{item}</li>
                   ))}
                 </ul>
-                <div className="mt-4">
-                  {selectedProduct.description.pricing.map((price, index) => (
-                    <p key={index} className="font-bold">{price}</p>
-                  ))}
-                </div>
-                <p className="mt-4">{selectedProduct.description.callToAction}</p>
+                {selectedProduct.description.pricing.map((price, index) => (
+                  <p key={index} className="mb-2">{price}</p>
+                ))}
+                <p className="font-semibold">{selectedProduct.description.callToAction}</p>
               </div>
-            ) : (
-              <p className="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">
-                Aucune description disponible
-              </p>
             )}
-            {/* <Link
-              className={cn(
-                buttonVariants({ size: "sm" }),
-                "max-w-52 gap-2 overflow-hidden whitespace-pre",
-                "group relative w-full justify-center gap-2 rounded-md transition-all duration-300 ease-out hover:ring-2 hover:ring-primary hover:ring-offset-2"
-              )}
-              href="/reservation"
-            >
-              <span className="absolute right-0 -mt-12 h-32 w-8 translate-x-12 rotate-12 bg-white opacity-10 transition-all duration-1000 ease-out group-hover:-translate-x-40" />
-              <div className="flex items-center">
-                <span className="ml-1 text-sm sm:text-md">Réservez</span>
-              </div>
-            </Link> */}
           </div>
         </div>
       </section>
@@ -431,32 +412,38 @@ export default function ListeSpaceCardProd({
             </CardHeader>
             <CardContent className="grid gap-8">
               <div className="grid grid-cols-2 gap-3">
-              <div className="grid gap-3">
-                <Label htmlFor="quantity">Quantité</Label>
-                <Input
-                  id="quantity"
-                  type="number"
-                  min="1"
-                  defaultValue="1" // Valeur par défaut dans l'input
-                  {...register("quantity", { required: "La quantité est requise", min: { value: 1, message: "La quantité doit être supérieure à 0" } })}
-                  aria-invalid={errors.quantity ? "true" : "false"}
-                  onChange={(e) => setQuantity(e.target.value)}
-                />
-                {errors.quantity && <p role="alert" className="text-red-600 text-sm">{errors.quantity.message}</p>}
-              </div>
-                <div className="grid gap-3 w-full">
-                  <Label htmlFor="category">Type d'achat</Label>
+                <div className="grid gap-3">
+                  <Label htmlFor="quantity">Quantité</Label>
+                  <Input
+                    id="quantity"
+                    type="number"
+                    min="1"
+                    defaultValue="1"
+                    {...register("quantity", {
+                      required: "La quantité est requise",
+                      min: { value: 1, message: "La quantité doit être supérieure à 0" },
+                    })}
+                    aria-invalid={errors.quantity ? "true" : "false"}
+                    onChange={(e) => setQuantity(e.target.value)}
+                  />
+                  {errors.quantity && (
+                    <p role="alert" className="text-red-600 text-sm">
+                      {errors.quantity.message}
+                    </p>
+                  )}
+                </div>
+                <div className="grid gap-3">
+                  <Label htmlFor="category">Type d&apos;achat</Label>
                   <select
                     id="category"
                     {...register("category", { required: true })}
                     onChange={(e) => setCategory(e.target.value)}
-                    className="rounded-md border p-2"
+                    className="rounded-md border p-2 w-full"
                     value={category}
                   >
-                    <option value="">Sélectionner le type d'achat</option>
+                    <option value="">Sélectionner le type d&apos;achat</option>
                     <option value="Détail">Détails</option>
                     <option value="En gros">En gros</option>
-                    
                   </select>
                   {errors.category?.type === "required" && (
                     <p role="alert">La catégorie est requise</p>

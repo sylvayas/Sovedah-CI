@@ -10,9 +10,9 @@ export default function About() {
         <div className="grid grid-rows-2 gap-8 items-start w-full xl:w-3/4">
           <div className="flex gap-2 items-center">
             <Icons.logo className="size-24" />
-            <p className="md:text-xl"> <span className="font-saudagar">SOVEDAH CI</span> se charge de positionner votre entreprise au niveau de l&apos;Excellence grâce à vos bureaux.</p>
+            <p className="md:text-xl"> <span className="font-saudagar">SOVEDAH CI</span> votre partenaire vers l’Excellence.</p>
           </div>
-          <div>Dites au revoir aux espaces de travail traditionnels et vos tracas du quotidien pour votre immobilier d&apos;entreprise  !</div>
+          <div>Voyagez en toute sérénité avec notre service de réservation de billets d’avion, facilitez vos déplacements grâce à la location de voiture, optimisez vos affaires avec notre commerce général, et libérez-vous du stress grâce à notre conciergerie sur mesure.</div>
         </div>
         <div className="grid grid-rows-2 ">
           <p><span className="font-semibold text-3xl ">SOVEDAH CI</span> vous propose une gamme complète de services adaptés à vos besoins, incluant la réservation de billets d&apos;avion, 

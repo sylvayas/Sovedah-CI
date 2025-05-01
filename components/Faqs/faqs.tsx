@@ -12,10 +12,10 @@ export default function Faqs() {
     <section className="container min-h-[200px] py-14 relative">
       <div className="flex flex-col gap-4  md:gap-6">
         <h3 className="text-center font-saudagar text-2xl md:text-3xl text-novis_green">
-          Envie d&apos;en parler ? Nous sommes là pour vous !
+          Envie d&apos;e voyagez ou de disposer d&apos;un quelquonce services ? Nous sommes là pour vous !
         </h3>
-        <p className="text-sm text-novis_green text-center">Une création d&apos;entreprise ? Une installation d&apos;entreprise ? Un projet ? <br />
-          Parlons-en et trouvons ensemble les solutions qui vous conviennent !</p>
+        <p className="text-sm text-novis_green text-center">Un billet d&apos;avion ? des produits de qualités ? Un beau vehicule de location <br />
+          Parlons-en et trouvons ensemble ce qui vous conviennent !</p>
       </div>
       <div className="mt-12 flex flex-col items-center md:flex-row gap-4 md:gap-6 md:justify-evenly">
         <Link

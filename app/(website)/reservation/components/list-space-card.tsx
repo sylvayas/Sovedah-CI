@@ -201,7 +201,7 @@ export default function Description({ group = { id: null, title: "Inconnu" }, sp
         description: "Une erreur est survenue lors du paiement",
       });
     }
-  }, [paymentStatus, data, date, totalAmount, group.id, space.id]);
+  }, [paymentStatus, data, date, totalAmount, group.id, space.id,router]);
 
   return (
     <section className="container min-h-[300px] py-14 relative">
