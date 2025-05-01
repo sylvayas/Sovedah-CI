@@ -46,25 +46,7 @@ export const AVANTAGES = [
     image: "/images/produits&details/lilas-couches-adultes-large-15-pieces.webp",
   },
 
-  {
-    title: "Conforta protect medium",
-    description: {
-      intro: "Découvrez les couches adultes Conforta Protect – Taille Large, conçues pour offrir confort, sécurité et discrétion à ceux qui en ont le plus besoin",
-      whyChoose: [
-        "Haute absorption : restez au sec plus longtemps grâce à une technologie antifuite efficace.",
-        "Taille Large : convient parfaitement aux adultes ayant un tour de taille de 115 cm à 140 cm.",
-        "Confort optimal : une coupe anatomique et des matériaux doux pour la peau.",
-        "Praticité : paquet de 10 couches, idéal pour une utilisation quotidienne.",
-        "Conforta, c’est la confiance retrouvée, de jour comme de nuit."
-      ],
-      pricing: [
-        "PU : 6000 FCFA",
-        "A partir de 4 parquets : 5500 FCFA",
-      ],
-      callToAction: "Commandez maintenant pour une douceur au quotidien !",
-    },
-    image: "/images/produits&details/conforta.jpg",
-  },
+
 
   // Add other products with similar structured descriptions
   {
@@ -106,26 +88,7 @@ export const AVANTAGES = [
       },
     image: "/images/produits&details/essuie-tout.jpg",
   },
-  {
-    title: "Conforta clip super",
-    description: {
-      intro: "Découvrez les serviettes Conforta Micro-aérée, conçues pour répondre à tous vos besoins avec 3 niveaux de protection adaptés à chaque moment du cycle :",
-      whyChoose: [
-        "Clip Super (9 pièces) : Pour les jours de flux abondant. Absorption renforcée et sécurité maximale.",
-        "Points forts :",
-        "Technologie Zone Bleue pour une absorption ciblée",
-        "Texture micro-aérée pour une meilleure respirabilité",
-        "Confort garanti sans sensation d’humidité",
-        "Emballage pratique et hygiénique",
-      ],
-      pricing: [
-        "PU : 650 FCFA",
-        "A partir 24 parquets : 550 FCFA",
-      ],
-      callToAction: "Commandez maintenant pour une douceur au quotidien !",
-    },
-    image: "/images/produits&details/conf.jpeg",
-  },
+ 
 
   {
     title: "Conforta ultra doux texture spéciale",
@@ -312,26 +275,7 @@ export const AVANTAGES = [
       },
     image: "/images/produits&details/clean2.jpeg",
   },
-//   {
-//     title: "Masque de sommeil",
-//     description: "Masque de sommeil pour un voyage confortable.",
-//     image: "/images/accessoire_voyage/Masque de sommeil occultant 2.avif",
-//   },
-//   {
-//     title: "Valise cabine",
-//     description: "Valise cabine pour voyages légers.",
-//     image: "/images/accessoire_voyage/Valises cabine 2.jpg",
-//   },
-//   {
-//     title: "Sac à dos",
-//     description: "Sac à dos de voyage robuste.",
-//     image: "/images/accessoire_voyage/Sacs à dos de voyage 3.webp",
-//   },
-//   {
-//     title: "Coussin de voyage",
-//     description: "Coussin de voyage ergonomique.",
-//     image: "/images/accessoire_voyage/Coussin de voyage ergonomique 2.jpg",
-//   },
+
 
   
 ];

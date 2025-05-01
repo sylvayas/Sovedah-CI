@@ -3,7 +3,7 @@ import Hero from "@/components/space/Hero";
 import Description from "@/components/space/Description";
 import { espaces } from '@/config/data';
 import { group } from 'console';
-import SpaceStates from '../components/space-states';
+
 
 export default async function ItemSpace({
   params,
@@ -27,7 +27,7 @@ export default async function ItemSpace({
         <div>
             <Hero/>
             <Description group={group} space={item}/>
-            <SpaceStates/>
+            
         </div>
     );
 }
