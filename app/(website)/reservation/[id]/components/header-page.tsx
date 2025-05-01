@@ -1,7 +1,7 @@
 import { Icons } from "@/components/icons";
 import NumberTicker from "@/components/magicui/number-ticker";
 import Image from "next/image";
-import imgback from "@/public/images/coworking/coworking (1).jpg";
+import imgback from "@/public/images/carrousel_images/coworking (1).jpg";
 
 export default function HeaderPage() {
   return (
