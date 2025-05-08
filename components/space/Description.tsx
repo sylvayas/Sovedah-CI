@@ -132,7 +132,7 @@ export default function Description({ group = { id: null, title: "Inconnu" }, sp
           },
           body: JSON.stringify({
             subject: "Demande de réservation Sovedah-CI",
-            to: [data.email, "medesse.allao@sovedahci.com"],
+            to: [data.email, "INFOS@sovedahci.com"],
             emailData: {
               coworkingName: space.title,
               category: group.title,
@@ -174,10 +174,9 @@ export default function Description({ group = { id: null, title: "Inconnu" }, sp
       }, 300),
     []
   );
-
   const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    debouncedSetQuantity(value);
+    setQuantity(value); // Directly update the state
   };
 
   useEffect(() => {
@@ -185,7 +184,7 @@ export default function Description({ group = { id: null, title: "Inconnu" }, sp
       debouncedSetQuantity.cancel(); // Clean up debounce on component unmount
     };
   }, [debouncedSetQuantity]);
-  
+
   const handleDateChange = (newDate: Date | undefined) => {
     if (newDate && newDate.getTime() !== date?.getTime()) {
       setDate(newDate);
@@ -293,14 +292,18 @@ export default function Description({ group = { id: null, title: "Inconnu" }, sp
             <CardTitle>Détail du paiement</CardTitle>
           </CardHeader>
           <CardContent className="grid gap-8">
-            <div className="grid gap-3">
+                      <div className="grid gap-3">
               <Label htmlFor="quantity">Quantité</Label>
               <Input
                 id="quantity"
                 type="text"
-                value={quantity}
-                onChange={handleQuantityChange}
+                {...register("quantity", { required: "Quantité requise" })}
+                onChange={(e) => {
+                  handleQuantityChange(e);
+                  register("quantity").onChange(e); // Ensure form state is updated
+                }}
               />
+              {errors.quantity && <p role="alert" className="text-red-600 text-sm">{errors.quantity.message}</p>}
             </div>
             <div className="grid grid-cols-2 gap-3">
               <div className="grid gap-3">

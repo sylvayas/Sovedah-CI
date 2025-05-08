@@ -88,7 +88,7 @@ const babyProducts: Product[] = [
       pricing: ["PU : 15000 FCFA"],
       callToAction: "Idéal pour les aventuriers !",
     },
-    src: "/images/accessoire_voyage/Sacs à dos de voyage 3.webp",
+    src: "/images/accessoire_voyage/Sacsàdosdevoyage.jpg",
   },
   {
     id: "2",
@@ -215,26 +215,12 @@ export default function DescriptionAllSpaces() {
                       fill
                       sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
                       className="object-cover transition-transform duration-500 group-hover:scale-110"
-                      priority={product.title === "Conforta Lingettes Bébé – Ultra Doux"} // Priorité pour Conforta
+                      priority={product.title === "Conforta Lingettes Bébé – Ultra Doux"}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
                       <div className="p-3 text-white">
                         <h3 className="font-medium text-sm">{product.title}</h3>
                         {product.date && <p className="text-xs text-white/80">{product.date}</p>}
-                        <Link
-                          className={cn(
-                            buttonVariants(),
-                            "max-w-32 md:max-w-48 gap-2 overflow-hidden whitespace-pre",
-                            "group relative w-full justify-center gap-2 rounded-md transition-all duration-300 ease-out hover:ring-2 hover:ring-primary hover:ring-offset-2"
-                          )}
-                          href={getProductLink(product)}
-                        >
-                          <span className="absolute right-0 -mt-12 h-32 w-8 translate-x-12 rotate-12 bg-white opacity-10 transition-all duration-1000 ease-out group-hover:-translate-x-40" />
-                          <div className="flex items-center">
-                            <Icons.calendar className="size-4" />
-                            <span className="ml-1 text-sm sm:text-md">Allez à la boutique</span>
-                          </div>
-                        </Link>
                       </div>
                     </div>
                   </div>
@@ -266,20 +252,6 @@ export default function DescriptionAllSpaces() {
                       <div className="p-3 text-white">
                         <h3 className="font-medium text-sm">{product.title}</h3>
                         {product.date && <p className="text-xs text-white/80">{product.date}</p>}
-                        <Link
-                          className={cn(
-                            buttonVariants(),
-                            "max-w-32 md:max-w-48 gap-2 overflow-hidden whitespace-pre",
-                            "group relative w-full justify-center gap-2 rounded-md transition-all duration-300 ease-out hover:ring-2 hover:ring-primary hover:ring-offset-2"
-                          )}
-                          href={getProductLink(product)}
-                        >
-                          <span className="absolute right-0 -mt-12 h-32 w-8 translate-x-12 rotate-12 bg-white opacity-10 transition-all duration-1000 ease-out group-hover:-translate-x-40" />
-                          <div className="flex items-center">
-                            <Icons.calendar className="size-4" />
-                            <span className="ml-1 text-sm sm:text-md">Allez à la boutique</span>
-                          </div>
-                        </Link>
                       </div>
                     </div>
                   </div>
@@ -289,9 +261,9 @@ export default function DescriptionAllSpaces() {
           </TabsContent>
         </Tabs>
       </div>
-{/* 
+
       {selectedImage && (
-        <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center">
+        <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
           <button
             className="absolute top-4 right-4 text-white p-2 rounded-full bg-black/50 hover:bg-black/70"
             onClick={closeLightbox}
@@ -300,22 +272,62 @@ export default function DescriptionAllSpaces() {
             <X className="h-6 w-6" />
           </button>
           <button
-            className="absolute left-4 text-white p-2 rounded-full bg-black/50 hover:bg-black/70me/70"
+            className="absolute left-4 text-white p-2 rounded-full bg-black/50 hover:bg-black/70"
             onClick={goToPrevious}
             aria-label="Image précédente"
           >
             <ChevronLeft className="h-6 w-6" />
           </button>
-          <div className="relative w-full max-w-4xl h-[80vh]">
-            <Image
-              src={selectedImage.src || "/placeholder.svg"}
-              alt={selectedImage.title}
-              fill
-              className="object-contain"
-            />
-            <div className="absolute bottom-0 left-0 right-0 bg-black/70 p-4 text-white">
-              <h3 className="font-bold">{selectedImage.title}</h3>
-              {selectedImage.date && <p className="text-sm text-white/80">{selectedImage.date}</p>}
+          <div className="relative w-full max-w-4xl h-[80vh] flex flex-col md:flex-row gap-4">
+            <div className="relative w-full md:w-1/2 h-[40vh] md:h-full">
+              <Image
+                src={selectedImage.src || "/placeholder.svg"}
+                alt={selectedImage.title}
+                fill
+                className="object-contain"
+              />
+            </div>
+            <div className="w-full md:w-1/2 bg-black/70 p-6 text-white overflow-y-auto">
+              <h3 className="font-bold text-xl mb-2">{selectedImage.title}</h3>
+              {selectedImage.date && <p className="text-sm text-white/80 mb-4">{selectedImage.date}</p>}
+              <div className="text-sm space-y-4">
+                {typeof selectedImage.description === "string" ? (
+                  <p>{selectedImage.description}</p>
+                ) : (
+                  <>
+                    <p>{selectedImage.description.intro}</p>
+                    <div>
+                      <h4 className="font-semibold">Pourquoi choisir ce produit ?</h4>
+                      <ul className="list-disc pl-5">
+                        {selectedImage.description.whyChoose.map((item, index) => (
+                          <li key={index}>{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold">Tarification</h4>
+                      <ul className="list-disc pl-5">
+                        {selectedImage.description.pricing.map((item, index) => (
+                          <li key={index}>{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                    <p>{selectedImage.description.callToAction}</p>
+                  </>
+                )}
+              </div>
+              <Link
+                className={cn(
+                  buttonVariants(),
+                  "mt-4 inline-flex items-center gap-2",
+                  "group relative justify-center rounded-md transition-all duration-300 ease-out hover:ring-2 hover:ring-primary hover:ring-offset-2"
+                )}
+                href={getProductLink(selectedImage)}
+              >
+                <span className="absolute right-0 -mt-12 h-32 w-8 translate-x-12 rotate-12 bg-white opacity-10 transition-all duration-1000 ease-out group-hover:-translate-x-40" />
+                <Icons.calendar className="size-4" />
+                <span>Allez à la boutique</span>
+              </Link>
             </div>
           </div>
           <button
@@ -326,8 +338,7 @@ export default function DescriptionAllSpaces() {
             <ChevronRight className="h-6 w-6" />
           </button>
         </div>
-      )} */}
-
+      )}
     </div>
   );
 }

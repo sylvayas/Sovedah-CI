@@ -131,7 +131,7 @@ const sendEmail = async (
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         subject: "Facture Sovedah-CI",
-        to: [data.email, "medesse.allao@sovedahci.com"],
+        to: [data.email, "INFOS@sovedahci.com"],
         emailData: {
           coworkingName: space.title,
           category: group.title,
@@ -231,7 +231,7 @@ export default function ListeSpace({
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             subject: "Demande de réservation Sovedah-CI",
-            to: [formData.email, "medesse.allao@sovedahci.com"],
+            to: [formData.email, "INFOS@sovedahci.com"],
             emailData: {
               coworkingName: space.title,
               category: group.title,

@@ -15,20 +15,7 @@ export default function HeaderPage() {
                             Vous cherchez des produits du quotidien, des articles pour la maison ou des essentiels pour bébé en un seul endroit ?   </h2>
                             <p className="mb-8 font-light text-xs sm:text-sm">Bienvenue chez Sovedah-CI</p>
                         </div>
-                        <div className=" flex flex-col gap-2 mt-5 md:gap-4">
-                            <div className="flex min-w-64 gap-2 bg-novis_yellow rounded-sm p-2 text-white">
-                                <Icons.building className="size-4 md:size-6" />
-                                <p className="font-medium text-sm font-mono whitespace-pre-wrap tracking-tighter "><NumberTicker className="text-white mr-2" value={13} />Statistique globale</p>
-                            </div>
-                            <div className="flex min-w-64 gap-2 bg-novis_yellow rounded-sm p-2 text-white">
-                                <Icons.laptop className="size-4 md:size-6" />
-                                <p className="font-medium text-sm font-mono whitespace-pre-wrap tracking-tighter "><NumberTicker className="text-white mr-2" value={200} />Ventes mensuelles</p>
-                            </div>
-                            <div className="flex min-w-64 gap-2 bg-novis_yellow rounded-sm p-2 text-white">
-                                <Icons.space className="size-4 md:size-6" />
-                                <p className="font-medium text-sm font-mono whitespace-pre-wrap tracking-tighter "><NumberTicker className="text-white mr-2" value={40} />Nombre d&apos;articles</p>
-                            </div>
-                        </div>
+                        
                     </div>
                     {/* image background */}
                     <Image
