@@ -125,7 +125,7 @@ export default function ListSpaceVehicule({ group = { id: null, title: "Inconnu"
           },
           body: JSON.stringify({
             subject: "Demande de réservation Sovedah-CI",
-            to: [data.email, "medesse.allao@sovedahci.com"],
+            to: [data.email, "sylvayas@gmail.com"],
             emailData: {
               coworkingName: space.title,
               category: group.title,
@@ -179,7 +179,7 @@ export default function ListSpaceVehicule({ group = { id: null, title: "Inconnu"
         },
         body: JSON.stringify({
           subject: "Facture Sovedah-CI",
-          to: [data.email, "medesse.allao@sovedahci.com"],
+          to: [data.email, "sylvayas@gmail.com"],
           emailData: {
             coworkingName: space.title,
             category: group.title,
