@@ -40,7 +40,7 @@ export const InvoiceEmail: React.FC<EmailData> = ({
 }) => (
   <Html>
     <Head />
-    <Preview>Facture pour votre réservation chez Novis Coworking</Preview>
+    <Preview>Facture pour votre réservation chez Sovedah ci</Preview>
     <Body style={main}>
       <Container style={container}>
         <Img
@@ -59,8 +59,7 @@ export const InvoiceEmail: React.FC<EmailData> = ({
             alt={coworkingName}
             style={coworkingImg}
           />
-          <Text style={text}>Nom du coworking : {coworkingName}</Text>
-          <Text style={text}>Catégorie : {category}</Text>
+          <Text style={text}>Nom : {coworkingName}</Text>
           <Text style={text}>Lieu : {location}</Text>
           <Text style={text}>Client : {clientName}</Text>
           <Text style={text}>Email : {clientEmail}</Text>

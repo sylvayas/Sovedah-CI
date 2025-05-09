@@ -116,7 +116,7 @@ export default function Description({ group = { id: null, title: "Inconnu" }, sp
           },
           body: JSON.stringify({
             subject: "Demande de réservation Sovedah-CI",
-            to: [data.email, "medesse.allao@sovedahci.com"],
+            to: [data.email, "INFOS@sovedahci.com"],
             emailData: {
               coworkingName: space.title,
               category: group.title,
@@ -168,7 +168,7 @@ export default function Description({ group = { id: null, title: "Inconnu" }, sp
         },
         body: JSON.stringify({
           subject: "Facture Sovedah-CI",
-          to: [data.email, "medesse.allao@sovedahci.com"],
+          to: [data.email, "INFOS@sovedahci.com"],
           emailData: {
             coworkingName: space.title,
             category: group.title,
