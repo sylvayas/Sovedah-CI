@@ -136,13 +136,25 @@ export default function DescriptionAllSpacesprod() {
               className="card bg-base-100 shadow-md transition-transform transform hover:scale-[1.02] hover:shadow-md cursor-pointer w-full h-full"
             >
               <figure className="px-5 pt-5">
-                <Image
-                  src={avantage.image}
-                  alt={avantage.title}
-                  className="rounded-xl object-cover w-full h-56"
-                  width={400}
-                  height={400}
-                />
+               
+
+                 <Link 
+                    href={{
+                      pathname: "/reservationproduct/",
+                      query: {
+                        title: encodeURIComponent(avantage.title),
+                        image: encodeURIComponent(avantage.image),
+                      },
+                    }}
+                  >
+                     <Image
+                      src={avantage.image}
+                      alt={avantage.title}
+                      className="rounded-xl object-cover w-full h-56"
+                      width={400}
+                      height={400}
+                    />
+                  </Link>
               </figure>
               <div className="card-body items-center mt-5 text-center">
                 <h2 className="card-title mb-5">{avantage.title}</h2>

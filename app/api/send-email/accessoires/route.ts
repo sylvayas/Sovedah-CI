@@ -1,7 +1,7 @@
 // /api/send-email/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import { sendEmail } from "@/services/sendEmail";
-import FormulaEmail from "@/emails/formula-email";
+import AccessoiresEmail from "@/emails/accessoires-email";
 
 export async function POST(request: NextRequest) {
   try {
@@ -51,7 +51,6 @@ export async function POST(request: NextRequest) {
       clientAdresse: emailData.clientAdresse,
       date: emailData.date,
       quantity: emailData.quantity,
-      category: emailData.category || "Détail", // Valeur par défaut pour Accessoires de voyage
       productTitle: emailData.productTitle,
       productDescription: emailData.productDescription || "",
     };
@@ -59,7 +58,7 @@ export async function POST(request: NextRequest) {
     await sendEmail({
       subject,
       to,
-      react: FormulaEmail(filteredEmailData),
+      react: AccessoiresEmail(filteredEmailData),
     });
 
     return NextResponse.json(
@@ -80,4 +79,3 @@ export async function POST(request: NextRequest) {
 
 
 }
-

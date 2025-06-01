@@ -1,3 +1,4 @@
+
 import React from "react";
 import {
   Body,
@@ -10,19 +11,17 @@ import {
   Section,
   Text,
 } from "@react-email/components";
-import { FormulaEmailData } from "@/types";
+import { AccessoiresData } from "@/types";
 
-export const FormulaEmail: React.FC<FormulaEmailData> = ({
+export const FormulaEmail: React.FC<AccessoiresData> = ({
   clientName = "Non spécifié",
   clientEmail = "Non spécifié",
   clientPhone = "Non spécifié",
   clientAdresse = "Non spécifié",
   date = "Non spécifié",
   quantity = "Non spécifié",
-  category = "Non spécifié",
   productTitle = "Non spécifié",
   productDescription = "",
-  productType = "accessoire", // Valeur par défaut
 }) => {
   // Validation pour productTitle
   if (!productTitle || productTitle === "Non spécifié") {
@@ -53,9 +52,6 @@ export const FormulaEmail: React.FC<FormulaEmailData> = ({
             <Text style={text}>Email : {clientEmail}</Text>
             <Text style={text}>Téléphone : {clientPhone}</Text>
             <Text style={text}>Adresse : {clientAdresse}</Text>
-            {productType === "hygiene" && ( // Afficher catégorie seulement pour les produits d'hygiène
-              <Text style={text}>Catégorie : {category}</Text>
-            )}
             <Text style={text}>Quantité : {quantity}</Text>
             <Text style={text}>Date de la commande : {date}</Text>
           </Section>

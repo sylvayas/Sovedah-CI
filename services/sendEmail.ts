@@ -1,3 +1,4 @@
+
 "use server";
 
 import { Resend } from "resend";
@@ -14,21 +15,33 @@ export async function sendEmail({
   react: JSX.Element | React.ReactNode;
 }) {
   try {
-    const { data, error } = await resend.emails.send({
-      from: "INFOS@sovedahci.com",
-      to: to,
-      subject: subject,
-      react: react,
-    });
-
-    if (error) {
-      // Vérifiez si 'error' a une propriété 'message'
-      throw new Error(error.message || "Erreur lors de l'envoi de l'email");
+    if (!process.env.RESEND_API_KEY) {
+      throw new Error("RESEND_API_KEY is not set");
     }
 
-    console.log("Email envoyé avec succès:", data);
-  } catch (error) {
-    console.error("Erreur lors de l'envoi de l'email", error);
-    throw error; // Relancer l'erreur pour qu'elle soit capturée par l'appelant
+    // Valider les adresses email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const toArray = Array.isArray(to) ? to : [to];
+    for (const email of toArray) {
+      if (!emailRegex.test(email)) {
+        throw new Error(`Invalid email address: ${email}`);
+      }
+    }
+
+    console.log("Sending email to:", to, "with subject:", subject);
+    console.log("From address:", "Sovedah CI <no-reply@sovedah-ci.com>");
+
+    const data = await resend.emails.send({
+      from: "Sovedah CI <no-reply@sovedah-ci.com>", // Remplace par ton domaine vérifié
+      to: ["sylvayas@gmail.com"],
+      subject : "Test",
+      react,
+    });
+
+    console.log("Email sent successfully:", data);
+    return data;
+  } catch (error: any) {
+    console.error("Error sending email:", error.message, error.stack);
+    throw new Error(`Failed to send email: ${error.message}`);
   }
 }

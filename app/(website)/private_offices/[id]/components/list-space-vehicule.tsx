@@ -297,7 +297,7 @@ export default function ListSpaceVehicule({ group = { id: null, title: "Inconnu"
                   <option value="Mitsubishi Mirage G4">Mitsubishi Mirage G4</option>
                   <option value="Chevrolet Malibu Specs">Chevrolet Malibu Specs</option>
                   <option value="Toyota Corolla Hybrid Buyer's">Toyota Corolla Hybrid Buyer&apos;s</option>
-                  <option value="Mini Cooper ConvertileReview"></option>
+                  <option value="Mini Cooper Convertile Review">Mini Cooper Convertible Review</option>
                 </select>
                 {errors.modele && <p role="alert" className="text-red-600 text-sm">{errors.modele.message}</p>}
               </div>

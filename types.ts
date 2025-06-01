@@ -46,3 +46,28 @@ interface List_SpaceCard {
     id: string,
     items: I_SpaceCard[];
 }
+
+export interface FormulaEmailData {
+  clientName: string;
+  clientEmail: string;
+  clientPhone: string;
+  clientAdresse: string;
+  date: string;
+  category: string;
+  quantity:string;
+  productTitle:string;
+  productDescription:string;
+
+}
+
+export interface AccessoiresData {
+  clientName: string;
+  clientEmail: string;
+  clientPhone: string;
+  clientAdresse: string;
+  date: string;
+  quantity:string;
+  productTitle:string;
+  productDescription:string;
+
+}
