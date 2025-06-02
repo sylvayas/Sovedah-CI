@@ -1,18 +1,21 @@
+
 "use client";
 
-import TitleSection from "@/components/title-section";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { useRouter } from "next/navigation";
 import { ArrowUpRight } from "lucide-react";
+import dayjs from "dayjs";
+import { toast } from "sonner";
+import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from "@headlessui/react";
+import TitleSection from "@/components/title-section";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Calendar } from "@/components/ui/calendar";
-import { useForm, SubmitHandler } from "react-hook-form";
 import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
-import dayjs from "dayjs";
-import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from "@headlessui/react";
 
+// Interfaces
 interface IFormInput {
   name: string;
   email: string;
@@ -23,22 +26,75 @@ interface IFormInput {
   date: Date | undefined;
 }
 
-export default function Description({
-  group = { id: null, title: "Inconnu" },
-  space = { id: null, title: "Inconnu", adresse: "Inconnue" },
-}: {
-  group?: any;
-  space?: any;
-}) {
-  const [date, setDate] = useState<Date | undefined>(new Date(2025, 3, 17)); // 17 avril 2025
-  const [open, setOpen] = useState(false); // State for dialog visibility
-  const [isSubmitting, setIsSubmitting] = useState(false); // State for submission status
+// Utility Functions
+const formatDate = (date: Date | undefined): string => {
+  return date ? dayjs(date).format("YYYY-MM-DD") : "";
+};
+
+// Send email function
+const sendEmail = async (
+  data: IFormInput,
+  date: Date | undefined,
+  router: ReturnType<typeof useRouter>
+) => {
+  try {
+    const emailData = {
+      clientName: data.name,
+      clientEmail: data.email,
+      clientPhone: data.phone,
+      clientAdresse: data.adressepostale,
+      date: formatDate(date),
+      priceType: `${data.quantity} ${data.category}`,
+    };
+
+    const response = await fetch("/api/send-email/accessoires", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        subject: "Demande de réservation Sovedah-CI",
+        to: [data.email, "INFOS@sovedahci.com"],
+        emailData,
+      }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Failed to send email");
+    }
+
+    // Navigate to recap page
+    router.push(
+      `/recap/accessoires/?type=reservation&name=${encodeURIComponent(
+        data.name
+      )}&email=${encodeURIComponent(data.email)}&phone=${encodeURIComponent(
+        data.phone
+      )}&adressepostale=${encodeURIComponent(data.adressepostale)}&date=${formatDate(
+        date
+      )}&quantity=${encodeURIComponent(data.quantity)}&category=${encodeURIComponent(
+        data.category
+      )}`
+    );
+  } catch (error: any) {
+    toast.error("Erreur", {
+      description: error.message || "Une erreur est survenue lors de l'envoi de la demande",
+    });
+    throw error;
+  }
+};
+
+// Main Component
+export default function Description() {
+  const router = useRouter();
+  const [date, setDate] = useState<Date | undefined>(new Date(2025, 3, 17));
+  const [open, setOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
     reset,
+    setValue,
   } = useForm<IFormInput>({
     mode: "onChange",
     defaultValues: {
@@ -46,10 +102,13 @@ export default function Description({
     },
   });
 
-  const onSubmit: SubmitHandler<IFormInput> = async (data, event) => {
-    // Prevent default form submission behavior to ensure no navigation occurs
-    event?.preventDefault();
+  // Update form date when state changes
+  useEffect(() => {
+    setValue("date", date);
+  }, [date, setValue]);
 
+  const onSubmit: SubmitHandler<IFormInput> = async (data, event) => {
+    event?.preventDefault();
     if (!date) {
       toast.error("Erreur", {
         description: "Veuillez sélectionner une date",
@@ -57,69 +116,30 @@ export default function Description({
       return;
     }
 
-    setIsSubmitting(true); // Disable button during submission
+    setIsSubmitting(true);
     try {
-      const emailData = {
-        location: space.adresse || "Inconnue",
-        clientName: data.name,
-        clientEmail: data.email,
-        clientPhone: data.phone,
-        clientAdresse: data.adressepostale,
-        date: dayjs(date).format("YYYY-MM-DD"),
-        priceType: `${data.quantity} ${data.category}`,
-      };
-
-      console.log("Sending email with data:", {
-        subject: "Demande de réservation Sovedah-CI",
-        to: [data.email, "INFOS@sovedahci.com"],
-        emailData,
-      });
-
-      const response = await fetch("/api/send-email", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          subject: "Demande de réservation Sovedah-CI",
-          to: [data.email, "INFOS@sovedahci.com"],
-          emailData,
-        }),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.details || "Échec de l'envoi de l'email");
-      }
-
-      // Show success modal and toast
+      await sendEmail(data, date, router);
       setOpen(true);
       toast.success("Succès", {
         description: "Votre demande de réservation a été envoyée avec succès !",
       });
-      reset(); // Reset form fields
-      setDate(new Date(2025, 3, 17)); // Reset date to default
-    } catch (error: any) {
-      console.error("Erreur dans onSubmit:", error.message, error.stack);
-      toast.error("Erreur", {
-        description: error.message || "Une erreur est survenue lors de l'envoi de la demande",
-      });
+      reset();
+      setDate(new Date(2025, 3, 17));
+    } catch (error) {
+      // Error handling is done in sendEmail
     } finally {
-      setIsSubmitting(false); // Re-enable button
+      setIsSubmitting(false);
     }
-  };
-
-  const formatDate = (date: Date | undefined): string => {
-    return date ? dayjs(date).format("YYYY-MM-DD") : "";
   };
 
   return (
     <section className="container min-h-[300px] py-14 relative">
-      <TitleSection title={"Détail de réservation"} />
+      <TitleSection title="Détail de réservation" />
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="grid gap-4 md:gap-8 lg:grid-cols-2 mt-4"
       >
+        {/* Personal Information */}
         <div className="relative flex-col items-start gap-8 flex">
           <div className="grid w-full items-start gap-6">
             <div className="grid gap-6 rounded-lg border p-4">
@@ -132,7 +152,11 @@ export default function Description({
                   {...register("name", { required: "Nom & Prénom sont requis" })}
                   aria-invalid={errors.name ? "true" : "false"}
                 />
-                {errors.name && <p role="alert" className="text-red-600 text-sm">{errors.name.message}</p>}
+                {errors.name && (
+                  <p role="alert" className="text-red-600 text-sm">
+                    {errors.name.message}
+                  </p>
+                )}
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div className="grid gap-3">
@@ -149,7 +173,11 @@ export default function Description({
                     })}
                     aria-invalid={errors.email ? "true" : "false"}
                   />
-                  {errors.email && <p role="alert" className="text-red-600 text-sm">{errors.email.message}</p>}
+                  {errors.email && (
+                    <p role="alert" className="text-red-600 text-sm">
+                      {errors.email.message}
+                    </p>
+                  )}
                 </div>
                 <div className="grid gap-3">
                   <Label htmlFor="phone">Téléphone</Label>
@@ -165,7 +193,11 @@ export default function Description({
                     })}
                     aria-invalid={errors.phone ? "true" : "false"}
                   />
-                  {errors.phone && <p role="alert" className="text-red-600 text-sm">{errors.phone.message}</p>}
+                  {errors.phone && (
+                    <p role="alert" className="text-red-600 text-sm">
+                      {errors.phone.message}
+                    </p>
+                  )}
                 </div>
               </div>
               <div className="grid gap-3">
@@ -176,11 +208,17 @@ export default function Description({
                   {...register("adressepostale", { required: "Adresse postale est requise" })}
                   aria-invalid={errors.adressepostale ? "true" : "false"}
                 />
-                {errors.adressepostale && <p role="alert" className="text-red-600 text-sm">{errors.adressepostale.message}</p>}
+                {errors.adressepostale && (
+                  <p role="alert" className="text-red-600 text-sm">
+                    {errors.adressepostale.message}
+                  </p>
+                )}
               </div>
             </div>
           </div>
         </div>
+
+        {/* Reservation Details */}
         <Card>
           <CardHeader>
             <CardTitle>Détail de la réservation</CardTitle>
@@ -199,7 +237,11 @@ export default function Description({
                 })}
                 aria-invalid={errors.quantity ? "true" : "false"}
               />
-              {errors.quantity && <p role="alert" className="text-red-600 text-sm">{errors.quantity.message}</p>}
+              {errors.quantity && (
+                <p role="alert" className="text-red-600 text-sm">
+                  {errors.quantity.message}
+                </p>
+              )}
             </div>
             <div className="grid gap-3">
               <Label htmlFor="category">Catégorie</Label>
@@ -210,7 +252,11 @@ export default function Description({
                 {...register("category", { required: "Catégorie est requise" })}
                 aria-invalid={errors.category ? "true" : "false"}
               />
-              {errors.category && <p role="alert" className="text-red-600 text-sm">{errors.category.message}</p>}
+              {errors.category && (
+                <p role="alert" className="text-red-600 text-sm">
+                  {errors.category.message}
+                </p>
+              )}
             </div>
             <div className="grid gap-3">
               <Label>Sélectionner une date</Label>
