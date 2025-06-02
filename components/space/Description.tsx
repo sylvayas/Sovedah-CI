@@ -334,7 +334,7 @@ export default function Description() {
                 )}
               </div>
               <div className="flex flex-col gap-2">
-                <Label htmlFor="arrivalCountry">Pays d'arrivée</Label>
+                <Label htmlFor="arrivalCountry">Pays d&apos;arrivée</Label>
                 <Controller
                   name="arrivalCountry"
                   control={control}
@@ -357,7 +357,7 @@ export default function Description() {
             </div>
             <div className="grid grid-cols-2 gap-3">
               <div className="grid gap-3">
-                <Label>Date d'aller</Label>
+                <Label>Date d&apos;aller</Label>
                 <Controller
                   name="departureDate"
                   control={control}
