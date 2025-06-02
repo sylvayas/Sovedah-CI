@@ -60,7 +60,7 @@ export const FormulaEmail: React.FC<FormulaEmailData> = ({
           <Section style={footerSection}>
             <Text style={footerText}>
               Merci de faire confiance à Sovedah CI. 
-              Nous vous contacterons prochainement pour finaliser votre réservation.
+              Votre commande est en cours de traitement. Nous vous contacterons a l&apos;instant pour finaliser votre réservation.
             </Text>
           </Section>
         </Container>
