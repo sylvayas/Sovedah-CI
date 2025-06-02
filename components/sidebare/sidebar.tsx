@@ -22,18 +22,19 @@ export default function Sidebar() {
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
+       <div className="md:hidden">
+        <Icons.logo_rogner className="mr-2 w-20" />
+      </div>
       <SheetTrigger asChild>
         <Button
           variant="ghost"
-          className="mr-4 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 xl:hidden"
+          className="mr-4 px-0 mt-7 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 xl:hidden"
         >
           <MenuIcon className="size-6" />
           <span className="sr-only">Toggle Menu</span>
         </Button>
       </SheetTrigger>
-      <div className="md:hidden">
-        <Icons.logo_rogner className="mr-2 w-20" />
-      </div>
+     
       <SheetContent side="left" className="px-2">
         <SheetHeader>
           <div className="md:hidden">
