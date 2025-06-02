@@ -1,4 +1,3 @@
-
 "use client";
 
 import TitleSection from "@/components/title-section";
@@ -34,14 +33,15 @@ interface IFormInput {
   passengerCount: string;
   departureCountry: string;
   arrivalCountry: string;
-  dates: Date[];
+  departureDate: Date;
+  returnDate?: Date; // Optional return date
 }
 
 export default function Description() {
-  const [dates, setDates] = useState<Date[]>([]);
+  const [departureDate, setDepartureDate] = useState<Date | undefined>(undefined);
+  const [returnDate, setReturnDate] = useState<Date | undefined>(undefined);
   const [quantity, setQuantity] = useState<string>("");
   const [data, setData] = useState<any>();
-  const [date, setDate] = useState<Date | undefined>(undefined);
   const [isLoading, setIsLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -62,8 +62,7 @@ export default function Description() {
 
   // Initialize client-side
   useEffect(() => {
-    setDate(new Date(2025, 3, 17));
-    setDates([new Date(2025, 3, 17)]);
+    setDepartureDate(new Date(2025, 3, 17));
     setIsLoading(false);
   }, []);
 
@@ -96,7 +95,8 @@ export default function Description() {
             sexe: data.sexe,
             typePiece: data.CNI,
             numeroPiece: data.numerodocument,
-            date: formatDates(dates),
+            departureDate: dayjs(data.departureDate).format("YYYY-MM-DD"),
+            returnDate: data.returnDate ? dayjs(data.returnDate).format("YYYY-MM-DD") : "Non spécifié",
             travelOption: data.travelOption,
             passengerCount: data.passengerCount,
             departureCountry: countryList.find((c) => c.code === data.departureCountry)?.name,
@@ -111,8 +111,8 @@ export default function Description() {
 
       // Clear form inputs and states
       reset();
-      setDates([]);
-      setDate(undefined);
+      setDepartureDate(undefined);
+      setReturnDate(undefined);
       setQuantity("");
 
       setIsModalOpen(true);
@@ -121,10 +121,6 @@ export default function Description() {
         description: "Une erreur est survenue lors de l'envoi de la demande",
       });
     }
-  };
-
-  const formatDates = (dates: Date[]): string => {
-    return dates.map((d) => dayjs(d).format("YYYY-MM-DD")).join(",");
   };
 
   const debouncedSetQuantity = useMemo(
@@ -148,17 +144,23 @@ export default function Description() {
     }
   };
 
+  // Clean up debounced function
   useEffect(() => {
     return () => {
       debouncedSetQuantity.cancel();
     };
   }, [debouncedSetQuantity]);
 
-  const handleDateChange = (newDate: Date | undefined) => {
-    if (newDate && newDate.getTime() !== date?.getTime()) {
-      setDate(newDate);
-      setDates([newDate]);
+  const handleDepartureDateChange = (newDate: Date | undefined) => {
+    if (newDate) {
+      setDepartureDate(newDate);
+      setValue("departureDate", newDate, { shouldValidate: true });
     }
+  };
+
+  const handleReturnDateChange = (newDate: Date | undefined) => {
+    setReturnDate(newDate);
+    setValue("returnDate", newDate, { shouldValidate: false });
   };
 
   return (
@@ -332,7 +334,7 @@ export default function Description() {
                 )}
               </div>
               <div className="flex flex-col gap-2">
-                <Label htmlFor="arrivalCountry">Pays d&apos;arrivée</Label>
+                <Label htmlFor="arrivalCountry">Pays d'arrivée</Label>
                 <Controller
                   name="arrivalCountry"
                   control={control}
@@ -353,15 +355,41 @@ export default function Description() {
                 )}
               </div>
             </div>
-            <div className="grid gap-3">
-              <Label>Sélectionner une date</Label>
-              <Calendar
-                date={date}
-                setDate={handleDateChange}
-                showOutsideDays={true}
-              />
+            <div className="grid grid-cols-2 gap-3">
+              <div className="grid gap-3">
+                <Label>Date d'aller</Label>
+                <Controller
+                  name="departureDate"
+                  control={control}
+                  rules={{ required: "Date d'aller requise" }}
+                  render={({ field }) => (
+                    <Calendar
+                      date={departureDate}
+                      setDate={handleDepartureDateChange}
+                      showOutsideDays={true}
+                    />
+                  )}
+                />
+                {errors.departureDate && (
+                  <p role="alert" className="text-red-600 text-sm">{errors.departureDate.message}</p>
+                )}
+              </div>
+              <div className="grid gap-3">
+                <Label>Date de retour (facultatif)</Label>
+                <Controller
+                  name="returnDate"
+                  control={control}
+                  render={({ field }) => (
+                    <Calendar
+                      date={returnDate}
+                      setDate={handleReturnDateChange}
+                      showOutsideDays={true}
+                    />
+                  )}
+                />
+              </div>
             </div>
-            <Button type="submit" disabled={!isValid || dates.length === 0} className="ml-auto gap-1">
+            <Button type="submit" disabled={!isValid || !departureDate} className="ml-auto gap-1">
               <span>
                 Demande de réservation
                 <ArrowUpRight className="h-4 w-4" />

@@ -1,4 +1,3 @@
-
 import React from "react";
 import {
   Body,
@@ -11,26 +10,25 @@ import {
   Section,
   Text,
 } from "@react-email/components";
-import {  BilletData } from "@/types";
+import { BilletData } from "@/types";
 
 export const FormulaEmail: React.FC<BilletData> = ({
   clientName = "Non spécifié",
-  clientLastname="Non spécifié",
+  clientLastname = "Non spécifié",
   clientEmail = "Non spécifié",
   clientPhone = "Non spécifié",
   dateNaissance = "Non spécifié",
-  nationality="Non spécifié",
-  sexe="Non spécifié",
-  typePiece="Non spécifié",
-  numeroPiece="Non spécifié",
-  date = "Non spécifié",
+  nationality = "Non spécifié",
+  sexe = "Non spécifié",
+  typePiece = "Non spécifié",
+  numeroPiece = "Non spécifié",
+  departureDate = "Non spécifié",
+  returnDate = "Non spécifié",
   travelOption = "Non spécifié",
-  passengerCount= "Nom spécifié",
-  departureCountry="Non spécifié",
-  arrivalCountry="Non spécifié",
+  passengerCount = "Non spécifié",
+  departureCountry = "Non spécifié",
+  arrivalCountry = "Non spécifié",
 }) => {
-  
-
   return (
     <Html>
       <Head />
@@ -46,21 +44,24 @@ export const FormulaEmail: React.FC<BilletData> = ({
           />
           <Heading style={heading}>Demande de réservation</Heading>
           <Section style={section}>
-            <Text style={text}>Informations du client </Text>
+            <Text style={text}>Informations du client</Text>
             <Text style={text}>Nom : {clientName}</Text>
-            <Text style={text}>Prenom : {clientLastname}</Text>
+            <Text style={text}>Prénom : {clientLastname}</Text>
             <Text style={text}>Email : {clientEmail}</Text>
             <Text style={text}>Téléphone : {clientPhone}</Text>
-            <Text style={text}>Date de Naissance: {dateNaissance}</Text>
-            <Text style={text}>Nationnalité: {nationality}</Text>
-            <Text style={text}>Sexe: {sexe}</Text>
+            <Text style={text}>Date de naissance : {dateNaissance}</Text>
+            <Text style={text}>Nationalité : {nationality}</Text>
+            <Text style={text}>Sexe : {sexe}</Text>
             <Text style={text}>Type de pièce : {typePiece}</Text>
-            <Text style={text}>Numéro de la pièce: {numeroPiece}</Text>
-             <Text style={text}>Option de voyage: {travelOption}</Text>
-            <Text style={text}>Nombre de passagers: {passengerCount}</Text>
-            <Text style={text}>Pays de depart: {departureCountry}</Text>
-            <Text style={text}>Pays d'arrivé : {arrivalCountry}</Text>
-             <Text style={text}>Date du voyage: {date}</Text>
+            <Text style={text}>Numéro de la pièce : {numeroPiece}</Text>
+            <Text style={text}>Option de voyage : {travelOption}</Text>
+            <Text style={text}>Nombre de passagers : {passengerCount}</Text>
+            <Text style={text}>Pays de départ : {departureCountry}</Text>
+            <Text style={text}>Pays d'arrivée : {arrivalCountry}</Text>
+            <Text style={text}>Date de départ : {departureDate}</Text>
+            {returnDate !== "Non spécifié" && (
+              <Text style={text}>Date de retour : {returnDate}</Text>
+            )}
           </Section>
           <Section style={footerSection}>
             <Text style={footerText}>

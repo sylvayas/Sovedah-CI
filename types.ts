@@ -82,7 +82,8 @@ export interface BilletData {
   sexe:string;
   typePiece:string;
   numeroPiece:string;
-  date: string;
+  departureDate: string;
+  returnDate:string;
   travelOption:string;
   passengerCount:string;
   departureCountry:string;
