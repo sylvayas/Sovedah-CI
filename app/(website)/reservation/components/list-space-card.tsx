@@ -82,7 +82,7 @@ export default function Description({
         },
         body: JSON.stringify({
           subject: "Demande de réservation Sovedah-CI",
-          to: [data.email, "sylvayas@gmail.com"],
+          to: [data.email, "INFOS@sovedahci.com"],
           emailData,
         }),
       });

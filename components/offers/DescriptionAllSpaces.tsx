@@ -27,7 +27,7 @@ export const AVANTAGES = [
   },
 
   {
-    title: "Likas protect",
+    title: "Lilas protect",
     description: {
       intro: "Découvrez les couches adultes Conforta Protect – Taille Large, conçues pour offrir confort, sécurité et discrétion à ceux qui en ont le plus besoin",
       whyChoose: [
