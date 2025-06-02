@@ -31,7 +31,7 @@ export const FormulaEmail: React.FC<AccessoiresData> = ({
   return (
     <Html>
       <Head />
-      <Preview>Confirmation de réservation - Sovedah CI</Preview>
+      <Preview>Demande de commande - Sovedah CI</Preview>
       <Body style={main}>
         <Container style={container}>
           <Img
@@ -41,7 +41,7 @@ export const FormulaEmail: React.FC<AccessoiresData> = ({
             alt="Sovedah CI"
             style={logo}
           />
-          <Heading style={heading}>Confirmation de Commande</Heading>
+          <Heading style={heading}>Demande de Commande</Heading>
           <Section style={section}>
             <Text style={text}>Produit commandé : {productTitle}</Text>
             {productDescription && (

@@ -71,3 +71,33 @@ export interface AccessoiresData {
   productDescription:string;
 
 }
+
+export interface BilletData {
+  clientName: string;
+  clientLastname:string,
+  clientEmail: string;
+  clientPhone: string;
+  dateNaissance: string;
+  nationality: string;
+  sexe:string;
+  typePiece:string;
+  numeroPiece:string;
+  date: string;
+  travelOption:string;
+  passengerCount:string;
+  departureCountry:string;
+  arrivalCountry:string;
+}
+
+export interface VoiturelocationEmailData {
+  clientName: string;
+  clientLastname:string;
+  clientEmail: string;
+  clientPhone: string;
+  drivingLicense: string;
+  address: string;
+  vehicleModel: string;
+  reservationDate:string;
+  vehicleCategory:string;
+
+}

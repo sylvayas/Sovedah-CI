@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useSearchParams } from "next/navigation";
@@ -17,7 +18,6 @@ export default function Content() {
   const category = searchParams.get("category");
   const productTitle = searchParams.get("productTitle");
   const productDescription = searchParams.get("productDescription");
-  const productType = searchParams.get("productType"); // Ajout du productType
 
   // Validation pour productTitle
   React.useEffect(() => {
@@ -68,11 +68,9 @@ export default function Content() {
             <div>
               <strong>Produit commandé :</strong> {productTitle || "Non spécifié"}
             </div>
-            {productType === "hygiene" && ( // Afficher catégorie seulement pour les produits d'hygiène
-              <div>
-                <strong>Catégorie :</strong> {category || "Non spécifiée"}
-              </div>
-            )}
+            <div>
+              <strong>Catégorie :</strong> {category || "Non spécifiée"}
+            </div>
             <div>
               <strong>Quantité :</strong> {quantity || "Non spécifiée"}
             </div>

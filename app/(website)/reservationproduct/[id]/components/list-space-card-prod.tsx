@@ -81,12 +81,12 @@ const sendEmail = async (
       productDescription: formatDescriptionForEmail(selectedProduct.description),
     };
 
-    const response = await fetch("/api/send-email", {
+    const response = await fetch("/api/send-email/accessoires", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         subject: "Demande de réservation Sovedah-CI",
-        to: [data.email, "sylvayas@gmail.com"],
+        to: [data.email, "INFOS@sovedahci.com"],
         emailData,
       }),
     });
@@ -315,11 +315,9 @@ export default function ListeSpaceCardProd() {
                       {errors.quantity.message}
                     </p>
                   )}
-                </div>
-              
-              </div>
-              <div className="grid gap-3">
-                <Label>Date de livraison</Label>
+                </div>  
+                  <div className="grid gap-3 mt-8">
+                     <Label>Date de livraison</Label>
                 <Calendar
                   id="date"
                   date={date}
@@ -337,7 +335,13 @@ export default function ListeSpaceCardProd() {
                 ) : (
                   <p className="text-sm text-gray-600">Aucune date sélectionnée</p>
                 )}
-              </div>
+                  </div>
+                </div>
+              
+              
+            
+               
+              
               <Button
                 type="submit"
                 disabled={!isValid || !date || isSubmitting || !selectedProduct}

@@ -31,6 +31,7 @@ export async function POST(request: NextRequest) {
       "clientAdresse",
       "date",
       "quantity",
+      "category",
       "productTitle",
       
     ];
@@ -60,6 +61,8 @@ export async function POST(request: NextRequest) {
       subject,
       to,
       react: FormulaEmail(filteredEmailData),
+      userName:emailData.clientName,
+      userEmail:emailData.clientEmail,
     });
 
     return NextResponse.json(
@@ -76,8 +79,4 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     );
   }
-
-
-
 }
-

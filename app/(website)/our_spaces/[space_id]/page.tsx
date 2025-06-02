@@ -26,7 +26,7 @@ export default async function ItemSpace({
     return (
         <div>
             <Hero/>
-            <Description group={group} space={item}/>
+            <Description/>
             
         </div>
     );

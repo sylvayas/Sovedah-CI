@@ -11,28 +11,26 @@ import {
   Section,
   Text,
 } from "@react-email/components";
-import { FormulaEmailData } from "@/types";
+import {  VoiturelocationEmailData } from "@/types";
 
-export const FormulaEmail: React.FC<FormulaEmailData> = ({
+export const FormulaEmail: React.FC<VoiturelocationEmailData> = ({
   clientName = "Non spécifié",
+  clientLastname = "Non spécifié",
   clientEmail = "Non spécifié",
   clientPhone = "Non spécifié",
-  clientAdresse = "Non spécifié",
-  date = "Non spécifié",
-  quantity = "Non spécifié",
-  category = "Non spécifié",
-  productTitle = "Non spécifié",
-  productDescription = "",
+  drivingLicense = "Non spécifié",
+  address = "Non spécifié",
+  vehicleModel = "Non spécifié",
+  vehicleCategory= "Non spécifié",
+ reservationDate = "",
 }) => {
   // Validation pour productTitle
-  if (!productTitle || productTitle === "Non spécifié") {
-    console.warn("Aucun titre de produit spécifié dans l'email");
-  }
+
 
   return (
     <Html>
       <Head />
-      <Preview>Demande de commande- Sovedah CI</Preview>
+      <Preview>Demande de réservation - Sovedah CI</Preview>
       <Body style={main}>
         <Container style={container}>
           <Img
@@ -42,20 +40,18 @@ export const FormulaEmail: React.FC<FormulaEmailData> = ({
             alt="Sovedah CI"
             style={logo}
           />
-          <Heading style={heading}>Demande de Commande</Heading>
+          <Heading style={heading}>Demande de reservation</Heading>
           <Section style={section}>
-            <Text style={text}>Produit commandé : {productTitle}</Text>
-            {productDescription && (
-              <Text style={text}>Description du produit : {productDescription}</Text>
-            )}
-            <Text style={text}>Informations du client :</Text>
+            <Text style={text}>Informations du client </Text>
             <Text style={text}>Nom : {clientName}</Text>
+            <Text style={text}>Prenom : {clientLastname}</Text>
             <Text style={text}>Email : {clientEmail}</Text>
             <Text style={text}>Téléphone : {clientPhone}</Text>
-            <Text style={text}>Adresse : {clientAdresse}</Text>
-            <Text style={text}>Catégorie : {category}</Text>
-            <Text style={text}>Quantité : {quantity}</Text>
-            <Text style={text}>Date de la commande : {date}</Text>
+            <Text style={text}>Numéro du permis de conduire : {drivingLicense}</Text>
+            <Text style={text}>Adresse : {address}</Text>
+            <Text style={text}>Modèle du véhicule : {vehicleModel}</Text>
+            <Text style={text}>Catégorie de véhicule : {vehicleCategory}</Text>
+            <Text style={text}>Date de la réservation : {reservationDate}</Text>
           </Section>
           <Section style={footerSection}>
             <Text style={footerText}>

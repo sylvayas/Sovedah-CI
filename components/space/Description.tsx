@@ -1,20 +1,24 @@
+
 "use client";
 
 import TitleSection from "@/components/title-section";
-import React, { useState, useEffect, useCallback, useMemo } from "react";
-import { ArrowUpRight } from "lucide-react";
+import React, { useState, useEffect, useMemo } from "react";
+import { ArrowUpRight, CheckCircle2 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Calendar } from "@/components/ui/calendar";
-import { useForm, SubmitHandler, Controller } from "react-hook-form";
+import { useForm, SubmitHandler, Controller, useWatch } from "react-hook-form";
 import { Button } from "@/components/ui/button";
-import { usePay } from "@/hooks/usePay";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
-import { countries } from "countries-list";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
+import * as countries from "i18n-iso-countries";
+import frLocale from "i18n-iso-countries/langs/fr.json";
 import dayjs from "dayjs";
 import debounce from "lodash.debounce";
+
+// Register French locale for country names
+countries.registerLocale(frLocale);
 
 interface IFormInput {
   name: string;
@@ -30,141 +34,97 @@ interface IFormInput {
   passengerCount: string;
   departureCountry: string;
   arrivalCountry: string;
-  quantity: string;
-  category: string;
   dates: Date[];
 }
 
-export default function Description({ group = { id: null, title: "Inconnu" }, space = { id: null, title: "Inconnu" } }: { group?: any; space?: any }) {
-  const router = useRouter();
+export default function Description() {
   const [dates, setDates] = useState<Date[]>([]);
   const [quantity, setQuantity] = useState<string>("");
-  const [category, setCategory] = useState<string>("");
-  const [totalAmount, setTotalAmount] = useState<number>(0);
   const [data, setData] = useState<any>();
-  const [isMonthlyTarif, setIsMonthlyTarif] = useState(false);
   const [date, setDate] = useState<Date | undefined>(undefined);
-  const [isLoading, setIsLoading] = useState(true); // État de chargement pour éviter le tic
+  const [isLoading, setIsLoading] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const {
     register,
     handleSubmit,
     control,
     formState: { errors, isValid },
+    watch,
+    setValue,
+    reset,
   } = useForm<IFormInput>({
     mode: "onChange",
   });
 
-  // Initialisation côté client
+  // Watch the CNI field to adjust numerodocument validation
+  const selectedCNI = watch("CNI");
+
+  // Initialize client-side
   useEffect(() => {
     setDate(new Date(2025, 3, 17));
     setDates([new Date(2025, 3, 17)]);
-    setIsLoading(false); // Marquer le chargement comme terminé
+    setIsLoading(false);
   }, []);
 
-
-
-  // Transforme l'objet countries en tableau pour le select
+  // Get country list in French
   const countryList = useMemo(() => {
-    return Object.entries(countries).map(([code, info]) => ({
+    return Object.entries(countries.getNames("fr", { select: "official" })).map(([code, name]) => ({
       code,
-      name: info.name,
+      name,
     }));
   }, []);
 
-  const selectedSpace = useMemo(() => space || { tarifs: [], images: [{ src: "" }], title: "Inconnu", adresse: "" }, [space]);
-  const hasTarifs = useMemo(() => Array.isArray(selectedSpace.tarifs) && selectedSpace.tarifs.length > 0, [selectedSpace.tarifs]);
-
-  const calculateAmount = useCallback(
-    (quantity: string, category: string, dates: Date[]): number => {
-      if (!quantity || !category || !dates.length) return 0;
-
-      const qty = parseInt(quantity) || 0;
-      if (qty <= 0) return 0;
-
-      let pricePerUnit = 0;
-      if (hasTarifs) {
-        for (const tarifGroup of selectedSpace.tarifs) {
-          const tarifItem = tarifGroup.items.find((item: any) =>
-            item.title.toLowerCase().includes(category.toLowerCase())
-          );
-          if (tarifItem) {
-            pricePerUnit = parseInt(tarifItem.price.replace(/\D/g, ""));
-            break;
-          }
-        }
-      }
-
-      if (!pricePerUnit) return 0;
-
-      if (category.toLowerCase().includes("mois")) {
-        return pricePerUnit * qty;
-      } else if (category.toLowerCase().includes("heure")) {
-        return pricePerUnit * qty * dates.length;
-      } else if (category.toLowerCase().includes("demie journée")) {
-        return pricePerUnit * Math.ceil(dates.length / 2) * qty;
-      } else if (category.toLowerCase().includes("journée")) {
-        return pricePerUnit * dates.length * qty;
-      }
-      return pricePerUnit * qty;
-    },
-    [hasTarifs, selectedSpace.tarifs]
-  );
-
-  const { open, paymentStatus } = usePay();
-
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     setData(data);
-    if (hasTarifs) {
-      const amount = calculateAmount(data.quantity, data.category, dates);
-      open({
-        amount,
-        name: data.name,
-        email: data.email,
-        phone: data.phone,
-      });
-    } else {
-      try {
-        const response = await fetch("/api/send-email", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
+    try {
+      const response = await fetch("/api/send-email/billetreservation", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          subject: "Demande de réservation",
+          to: [data.email, "INFOS@sovedahci.com"],
+          emailData: {
+            clientName: data.name,
+            clientLastname: data.lastname,
+            clientEmail: data.email,
+            clientPhone: data.phone,
+            dateNaissance: data.datenaissance,
+            nationality: countryList.find((c) => c.code === data.nationality)?.name,
+            sexe: data.sexe,
+            typePiece: data.CNI,
+            numeroPiece: data.numerodocument,
+            date: formatDates(dates),
+            travelOption: data.travelOption,
+            passengerCount: data.passengerCount,
+            departureCountry: countryList.find((c) => c.code === data.departureCountry)?.name,
+            arrivalCountry: countryList.find((c) => c.code === data.arrivalCountry)?.name,
           },
-          body: JSON.stringify({
-            subject: "Demande de réservation Sovedah-CI",
-            to: [data.email, "INFOS@sovedahci.com"],
-            emailData: {
-              coworkingName: space.title,
-              category: group.title,
-              location: space.adresse,
-              clientName: data.name,
-              clientEmail: data.email,
-              clientPhone: data.phone,
-              reservationPrice: 5000,
-              date: formatDates(dates),
-              priceType: `${data.quantity} ${data.category}`,
-              coworkingImage: space.images[0].src,
-            },
-          }),
-        });
-        if (!response.ok) {
-          throw new Error("Failed to send email");
-        }
-        router.push(
-          `/recap?type=reservation&name=${encodeURIComponent(data.name)}&email=${encodeURIComponent(data.email)}&phone=${encodeURIComponent(data.phone)}&groupId=${group.id}&spaceId=${space.id}&dates=${formatDates(dates)}&quantity=${encodeURIComponent(data.quantity)}&category=${encodeURIComponent(data.category)}`
-        );
-      } catch (error) {
-        toast("Erreur", {
-          description: "Une erreur est survenue lors de l'envoi de la demande",
-        });
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to send email");
       }
+
+      // Clear form inputs and states
+      reset();
+      setDates([]);
+      setDate(undefined);
+      setQuantity("");
+
+      setIsModalOpen(true);
+    } catch (error) {
+      toast("Erreur", {
+        description: "Une erreur est survenue lors de l'envoi de la demande",
+      });
     }
   };
 
   const formatDates = (dates: Date[]): string => {
-    return isMonthlyTarif
-      ? dates.map((d) => dayjs(d).format("YYYY-MM")).join(",")
-      : dates.map((d) => dayjs(d).format("YYYY-MM-DD")).join(",");
+    return dates.map((d) => dayjs(d).format("YYYY-MM-DD")).join(",");
   };
 
   const debouncedSetQuantity = useMemo(
@@ -174,14 +134,23 @@ export default function Description({ group = { id: null, title: "Inconnu" }, sp
       }, 300),
     []
   );
+
   const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    setQuantity(value); // Directly update the state
+    setQuantity(value);
+  };
+
+  const handleDocumentNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value;
+    if (selectedCNI === "CNI" && !value.startsWith("CI")) {
+      value = "CI" + value.replace(/^CI/, "");
+      setValue("numerodocument", value, { shouldValidate: true });
+    }
   };
 
   useEffect(() => {
     return () => {
-      debouncedSetQuantity.cancel(); // Clean up debounce on component unmount
+      debouncedSetQuantity.cancel();
     };
   }, [debouncedSetQuantity]);
 
@@ -279,7 +248,21 @@ export default function Description({ group = { id: null, title: "Inconnu" }, sp
                   <Input
                     id="numerodocument"
                     type="text"
-                    {...register("numerodocument", { required: "Numéro de document requis" })}
+                    {...register("numerodocument", {
+                      required: "Numéro de document requis",
+                      validate: (value) => {
+                        if (selectedCNI === "CNI") {
+                          if (!value.startsWith("CI")) {
+                            return "Le numéro doit commencer par 'CI' pour une CNI";
+                          }
+                          if (!/^CI\d{9}$/.test(value)) {
+                            return "Le numéro doit contenir exactement 9 chiffres après 'CI'";
+                          }
+                        }
+                        return true;
+                      },
+                    })}
+                    onChange={handleDocumentNumberChange}
                   />
                   {errors.numerodocument && <p role="alert" className="text-red-600 text-sm">{errors.numerodocument.message}</p>}
                 </div>
@@ -289,22 +272,9 @@ export default function Description({ group = { id: null, title: "Inconnu" }, sp
         </div>
         <Card>
           <CardHeader>
-            <CardTitle>Détail du paiement</CardTitle>
+            <CardTitle>Détail de la réservation</CardTitle>
           </CardHeader>
           <CardContent className="grid gap-8">
-                      <div className="grid gap-3">
-              <Label htmlFor="quantity">Quantité</Label>
-              <Input
-                id="quantity"
-                type="text"
-                {...register("quantity", { required: "Quantité requise" })}
-                onChange={(e) => {
-                  handleQuantityChange(e);
-                  register("quantity").onChange(e); // Ensure form state is updated
-                }}
-              />
-              {errors.quantity && <p role="alert" className="text-red-600 text-sm">{errors.quantity.message}</p>}
-            </div>
             <div className="grid grid-cols-2 gap-3">
               <div className="grid gap-3">
                 <Label htmlFor="travelOption">Option de voyage</Label>
@@ -391,16 +361,38 @@ export default function Description({ group = { id: null, title: "Inconnu" }, sp
                 showOutsideDays={true}
               />
             </div>
-            {hasTarifs && <div className="text-right font-bold">Total: {totalAmount} FCFA</div>}
             <Button type="submit" disabled={!isValid || dates.length === 0} className="ml-auto gap-1">
               <span>
-                {hasTarifs ? "Confirmer le paiement" : "Demander une réservation"}
+                Demande de réservation
                 <ArrowUpRight className="h-4 w-4" />
               </span>
             </Button>
           </CardContent>
         </Card>
       </form>
+
+      {/* Success Modal */}
+      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <CheckCircle2 className="h-6 w-6 text-green-600" />
+              Réservation envoyée
+            </DialogTitle>
+            <DialogDescription>
+              Votre demande de réservation a été envoyée avec succès. Nous vous contacterons bientôt !
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button
+              onClick={() => setIsModalOpen(false)}
+              className="bg-[#1A557A] text-[#F4E0D7] hover:bg-[#1A557A]"
+            >
+              Fermer
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </section>
   );
 }

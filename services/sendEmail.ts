@@ -9,10 +9,14 @@ export async function sendEmail({
   subject,
   to,
   react,
+  userName,
+  userEmail,
 }: {
   subject: string;
   to: string | string[];
   react: JSX.Element | React.ReactNode;
+  userName: string; // Ex. "Kouakou Alexis"
+  userEmail: string;
 }) {
   try {
     if (!process.env.RESEND_API_KEY) {
@@ -29,13 +33,16 @@ export async function sendEmail({
     }
 
     console.log("Sending email to:", to, "with subject:", subject);
-    console.log("From address:", "Sovedah CI <no-reply@sovedah-ci.com>");
+    console.log("From address:", `${userName}<no-reply@sovedah-ci.com>`);
+    console.log("Reply-To address:", userEmail);
 
     const data = await resend.emails.send({
-      from: "Sovedah CI <no-reply@sovedah-ci.com>", // Remplace par ton domaine vérifié
-      to: ["sylvayas@gmail.com"],
-      subject : "Test",
+      from: `${userName}  <no-reply@sovedah-ci.com>`, // Remplace par ton domaine vérifié
+      to:toArray,
+      subject,
       react,
+      reply_to: userEmail, // Correction : utiliser reply_to au lieu de replyTo
+     
     });
 
     console.log("Email sent successfully:", data);

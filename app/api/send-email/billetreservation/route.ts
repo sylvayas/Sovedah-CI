@@ -1,7 +1,7 @@
 // /api/send-email/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import { sendEmail } from "@/services/sendEmail";
-import AccessoiresEmail from "@/emails/accessoires-email";
+import BilletreservationEmail from "@/emails/billetreservation-email";
 
 export async function POST(request: NextRequest) {
   try {
@@ -26,12 +26,19 @@ export async function POST(request: NextRequest) {
     // Champs requis pour FormulaEmail (exclure category)
     const requiredFields = [
       "clientName",
+      "clientLastname",
       "clientEmail",
       "clientPhone",
-      "clientAdresse",
+      "dateNaissance",
+      "nationality",
+      "sexe",
+      "typePiece",
+      "numeroPiece",
       "date",
-      "quantity",
-      "productTitle",
+      "travelOption",
+      "passengerCount",
+      "departureCountry",
+      "arrivalCountry",
       
     ];
     for (const field of requiredFields) {
@@ -46,19 +53,25 @@ export async function POST(request: NextRequest) {
     // Filtrer emailData pour ne conserver que les champs nécessaires
     const filteredEmailData = {
       clientName: emailData.clientName,
+      clientLastname: emailData.clientLastname,
       clientEmail: emailData.clientEmail,
       clientPhone: emailData.clientPhone,
-      clientAdresse: emailData.clientAdresse,
+      dateNaissance: emailData.dateNaissance,
+      nationality:emailData.nationality,
+      sexe:emailData.sexe,
+      typePiece:emailData.typePiece,
+      numeroPiece:emailData.numeroPiece,
       date: emailData.date,
-      quantity: emailData.quantity,
-      productTitle: emailData.productTitle,
-      productDescription: emailData.productDescription || "",
+      travelOption: emailData.travelOption, // Valeur par défaut pour Accessoires de voyage
+      passengerCount: emailData.passengerCount,
+      departureCountry: emailData.departureCountry,
+      arrivalCountry:emailData.arrivalCountry,
     };
 
     await sendEmail({
       subject,
       to,
-      react: AccessoiresEmail(filteredEmailData),
+      react: BilletreservationEmail(filteredEmailData),
       userName:emailData.clientName,
       userEmail:emailData.clientEmail,
     });
@@ -77,7 +90,4 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     );
   }
-
-
-
 }

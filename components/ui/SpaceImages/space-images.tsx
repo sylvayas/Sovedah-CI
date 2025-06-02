@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Image from "next/image";
-import { datas } from "@/config/data";
+
 import TitleSection from "@/components/title-section"
 import Marquee from "@/components/magicui/marquee";
 import { Suspense } from 'react';
@@ -15,65 +15,10 @@ export default function SpaceImages() {
     const [meetingRoom, setMeetingRoom] = useState<string[]>([]);
     const [commonRoom, setCommonRoom] = useState<string[]>([]);
 
-    useEffect(() => {
+  
 
-        datas[0].items.forEach((item) => {
-            if (item.imagePath) {
-                fetch(`/api/images?subfolder=${item.imagePath}`)
-                    .then(res => res.json())
-                    .then((data) => {
-                        if (data.error) {
-                            console.error(data.error);
-                        } else {
-                            setPrivateOffices(state => ([...state, ...data]))
-                        }
-                    });
-            }
-        })
+ 
 
-        datas[1].items.forEach((item) => {
-            if (item.imagePath) {
-                fetch(`/api/images?subfolder=${item.imagePath}`)
-                    .then(res => res.json())
-                    .then((data) => {
-                        if (data.error) {
-                            console.error(data.error);
-                        } else {
-                            setOpenSpace(state => ([...state, ...data]))
-                        }
-                    });
-            }
-        })
-
-        datas[2].items.forEach((item) => {
-            if (item.imagePath) {
-                fetch(`/api/images?subfolder=${item.imagePath}`)
-                    .then(res => res.json())
-                    .then((data) => {
-                        if (data.error) {
-                            console.error(data.error);
-                        } else {
-                            setMeetingRoom(state => ([...state, ...data]))
-                        }
-                    });
-            }
-        })
-
-        datas[3].items.forEach((item) => {
-            if (item.imagePath) {
-                fetch(`/api/images?subfolder=${item.imagePath}`)
-                    .then(res => res.json())
-                    .then((data) => {
-                        if (data.error) {
-                            console.error(data.error);
-                        } else {
-                            setCommonRoom(state => ([...state, ...data]))
-                        }
-                    });
-            }
-        })
-
-    }, []);
 
     return (
         <section className="bg-black text-white container h-fit py-14 relative">

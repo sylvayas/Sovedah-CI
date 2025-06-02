@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
 import React from "react";
 
-export default function Content() {
+export default function ContentAccessoire() {
   const searchParams = useSearchParams();
   const name = searchParams.get("name");
   const email = searchParams.get("email");

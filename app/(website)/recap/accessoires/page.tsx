@@ -1,11 +1,12 @@
 import { Suspense } from "react";
 import Content from "./content";
+import ContentAccessoire from "./content";
 
 
-export default function RecapPage() {
+export default function AccessoiresPage() {
   return (
     <Suspense>
-    <Content/>
+      <ContentAccessoire/>
     </Suspense>
   );
 }

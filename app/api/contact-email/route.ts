@@ -11,6 +11,8 @@ export async function POST(request: Request) {
       to,
       subject: `Nouveau message de contact de ${name}`,
       react: ContactEmail({ name, email, subject, message }),
+      userName: name,
+      userEmail: email,
     });
 
     return NextResponse.json({ success: true });

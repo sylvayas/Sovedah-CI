@@ -306,13 +306,13 @@ export default function ListeSpaceCardProd() {
                 )}
               </div>
               <div className="grid gap-3">
-                <Label htmlFor="category">Type d'achat</Label>
+                <Label htmlFor="category">Type d&apos;achat</Label>
                 <select
                   id="category"
                   {...register("category", { required: "La catégorie est requise" })}
                   className="rounded-md border p-2 w-full"
                 >
-                  <option value="">Sélectionner le type d'achat</option>
+                  <option value="">Sélectionner le type d&apos;achat</option>
                   <option value="Détail">Détail</option>
                   <option value="En gros">En gros</option>
                 </select>

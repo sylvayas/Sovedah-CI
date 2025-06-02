@@ -10,6 +10,7 @@
     "email": "email dev --port 3001"
   },
   "dependencies": {
+    "@headlessui/react": "^2.2.4",
     "@heroicons/react": "^2.2.0",
     "@hookform/resolvers": "^3.9.1",
     "@radix-ui/react-accordion": "^1.2.1",
@@ -45,6 +46,7 @@
     "dotenv": "^16.4.7",
     "embla-carousel-react": "^8.5.1",
     "framer-motion": "^11.11.17",
+    "i18n-iso-countries": "^7.14.0",
     "kkiapay-react": "^0.0.2",
     "lodash.debounce": "^4.0.8",
     "lucide-react": "^0.408.0",

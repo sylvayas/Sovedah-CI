@@ -1,7 +1,7 @@
 // /api/send-email/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import { sendEmail } from "@/services/sendEmail";
-import AccessoiresEmail from "@/emails/accessoires-email";
+import VoiturelocationEmail from "@/emails/voiturelocation-email";
 
 export async function POST(request: NextRequest) {
   try {
@@ -26,12 +26,15 @@ export async function POST(request: NextRequest) {
     // Champs requis pour FormulaEmail (exclure category)
     const requiredFields = [
       "clientName",
+      "clientLastname",
       "clientEmail",
       "clientPhone",
-      "clientAdresse",
-      "date",
-      "quantity",
-      "productTitle",
+      "drivingLicense",
+      "address",
+      "vehicleModel",
+      "reservationDate",
+      "vehicleCategory",
+     
       
     ];
     for (const field of requiredFields) {
@@ -46,21 +49,22 @@ export async function POST(request: NextRequest) {
     // Filtrer emailData pour ne conserver que les champs nécessaires
     const filteredEmailData = {
       clientName: emailData.clientName,
+      clientLastname: emailData.clientLastname,
       clientEmail: emailData.clientEmail,
       clientPhone: emailData.clientPhone,
-      clientAdresse: emailData.clientAdresse,
-      date: emailData.date,
-      quantity: emailData.quantity,
-      productTitle: emailData.productTitle,
-      productDescription: emailData.productDescription || "",
+      drivingLicense: emailData.drivingLicense,
+      address: emailData.address,
+      vehicleModel: emailData.vehicleModel,
+      reservationDate: emailData.reservationDate, // Valeur par défaut pour Accessoires de voyage
+      vehicleCategory: emailData.vehicleCategory,
     };
 
     await sendEmail({
       subject,
       to,
-      react: AccessoiresEmail(filteredEmailData),
-      userName:emailData.clientName,
-      userEmail:emailData.clientEmail,
+      react: VoiturelocationEmail(filteredEmailData),
+      userName: emailData.clientName,
+      userEmail: emailData.clientEmail,
     });
 
     return NextResponse.json(
@@ -77,7 +81,4 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     );
   }
-
-
-
 }

@@ -37,7 +37,6 @@ export const ContactEmail: React.FC<ContactEmailData> = ({
           alt="Sovedah-CI"
           style={logo}
         />
-        <Heading style={heading}>Nouveau message de contact</Heading>
         <Section style={section}>
           <Text style={text}>
             <strong>Nom :</strong> {name}

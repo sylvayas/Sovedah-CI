@@ -11,28 +11,30 @@ import {
   Section,
   Text,
 } from "@react-email/components";
-import { FormulaEmailData } from "@/types";
+import {  BilletData } from "@/types";
 
-export const FormulaEmail: React.FC<FormulaEmailData> = ({
+export const FormulaEmail: React.FC<BilletData> = ({
   clientName = "Non spécifié",
+  clientLastname="Non spécifié",
   clientEmail = "Non spécifié",
   clientPhone = "Non spécifié",
-  clientAdresse = "Non spécifié",
+  dateNaissance = "Non spécifié",
+  nationality="Non spécifié",
+  sexe="Non spécifié",
+  typePiece="Non spécifié",
+  numeroPiece="Non spécifié",
   date = "Non spécifié",
-  quantity = "Non spécifié",
-  category = "Non spécifié",
-  productTitle = "Non spécifié",
-  productDescription = "",
+  travelOption = "Non spécifié",
+  passengerCount= "Nom spécifié",
+  departureCountry="Non spécifié",
+  arrivalCountry="Non spécifié",
 }) => {
-  // Validation pour productTitle
-  if (!productTitle || productTitle === "Non spécifié") {
-    console.warn("Aucun titre de produit spécifié dans l'email");
-  }
+  
 
   return (
     <Html>
       <Head />
-      <Preview>Demande de commande- Sovedah CI</Preview>
+      <Preview>Demande de réservation - Sovedah CI</Preview>
       <Body style={main}>
         <Container style={container}>
           <Img
@@ -42,20 +44,23 @@ export const FormulaEmail: React.FC<FormulaEmailData> = ({
             alt="Sovedah CI"
             style={logo}
           />
-          <Heading style={heading}>Demande de Commande</Heading>
+          <Heading style={heading}>Demande de réservation</Heading>
           <Section style={section}>
-            <Text style={text}>Produit commandé : {productTitle}</Text>
-            {productDescription && (
-              <Text style={text}>Description du produit : {productDescription}</Text>
-            )}
-            <Text style={text}>Informations du client :</Text>
+            <Text style={text}>Informations du client </Text>
             <Text style={text}>Nom : {clientName}</Text>
+            <Text style={text}>Prenom : {clientLastname}</Text>
             <Text style={text}>Email : {clientEmail}</Text>
             <Text style={text}>Téléphone : {clientPhone}</Text>
-            <Text style={text}>Adresse : {clientAdresse}</Text>
-            <Text style={text}>Catégorie : {category}</Text>
-            <Text style={text}>Quantité : {quantity}</Text>
-            <Text style={text}>Date de la commande : {date}</Text>
+            <Text style={text}>Date de Naissance: {dateNaissance}</Text>
+            <Text style={text}>Nationnalité: {nationality}</Text>
+            <Text style={text}>Sexe: {sexe}</Text>
+            <Text style={text}>Type de pièce : {typePiece}</Text>
+            <Text style={text}>Numéro de la pièce: {numeroPiece}</Text>
+             <Text style={text}>Option de voyage: {travelOption}</Text>
+            <Text style={text}>Nombre de passagers: {passengerCount}</Text>
+            <Text style={text}>Pays de depart: {departureCountry}</Text>
+            <Text style={text}>Pays d'arrivé : {arrivalCountry}</Text>
+             <Text style={text}>Date du voyage: {date}</Text>
           </Section>
           <Section style={footerSection}>
             <Text style={footerText}>
