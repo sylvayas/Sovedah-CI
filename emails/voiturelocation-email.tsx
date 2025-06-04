@@ -40,9 +40,8 @@ export const FormulaEmail: React.FC<VoiturelocationEmailData> = ({
             alt="Sovedah CI"
             style={logo}
           />
-          <Heading style={heading}>Demande de reservation</Heading>
           <Section style={section}>
-            <Text style={text}>Informations du client </Text>
+            <Text style={text}>Information sur le client </Text>
             <Text style={text}>Nom : {clientName}</Text>
             <Text style={text}>Prenom : {clientLastname}</Text>
             <Text style={text}>Email : {clientEmail}</Text>

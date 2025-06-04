@@ -41,13 +41,12 @@ export const FormulaEmail: React.FC<AccessoiresData> = ({
             alt="Sovedah CI"
             style={logo}
           />
-          <Heading style={heading}>Demande de Commande</Heading>
           <Section style={section}>
             <Text style={text}>Produit commandé : {productTitle}</Text>
             {productDescription && (
               <Text style={text}>Description du produit : {productDescription}</Text>
             )}
-            <Text style={text}>Informations du client :</Text>
+            <Text style={text}>Information sur le client </Text>
             <Text style={text}>Nom : {clientName}</Text>
             <Text style={text}>Email : {clientEmail}</Text>
             <Text style={text}>Téléphone : {clientPhone}</Text>
