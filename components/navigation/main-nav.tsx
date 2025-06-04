@@ -22,13 +22,13 @@ export function MainNav() {
   const menuList = getMenuList(pathname);
 
   return (
-    <div className="flex items-center w-full">
+    <div className="flex items-center w-full space-x-60">
       {/* Logo on the left */}
       <Link href="/" className="relative mr-6 flex items-center space-x-2">
         <Icons.logo_rogner className="w-24" />
       </Link>
       {/* Centered Navigation Menu */}
-      <div className="flex justify-center flex-1">
+      <div className="flex justify-center  flex-1">
         <NavigationMenu className="flex items-center space-x-6 text-sm font-medium">
           <NavigationMenuList>
             <NavigationMenuItem>

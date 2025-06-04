@@ -36,7 +36,7 @@ export const FormulaEmail: React.FC<BilletData> = ({
       <Body style={main}>
         <Container style={container}>
           <Img
-            src={`${process.env.NEXT_PUBLIC_BASE_URL || "https://sovedahci.com"}/images/logo_sovedah_white.jpg`}
+            src={`${process.env.NEXT_PUBLIC_BASE_URL || "https://sovedah-ci.com"}/images/logo_sovedah_white.jpg`}
             width="100"
             height="100"
             alt="Sovedah CI"

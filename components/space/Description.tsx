@@ -84,7 +84,7 @@ export default function Description() {
         },
         body: JSON.stringify({
           subject: "Demande de réservation",
-          to: [data.email, "INFOS@sovedahci.com"],
+          to: [data.email, "infos@sovedahci.com"],
           emailData: {
             clientName: data.name,
             clientLastname: data.lastname,

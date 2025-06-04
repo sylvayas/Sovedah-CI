@@ -62,7 +62,7 @@ export async function POST(request: NextRequest) {
       to,
       react: FormulaEmail(filteredEmailData),
       userName:emailData.clientName,
-      userEmail:emailData.clientEmail,
+    
     });
 
     return NextResponse.json(

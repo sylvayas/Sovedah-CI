@@ -75,7 +75,6 @@ export async function POST(request: NextRequest) {
       to,
       react: BilletreservationEmail(filteredEmailData),
       userName:emailData.clientName,
-      userEmail:emailData.clientEmail,
     });
 
     return NextResponse.json(

@@ -1,4 +1,3 @@
-
 "use server";
 
 import { Resend } from "resend";
@@ -10,20 +9,18 @@ export async function sendEmail({
   to,
   react,
   userName,
-  userEmail,
 }: {
   subject: string;
   to: string | string[];
   react: JSX.Element | React.ReactNode;
-  userName: string; // Ex. "Kouakou Alexis"
-  userEmail: string;
+  userName: string;
 }) {
   try {
     if (!process.env.RESEND_API_KEY) {
       throw new Error("RESEND_API_KEY is not set");
     }
 
-    // Valider les adresses email
+    // Valider les adresses e-mail
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const toArray = Array.isArray(to) ? to : [to];
     for (const email of toArray) {
@@ -32,17 +29,24 @@ export async function sendEmail({
       }
     }
 
-    console.log("Sending email to:", to, "with subject:", subject);
-    console.log("From address:", `${userName}<no-reply@sovedah-ci.com>`);
-    console.log("Reply-To address:", userEmail);
+    // Valider userName
+    if (!userName || typeof userName !== "string" || userName.trim() === "") {
+      throw new Error("Invalid userName: must be a non-empty string");
+    }
+
+    // Valider react
+    if (!react) {
+      throw new Error("React component is required");
+    }
+
+    console.log("Sending email to:", toArray, "with subject:", subject);
+    console.log("From address:", `${userName} <no-reply@sovedah-ci.com>`);
 
     const data = await resend.emails.send({
-      from: `${userName}  <no-reply@sovedah-ci.com>`, // Remplace par ton domaine vérifié
-      to:toArray,
+      from: `${userName} <no-reply@sovedah-ci.com>`,
+      to,
       subject,
       react,
-      reply_to: userEmail, // Correction : utiliser reply_to au lieu de replyTo
-     
     });
 
     console.log("Email sent successfully:", data);

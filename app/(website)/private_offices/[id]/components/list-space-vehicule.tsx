@@ -61,7 +61,7 @@ export default function ListSpaceVehicule() {
         },
         body: JSON.stringify({
           subject: "Demande de réservation Sovedah-CI",
-          to: [data.email, "INFOS@sovedahci.com"],
+          to: [data.email, "infos@sovedahci.com"],
           emailData: {
             clientName: data.name,
             clientLastname: data.lastname,

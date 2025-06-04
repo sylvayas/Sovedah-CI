@@ -47,12 +47,12 @@ const sendEmail = async (
       priceType: `${data.quantity} ${data.category}`,
     };
 
-    const response = await fetch("/api/send-email/accessoires", {
+    const response = await fetch("/api/send-email", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         subject: "Demande de réservation Sovedah-CI",
-        to: [data.email, "INFOS@sovedahci.com"],
+        to: [data.email, "infos@sovedahci.com"],
         emailData,
       }),
     });

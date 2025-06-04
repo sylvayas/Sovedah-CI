@@ -60,7 +60,7 @@ export async function POST(request: NextRequest) {
       to,
       react: AccessoiresEmail(filteredEmailData),
       userName:emailData.clientName,
-      userEmail:emailData.clientEmail,
+    
     });
 
     return NextResponse.json(
