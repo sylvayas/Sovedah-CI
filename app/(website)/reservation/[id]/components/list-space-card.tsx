@@ -79,7 +79,7 @@ const sendEmail = async (
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         subject: "Demande de réservation Sovedah-CI",
-        to: [data.email, "sylvayas@gmail.com"],
+        to: [data.email, "infos@sovedah-ci.com"],
         emailData,
       }),
     });
