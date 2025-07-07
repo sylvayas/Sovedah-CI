@@ -32,7 +32,7 @@ export async function POST(request: NextRequest) {
       "date",
       "quantity",
       "productTitle",
-      
+      "productPrice",
     ];
     for (const field of requiredFields) {
       if (emailData[field] === undefined || emailData[field] === null || emailData[field] === "") {
@@ -53,6 +53,7 @@ export async function POST(request: NextRequest) {
       quantity: emailData.quantity,
       productTitle: emailData.productTitle,
       productDescription: emailData.productDescription || "",
+      productPrice: emailData.productPrice || "",
     };
 
     await sendEmail({
