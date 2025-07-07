@@ -1,4 +1,3 @@
-
 import React from "react";
 import {
   Body,
@@ -23,6 +22,7 @@ export const FormulaEmail: React.FC<FormulaEmailData> = ({
   category = "Non spécifié",
   productTitle = "Non spécifié",
   productDescription = "",
+  productPrice = "",
 }) => {
   // Validation pour productTitle
   if (!productTitle || productTitle === "Non spécifié") {
@@ -44,6 +44,9 @@ export const FormulaEmail: React.FC<FormulaEmailData> = ({
           />
           <Section style={section}>
             <Text style={text}>Produit commandé : {productTitle}</Text>
+            {productPrice && (
+              <Text style={text}>Prix du produit : {productPrice}</Text>
+            )}
             {productDescription && (
               <Text style={text}>Description du produit : {productDescription}</Text>
             )}

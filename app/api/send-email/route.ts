@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
       "quantity",
       "category",
       "productTitle",
-      
+      "productPrice",
     ];
     for (const field of requiredFields) {
       if (emailData[field] === undefined || emailData[field] === null || emailData[field] === "") {
@@ -55,6 +55,7 @@ export async function POST(request: NextRequest) {
       category: emailData.category || "Détail", // Valeur par défaut pour Accessoires de voyage
       productTitle: emailData.productTitle,
       productDescription: emailData.productDescription || "",
+      productPrice: emailData.productPrice || "",
     };
 
     await sendEmail({

@@ -62,6 +62,8 @@ const sendEmail = async (
   }
 ) => {
   try {
+    // Récupérer le prix unitaire (premier élément du tableau pricing)
+    const productPrice = selectedProduct.description.pricing[0] || "";
     const emailData = {
       clientName: data.name,
       clientEmail: data.email,
@@ -72,6 +74,7 @@ const sendEmail = async (
       category: data.category,
       productTitle: selectedProduct.title,
       productDescription: formatDescriptionForEmail(selectedProduct.description),
+      productPrice,
     };
 
     const response = await fetch("/api/send-email", {
@@ -79,7 +82,7 @@ const sendEmail = async (
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         subject: "Demande de réservation Sovedah-CI",
-        to: [data.email, "infos@sovedah-ci.com"],
+        to: [data.email, "infos@sovedahci.com"],
         emailData,
       }),
     });
@@ -103,11 +106,11 @@ const sendEmail = async (
         selectedProduct.image
       )}&productTitle=${encodeURIComponent(selectedProduct.title)}&productDescription=${encodeURIComponent(
         formatDescriptionForEmail(selectedProduct.description)
-      )}`
+      )}&productPrice=${encodeURIComponent(productPrice)}`
     );
   } catch (error) {
     toast("Erreur", {
-      description: "Une erreur est survenue lors de l'envoi de la demande",
+      description: "Une erreur est survenue lors de l&apos;envoi de la demande",
     });
   }
 };
@@ -195,11 +198,21 @@ export default function ListeSpaceCardProd() {
               <div className="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">
                 <p className="mb-4">{selectedProduct.description.intro}</p>
                 <h3 className="text-base font-semibold mb-2">Pourquoi choisir ce produit ?</h3>
-                <ul className="list-disc pl-5 mb-4">
+                <ul className="list-disc pl-5 mb-6">
                   {selectedProduct.description.whyChoose.map((item, index) => (
                     <li key={index}>{item}</li>
                   ))}
+                     
                 </ul>
+                <p className="mt-4 font-medium text-gray-700 dark:text-gray-300">
+                   {selectedProduct.description.pricing.map((item, index) => (
+                    <p key={index}>{item}</p>
+                  ))} 
+                </p>
+                <p className="mt-4 font-medium text-gray-700 dark:text-gray-300">
+                  {selectedProduct.description.callToAction}
+                </p>
+                            
               </div>
             )}
           </div>

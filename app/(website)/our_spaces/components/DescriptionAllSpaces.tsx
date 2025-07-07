@@ -41,7 +41,7 @@ const hygieneProducts: Product[] = [
   },
   {
     id: "2",
-    title: "Likas protect",
+    title: "Lilas protect",
     date: "1 avril 2025",
     description: {
       intro: "Découvrez les couches Likas Protect, conçues pour un confort optimal et une protection longue durée.",

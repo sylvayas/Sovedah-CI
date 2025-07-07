@@ -1,4 +1,3 @@
-// components/DescriptionAllSpaces.jsx
 import React from "react";
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
@@ -9,7 +8,7 @@ export const AVANTAGES = [
   {
     title: "Conforta Lingettes Bébé – Ultra Doux",
     description: {
-      intro: "Offrez à votre bébé une douceur inégalée avec les lingettes Conforta Ultra Doux. Spécialement conçues pour respecter la peau délicate des tout-petits, elles sont sans alcool, enrichies d’une texture spéciale nettoyante, et parfaitement adaptées pour une utilisation quotidienne, à la maison comme en déplacement.",
+      intro: "Offrez à votre bébé une douceur inégalée avec les lingettes Conforta Ultra Doux. Spécialement conçues pour respecter la peau délicate des tout-petits, elles sont sans alcool, enrichies d'une texture spéciale nettoyante, et parfaitement adaptées pour une utilisation quotidienne, à la maison comme en déplacement.",
       whyChoose: [
         "Douceur extrême pour la peau sensible des bébés",
         "Sans alcool : zéro irritation, zéro risque",
@@ -19,9 +18,9 @@ export const AVANTAGES = [
       ],
       pricing: [
         "PU : 750 FCFA",
-        "Prix revendeur à partir de 16 parquets : 650 FCFA",
+        "En gros à partir de 16 parquets : 650 FCFA",
       ],
-      callToAction: "Livraison rapide disponible à Abidjan et environs. Commandez dès maintenant via WhatsApp ou notre boutique en ligne. Vos lingettes préférées livrées directement chez vous !",
+      callToAction: "Commandez maintenant pour une douceur au quotidien !",
     },
     image: "/images/produits&details/papier hygienique pour enfant.jpg",
   },
@@ -35,11 +34,11 @@ export const AVANTAGES = [
         "Taille Large : convient parfaitement aux adultes ayant un tour de taille de 115 cm à 140 cm.",
         "Confort optimal : une coupe anatomique et des matériaux doux pour la peau.",
         "Praticité : paquet de 15 couches, idéal pour une utilisation quotidienne.",
-        "Conforta, c’est la confiance retrouvée, de jour comme de nuit."
+        "Conforta, c&apos;est la confiance retrouvée, de jour comme de nuit."
       ],
       pricing: [
         "PU : 6000 FCFA",
-        "A partir de 4 parquets : 5500 FCFA",
+        "En gors à partir de 4 parquets : 5500 FCFA",
       ],
       callToAction: "Commandez maintenant pour une douceur au quotidien !",
     },
@@ -58,11 +57,11 @@ export const AVANTAGES = [
         "Taille Large : convient parfaitement aux adultes ayant un tour de taille de 115 cm à 140 cm.",
         "Confort optimal : une coupe anatomique et des matériaux doux pour la peau.",
         "Praticité : paquet de 10 couches, idéal pour une utilisation quotidienne.",
-        "Conforta, c’est la confiance retrouvée, de jour comme de nuit."
+        "Conforta, c&apos;est la confiance retrouvée, de jour comme de nuit."
       ],
       pricing: [
         "PU : 6000 FCFA",
-        "A partir de 4 parquets : 5500 FCFA",
+        "En gros à partir de 4 parquets : 5500 FCFA",
       ],
       callToAction: "Commandez maintenant pour une douceur au quotidien !",
     },
@@ -78,11 +77,11 @@ export const AVANTAGES = [
           "Résistant à l'humidité : ne se déchire pas facilement même mouillé.",
           "Format économique : Une utilisation prolongée.",
           "Qualité professionnelle : idéal pour les restaurants, hôtels, bureaux et foyers exigeants.",
-          "Propre, pratique, professionnel – Clean Pro, c’est votre allié propreté au quotidien.",
+          "Propre, pratique, professionnel – Clean Pro, c&apos;est votre allié propreté au quotidien.",
         ],
         pricing: [
           "PU : 3000 FCFA seulement.",
-          "A partir de 6 rouleaux : 2 800 FCFA",
+          "En gros à partir de 6 rouleaux : 2 800 FCFA",
         ],
         callToAction: "Commandez maintenant pour une douceur au quotidien !",
       },
@@ -93,7 +92,7 @@ export const AVANTAGES = [
   {
     title: "Conforta ultra doux texture spéciale",
     description: {
-        intro: "Offrez à votre bébé une douceur inégalée avec les lingettes Conforta Ultra Doux. Spécialement conçues pour respecter la peau délicate des tout-petits, elles sont sans alcool, enrichies d’une texture spéciale nettoyante, et parfaitement adaptées pour une utilisation quotidienne, à la maison comme en déplacement.",
+        intro: "Offrez à votre bébé une douceur inégalée avec les lingettes Conforta Ultra Doux. Spécialement conçues pour respecter la peau délicate des tout-petits, elles sont sans alcool, enrichies d'une texture spéciale nettoyante, et parfaitement adaptées pour une utilisation quotidienne, à la maison comme en déplacement.",
         whyChoose: [
           "Douceur extrême pour la peau sensible des bébés",
           "Sans alcool : zéro irritation, zéro risque",
@@ -103,7 +102,7 @@ export const AVANTAGES = [
         ],
         pricing: [
           "PU : 750 FCFA",
-          "Prix revendeur à partir de 16 parquets : 650 FCFA",
+          "En gros à partir de 16 parquets : 650 FCFA",
         ],
         callToAction: "Commandez maintenant pour une douceur au quotidien !",
       },
@@ -112,7 +111,7 @@ export const AVANTAGES = [
   {
     title: "Papier Hygiénique Conforta Fleuri",
     description: {
-        intro: " Faites le choix de la douceur, de la résistance et de l’élégance avec le papier hygiénique Conforta Fleuri. Sa texture délicatement parfumée apporte un confort unique à chaque utilisation, tout en étant résistante et super absorbante.",
+        intro: " Faites le choix de la douceur, de la résistance et de l&apos;élégance avec le papier hygiénique Conforta Fleuri. Sa texture délicatement parfumée apporte un confort unique à chaque utilisation, tout en étant résistante et super absorbante.",
         whyChoose: [
           "Ce que vous gagnez :",
           "12 rouleaux au prix de 10 (2 rouleaux gratuits)",
@@ -122,7 +121,7 @@ export const AVANTAGES = [
         ],
         pricing: [
           "PU : 1.500 FCFA seulement !",
-          "A partir de 4 parquets : 1450 FCFA",
+          "En gros à partir de 4 parquets : 1450 FCFA",
         ],
         callToAction: "Commandez maintenant pour une douceur au quotidien !",
       },
@@ -137,12 +136,12 @@ export const AVANTAGES = [
           "Points forts :",
           "Technologie Zone Bleue pour une absorption ciblée",
           "Texture micro-aérée pour une meilleure respirabilité",
-          "Confort garanti sans sensation d’humidité",
+          "Confort garanti sans sensation d&apos;humidité",
           "Emballage pratique et hygiénique",
         ],
         pricing: [
           "PU : 650 FCFA",
-          "A partir 24 parquets : 550 FCFA",
+          "En gros à partir 24 parquets : 550 FCFA",
         ],
         callToAction: "Commandez maintenant pour une douceur au quotidien !",
       },
@@ -158,11 +157,11 @@ export const AVANTAGES = [
         "Absorption renforcée pour une sécurité maximale",
         "Conçue pour les flux abondants après accouchement",
         "Paquet de 15 serviettes",
-        "Adoptez Conforta Maternité Super, l’alliée incontournable pour vivre votre post-partum en toute sérénité !"
+        "Adoptez Conforta Maternité Super, l&apos;alliée incontournable pour vivre votre post-partum en toute sérénité !"
       ],
       pricing: [
         "PU : 1700 FCFA",
-        "A partir de 12 parquets : 1250 FCFA",
+        "En gros à partir de 12 parquets : 1250 FCFA",
       ],
       callToAction: "Commandez maintenant pour une douceur au quotidien !",
     },
@@ -171,7 +170,7 @@ export const AVANTAGES = [
   {
     title: "Conforta clean pro",
     description: {
-      intro: "Offrez à votre bébé tout le confort qu’il mérite avec les couches Clean Soft taille 2 (3-5 kg) ! Douces, absorbantes et testées dermatologiquement, elles assurent une protection optimale jour et nuit.",
+      intro: "Offrez à votre bébé tout le confort qu&apos;il mérite avec les couches Clean Soft taille 2 (3-5 kg) ! Douces, absorbantes et testées dermatologiquement, elles assurent une protection optimale jour et nuit.",
       whyChoose: [
         "Contenu du pack :",
         "6 paquets de 50 couches = 300 couches au total",
@@ -185,7 +184,7 @@ export const AVANTAGES = [
       ],
       pricing: [
         "PU : 3000 FCA",
-        "A partir de 6 parquets : 2800 FCFA",
+        "En gros à partir de 6 parquets : 2800 FCFA",
       ],
       callToAction: "Commandez maintenant pour une douceur au quotidien !",
     },
@@ -200,12 +199,12 @@ export const AVANTAGES = [
         "Points forts :",
         "Technologie Zone Bleue pour une absorption ciblée",
         "Texture micro-aérée pour une meilleure respirabilité",
-        "Confort garanti sans sensation d’humidité",
+        "Confort garanti sans sensation d&apos;humidité",
         "Emballage pratique et hygiénique",
       ],
       pricing: [
         "PU : 650 FCFA",
-        "A partir 24 parquets : 550 FCFA",
+        "En gros à partir 24 parquets : 550 FCFA",
       ],
       callToAction: "Commandez maintenant pour une douceur au quotidien !",
     },
@@ -221,12 +220,12 @@ export const AVANTAGES = [
         "Points forts :",
         "Technologie Zone Bleue pour une absorption ciblée",
         "Texture micro-aérée pour une meilleure respirabilité",
-        "Confort garanti sans sensation d’humidité",
+        "Confort garanti sans sensation d&apos;humidité",
         "Emballage pratique et hygiénique",
       ],
       pricing: [
         "PU : 650 FCFA",
-        "A partir 24 parquets : 550 FCFA",
+        "En gros à partir 24 parquets : 550 FCFA",
       ],
       callToAction: "Commandez maintenant pour une douceur au quotidien !",
     },
@@ -242,20 +241,44 @@ export const AVANTAGES = [
           "Absorption renforcée pour une sécurité maximale",
           "Conçue pour les flux abondants après accouchement",
           "Paquet de 15 serviettes",
-          "Adoptez Conforta Maternité Super, l’alliée incontournable pour vivre votre post-partum en toute sérénité !"
+          "Adoptez Conforta Maternité Super, l&apos;alliée incontournable pour vivre votre post-partum en toute sérénité !"
         ],
         pricing: [
           "PU : 1700 FCFA",
-          "A partir de 12 parquets : 1250 FCFA",
+          "En gros à partir de 12 parquets : 1250 FCFA",
         ],
         callToAction: "Commandez maintenant pour une douceur au quotidien !",
       },
     image: "/images/produits&details/serviettes-hygiéniques.jpg",
   },
   {
-    title: "Clean soft",
+    title: "Clean soft 4",
     description: {
-        intro: "Offrez à votre bébé tout le confort qu’il mérite avec les couches Clean Soft taille 2 (3-5 kg) ! Douces, absorbantes et testées dermatologiquement, elles assurent une protection optimale jour et nuit.",
+        intro: "Offrez à votre bébé tout le confort qu&apos;il mérite avec les couches Clean Soft taille 2 (3-5 kg) ! Douces, absorbantes et testées dermatologiquement, elles assurent une protection optimale jour et nuit.",
+        whyChoose: [
+          "Contenu du pack :",
+          "6 paquets de 50 couches = 300 couches au total",
+          "Taille 2 – Small (3 à 5 kg)",
+          "Idéales pour les nouveau-nés et jeunes nourrissons",
+          "Avantages :", 
+          "Douceur exceptionnelle pour la peau sensible de bébé",
+          "Barrières anti-fuiteS pour plus de sécurité",
+          "Faciles à mettre grâce aux attaches solides",
+          "Rapport qualité-prix imbattable !",
+        ],
+        pricing: [
+          "PU : 3500 FCA",
+          "En gros à partir de 6 parquets : 3200 FCFA",
+        ],
+        callToAction: "Commandez maintenant pour une douceur au quotidien !",
+      },
+    image: "/images/produits&details/clean2.jpeg",
+  },
+
+    {
+    title: "Clean soft 2",
+    description: {
+        intro: "Offrez à votre bébé tout le confort qu&apos;il mérite avec les couches Clean Soft taille 2 (3-5 kg) ! Douces, absorbantes et testées dermatologiquement, elles assurent une protection optimale jour et nuit.",
         whyChoose: [
           "Contenu du pack :",
           "6 paquets de 50 couches = 300 couches au total",
@@ -269,16 +292,38 @@ export const AVANTAGES = [
         ],
         pricing: [
           "PU : 3000 FCA",
-          "A partir de 6 parquets : 2800 FCFA",
+          "En gros à partir de 6 parquets : 2800 FCFA",
         ],
         callToAction: "Commandez maintenant pour une douceur au quotidien !",
       },
-    image: "/images/produits&details/clean2.jpeg",
+    image: "/images/couche_bébé_clean_soft/clean_soft2.jpeg",
   },
 
-
-  
+    {
+    title: "Clean soft 3",
+    description: {
+        intro: "Offrez à votre bébé tout le confort qu&apos;il mérite avec les couches Clean Soft taille 2 (3-5 kg) ! Douces, absorbantes et testées dermatologiquement, elles assurent une protection optimale jour et nuit.",
+        whyChoose: [
+          "Contenu du pack :",
+          "6 paquets de 50 couches = 300 couches au total",
+          "Taille 2 – Small (3 à 5 kg)",
+          "Idéales pour les nouveau-nés et jeunes nourrissons",
+          "Avantages :", 
+          "Douceur exceptionnelle pour la peau sensible de bébé",
+          "Barrières anti-fuiteS pour plus de sécurité",
+          "Faciles à mettre grâce aux attaches solides",
+          "Rapport qualité-prix imbattable !",
+        ],
+        pricing: [
+          "PU : 3000 FCA",
+          "En gros à partir de 6 parquets : 2800 FCFA",
+        ],
+        callToAction: "Commandez maintenant pour une douceur au quotidien !",
+      },
+    image: "/images/couche_bébé _clean_soft_3/clean_soft_3.jpeg",
+  },
 ];
+
 
 export default function DescriptionAllSpaces() {
   return (
@@ -289,40 +334,49 @@ export default function DescriptionAllSpaces() {
             Nos différents articles
           </h2>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4  gap-8 mb-6 lg:mb-8 h-full">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-6 lg:mb-8 h-full">
           {AVANTAGES.map((avantage, index) => (
             <div
               key={index}
-              className="card bg-base-100 shadow-md transition-transform transform hover:scale-[1.02] hover:shadow-md cursor-pointer w-full h-full"
+              className="group bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 cursor-pointer w-full h-full flex flex-col overflow-hidden"
             >
-              <figure className="px-5 pt-5">
-                  <Link 
-                    href={{
-                      pathname: "/reservation/list-space-card",
-                      query: {
-                        title: encodeURIComponent(avantage.title),
-                        image: encodeURIComponent(avantage.image),
-                      },
-                    }}
-                  >
-                      <Image
-                      src={avantage.image}
-                      alt={avantage.title}
-                      className="rounded-xl object-cover w-full h-56"
-                      width={500}
-                      height={500}
-                    />
-                  </Link>
-
-              </figure>
-              <div className="card-body items-center mt-5 text-center">
-                <h2 className="card-title mb-5">{avantage.title}</h2>
-                <div className="card-actions mb-4">
+              <Link
+                href={{
+                  pathname: "/reservation/list-space-card",
+                  query: {
+                    title: encodeURIComponent(avantage.title),
+                    image: encodeURIComponent(avantage.image),
+                  },
+                }}
+                className="block"
+              >
+                <div className="overflow-hidden">
+                  <Image
+                    src={avantage.image}
+                    alt={avantage.title}
+                    className="w-full h-44 sm:h-48 md:h-56 object-cover transition-all duration-300 group-hover:scale-105 rounded-t-2xl"
+                    width={500}
+                    height={500}
+                  />
+                </div>
+              </Link>
+              <div className="flex-1 flex flex-col justify-between">
+                <div className="px-4 pt-3 text-center">
+                  <h2 className="text-base md:text-lg font-semibold text-gray-800 mb-2 truncate">{avantage.title}</h2>
+                </div>
+                <div className="px-4 pb-3 flex flex-col gap-1 items-center">
+                  {avantage.description.pricing.map((price, idx) => (
+                    <p key={idx} className="text-xs text-gray-600">
+                      {price}
+                    </p>
+                  ))}
+                </div>
+                <div className="flex items-center justify-center px-4 pb-4 mt-auto">
                   <Link
                     className={cn(
                       buttonVariants(),
-                      "max-w-52 gap-2 overflow-hidden whitespace-pre",
-                      "group relative w-full justify-center gap-2 rounded-md transition-all duration-300 ease-out hover:ring-2 hover:ring-primary hover:ring-offset-2"
+                      "gap-2 overflow-hidden whitespace-pre",
+                      "group relative justify-center gap-2 rounded-md transition-all duration-300 ease-out hover:ring-2 hover:ring-primary hover:ring-offset-2"
                     )}
                     href={{
                       pathname: "/reservation/list-space-card",
@@ -333,9 +387,7 @@ export default function DescriptionAllSpaces() {
                     }}
                   >
                     <span className="absolute right-0 -mt-12 h-32 w-8 translate-x-12 rotate-12 bg-white opacity-10 transition-all duration-1000 ease-out group-hover:-translate-x-40" />
-                    <div className="flex items-center">
-                      <span className="ml-1">Commander</span>
-                    </div>
+                    <span className="ml-1">Commander</span>
                   </Link>
                 </div>
               </div>

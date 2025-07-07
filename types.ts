@@ -57,7 +57,7 @@ export interface FormulaEmailData {
   quantity:string;
   productTitle:string;
   productDescription:string;
-
+  productPrice:string;
 }
 
 export interface AccessoiresData {
@@ -69,7 +69,7 @@ export interface AccessoiresData {
   quantity:string;
   productTitle:string;
   productDescription:string;
-
+  productPrice:string;
 }
 
 export interface BilletData {
